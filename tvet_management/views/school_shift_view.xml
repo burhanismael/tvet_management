@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_school_shift_tree" model="ir.ui.view">
+            <field name="name">school.shift.tree</field>
+            <field name="model">school.shift</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="School Shift">
+                <field name="name"/>
+                <field name="school_department_id" select="1"/>
+            </tree>
+            </field>
+        </record>
+        
+        <record id="view_school_shift_form" model="ir.ui.view">
+            <field name="name">school.shift.form</field>
+            <field name="model">school.shift</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="School Shift">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name" select="1"/>
+                            </group>
+                            <group>
+                                <field name="school_department_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_school_shift_search" model="ir.ui.view">
+            <field name="name">school.shift.search</field>
+            <field name="model">school.shift</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="School Shift">
+                <field name="name" select="True"/>
+            </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="act_open_school_shift_view">
+            <field name="name">School Shift</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.shift</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_school_shift_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        
+
+    </data>
+</odoo>

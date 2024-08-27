@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="tvet_project_tree_view" model="ir.ui.view">
+        <field name="name">tvet.project.tree.view</field>
+        <field name="model">tvet.project</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="project_name"/>
+                <field name="project_code"/>
+                <field name="donor"/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="tvet_projects_form_view" model="ir.ui.view">
+        <field name="name">tvet.project.form.view</field>
+        <field name="model">tvet.project</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="project_name"/>
+                            <field name="project_code"/>
+                            <field name="donor"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="action_tvet_project" model="ir.actions.act_window">
+        <field name="name">Projects</field>
+        <field name="res_model">tvet.project</field>
+        <field name="binding_view_types">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+</odoo>

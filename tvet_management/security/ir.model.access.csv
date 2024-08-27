@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_tvet_project,tvet.project,model_tvet_project,,1,1,1,1
+access_school_department,school.department,model_school_department,,1,1,1,1
+access_school_course,school.course,model_school_course,,1,1,1,1
+access_school_subject,school.subject,model_school_subject,,1,1,1,1
+access_school_city,school.city,model_school_city,,1,1,1,1
+access_academic_year,academic.year,model_academic_year,,1,1,1,1
+access_class_room,class.room,model_class_room,,1,1,1,1
+access_school_semester,school.semester,model_school_semester,,1,1,1,1
+access_school_shift,school.shift,model_school_shift,,1,1,1,1
+access_student_registration,student.registration,model_student_registration,,1,1,1,1
+access_student_admission,student.admission,model_student_admission,,1,1,1,1
+
+

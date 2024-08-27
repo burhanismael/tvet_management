@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem id="menu_tvet_root"
+              name="TVET"
+              web_icon="tvet_management,static/description/icon.png"
+              sequence="1"/>
+
+    <menuitem id="menu_tvet_student" parent="menu_tvet_root" name="Student" sequence="1"/>
+
+    <menuitem id="menu_student_resgistration" parent="menu_tvet_student" name="Student Registration" sequence="1" action="act_open_student_registration_view"/>
+
+    <menuitem id="menu_tvet_academic" parent="menu_tvet_root" name="Academic" sequence="3"/>
+
+    <menuitem id="menu_tvet_examination" parent="menu_tvet_root" name="Examinations" sequence="2"/>
+
+    <menuitem id="menu_tvet_configuration" parent="menu_tvet_root" name="Configuration" sequence="4"/>
+
+
+    <menuitem id="menu_academic_year" parent="menu_tvet_configuration" name="Academic Year" sequence="1" action="act_open_academic_year_view_view"/>
+
+    <menuitem id="menu_tvet_department" parent="menu_tvet_configuration" name="Department" sequence="2" action="act_open_school_department_view"/>
+
+    <menuitem id="menu_tvet_course" parent="menu_tvet_configuration" name="Courses" sequence="3" action="action_school_course"/>
+
+    <menuitem id="menu_tvet_subject" parent="menu_tvet_configuration" name="Subjects" sequence="4" action="action_school_subject"/>
+
+    <menuitem id="menu_tvet_cities" parent="menu_tvet_configuration" name="Cities" sequence="5" action="action_school_city"/>
+
+    <menuitem id="menu_tvet_class" parent="menu_tvet_configuration" name="Class" sequence="5" action="act_open_class_room_view"/>
+
+    <menuitem id="menu_tvet_semester" parent="menu_tvet_configuration" name="Semester" sequence="5" action="act_open_semester_view"/>
+
+    <menuitem id="menu_tvet_shift" parent="menu_tvet_configuration" name="Shifts" sequence="5" action="act_open_school_shift_view"/>
+
+
+
+
+    <menuitem id="menu_tvet_project" parent="menu_tvet_configuration" name="Project" sequence="6" action="action_tvet_project"/>
+
+</odoo>

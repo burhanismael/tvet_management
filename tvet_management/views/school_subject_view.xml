@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Courses -->
+    <record id="view_school_subject_tree" model="ir.ui.view">
+        <field name="name">school.subject.tree</field>
+        <field name="model">school.subject</field>
+        <field name="arch" type="xml">
+            <tree string="Subjects">
+                <field name="name"/>
+                <field name="subject_code"/>
+                <field name="credit_hrs"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_school_subject_form" model="ir.ui.view">
+        <field name="name">school.subject.form</field>
+        <field name="model">school.subject</field>
+        <field name="arch" type="xml">
+            <form string="Subjects">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="credit_hrs"/>
+                        </group>
+                        <group>
+                            <field name="subject_code"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="remarks"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+     <record id="view_school_subject_search" model="ir.ui.view">
+        <field name="name">school.subject.search</field>
+        <field name="model">school.subject</field>
+        <field name="arch" type="xml">
+            <search string="Subject">
+                <field name="name"/>
+                <field name="subject_code"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_school_subject" model="ir.actions.act_window">
+        <field name="name">Subject</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.subject</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Record Found
+            </p>
+            <p>
+                Click to add new Subject.
+            </p>
+        </field>
+    </record>
+
+
+
+
+</odoo>

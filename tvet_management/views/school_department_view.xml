@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_school_department_tree" model="ir.ui.view">
+            <field name="name">school.department.tree</field>
+            <field name="model">school.department</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Department">
+                <field name="name"/>
+                <field name="department_code"/>
+                <field name="remarks"/>
+            </tree>
+            </field>
+        </record>
+        
+        <record id="view_school_department_form" model="ir.ui.view">
+            <field name="name">school.department.form</field>
+            <field name="model">school.department</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Department">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                            <group>
+                                <field name="department_code" placeholder="Department Code"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="remarks" placeholder="Remarks are important"/>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_school_department_search" model="ir.ui.view">
+            <field name="name">school.department.search</field>
+            <field name="model">school.department</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Department Course">
+                <field name="name" select="True"/>
+                <field name="department_code" select="True"/>
+            </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="act_open_school_department_view">
+            <field name="name">Department</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">school.department</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_school_department_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+    </data>
+</odoo>

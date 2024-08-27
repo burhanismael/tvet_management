@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <!-- Courses -->
+    <record id="view_school_city_tree" model="ir.ui.view">
+        <field name="name">school.city.tree</field>
+        <field name="model">school.city</field>
+        <field name="arch" type="xml">
+            <tree string="City">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_school_city_form" model="ir.ui.view">
+        <field name="name">school.city.form</field>
+        <field name="model">school.city</field>
+        <field name="arch" type="xml">
+            <form string="Cities">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+     <record id="view_school_city_search" model="ir.ui.view">
+        <field name="name">school.city.search</field>
+        <field name="model">school.city</field>
+        <field name="arch" type="xml">
+            <search string="Cities">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_school_city" model="ir.actions.act_window">
+        <field name="name">Cities</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">school.city</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Record Found
+            </p>
+            <p>
+                Click to add new City.
+            </p>
+        </field>
+    </record>
+
+
+
+
+</odoo>

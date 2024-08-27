@@ -1,0 +1,42 @@
+<odoo>
+    <data noupdate="0">
+        <record id="student_registration_seq" model="ir.sequence">
+            <field name="name">Student Registration Sequence</field>
+            <field name="code">student.registration</field>
+            <field name="prefix">NTI</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        <record id="hr_lecturer_seq" model="ir.sequence">
+            <field name="name">Lecturer Sequence</field>
+            <field name="code">hr.employee</field>
+            <field name="prefix">L</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
+
+<!--        <record id="attendance_sheet_seq" model="ir.sequence">-->
+<!--            <field name="name">attendance sheet</field>-->
+<!--            <field name="code">attendance.sheet</field>-->
+<!--            <field name="prefix">ATD</field>-->
+<!--            <field name="padding">6</field>-->
+<!--            <field name="company_id" eval="False"/>-->
+<!--        </record>-->
+
+<!--        <record id="exam_res_seq" model="ir.sequence">-->
+<!--            <field name="name">Exam Result</field>-->
+<!--            <field name="code">exam.result</field>-->
+<!--            <field name="prefix">RES/</field>-->
+<!--            <field name="padding">5</field>-->
+<!--            <field name="company_id" eval="False"/>-->
+<!--        </record>-->
+
+<!--        <record id="exam_res_entry_seq" model="ir.sequence">-->
+<!--            <field name="name">Exam Result Entry</field>-->
+<!--            <field name="code">exam.result.entry</field>-->
+<!--            <field name="prefix">RE/</field>-->
+<!--            <field name="padding">5</field>-->
+<!--            <field name="company_id" eval="False"/>-->
+<!--        </record>-->
+    </data>
+</odoo>

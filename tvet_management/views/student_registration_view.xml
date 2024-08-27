@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+
+        <record model="ir.ui.view" id="student_registration_kanban_view">
+        <field name="name">student.registration.kanban</field>
+        <field name="model">student.registration</field>
+        <field name="arch" type="xml">
+            <kanban create="0" class="o_res_partner_kanban">
+                <field name="color"/>
+                <field name="id"/>
+                <field name="student_name_id"/>
+                <field name="student_id"/>
+                <field name="department_id"/>
+                <field name="classroom_id"/>
+                <field name="gender"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <t t-set="color" t-value="kanban_color(record.color.raw_value || record.student_name_id.raw_value)"/>
+                        <div t-att-class="color + (record.color.raw_value == 1 ? ' oe_kanban_color_alert' : '')">
+                            <div class="oe_kanban_box oe_kanban_color_border">
+                                <div class="oe_kanban_box_header oe_kanban_color_bgdark oe_kanban_color_border oe_kanban_draghandle">
+                                    <table class="oe_kanban_table">
+                                        <tr>
+                                            <td class="oe_kanban_title1" align="left" valign="middle"
+                                                style="padding-left:10px;">
+                                                <h4>
+                                                    <a type="open">
+                                                        <field name="student_name_id"/>
+                                                    </a>
+                                                </h4>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="oe_kanban_box_content oe_kanban_color_bglight oe_kanban_box_show_onclick_trigger oe_kanban_color_border">
+                                    <table class="oe_kanban_table">
+                                        <tr width="300">
+                                            <td valign="top" width="64" align="left">
+                                                <a type="open">
+                                                    <img heigh="80" width="80"
+                                                         t-att-src="kanban_image('student.info', 'image', record.id.raw_value)"
+                                                         alt="image"/>
+                                                </a>
+                                            </td>
+                                            <td valign="top" align="left" style="padding-left:10px;">
+                                                <table>
+                                                    <tr>
+                                                        <td>Student ID :</td>
+                                                        <td style="padding-left:10px;">
+                                                            <b>
+                                                                <field name="student_id"/>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Department:</td>
+                                                        <td style="padding-left:10px;">
+                                                            <b>
+                                                                <field name="department_id"/>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Class :</td>
+                                                        <td style="padding-left:10px;">
+                                                            <b>
+                                                                <field name="classroom_id"/>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Gender :</td>
+                                                        <td style="padding-left:10px;">
+                                                            <b>
+                                                                <field name="gender"/>
+                                                            </b>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+
+        <record id="view_student_registration_tree" model="ir.ui.view">
+            <field name="name">student.registration.tree</field>
+            <field name="model">student.registration</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Student Registration">
+                    <field name="admission_id" select="1"/>
+                    <field name="student_name_id"/>
+                    <field name="birth_place_id" select="1"/>
+                    <field name="occupation" select="1" placeholder="select"/>
+                    <field name="blood_group" select="1"/>
+                    <field name="academic_year_id" select="1"/>
+                    <field name="shift_id" select="1"/>
+                    <field name="faculty_id" select="1"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_student_registration_form" model="ir.ui.view">
+            <field name="name">student.registration.form</field>
+            <field name="model">student.registration</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Student Registration">
+                <header>
+                    <button name="student_admission_start" string="Admission Start" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('status','!=','new'), ('is_admitission_button_show','=',True)]}"/>
+                    <field name="status" widget="statusbar" statusbar_visible="new,enrolled,drop_out,inactive,graduated" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="student_record" type="object" class="oe_stat_button" icon="fa-user" attrs="{'invisible': [('is_admitission_button_show','=', False)]}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Admission</span>
+                                <span class="o_stat_text">Record</span>
+                            </div>
+                        </button>
+                        <button name="student_invoice" type="object" class="oe_stat_button" icon="fa-file-text" attrs="{'invisible': [('is_semester_invoice','=', False)]}">
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">Invoice</span>
+                            </div>
+                        </button>
+                    </div>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                     <div class="oe_title">
+                        <h1>
+                            <field name="admission_id"  readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="admission_id_id" invisible="1"/>
+<!--                            <field name="student_name_id" />-->
+<!--                            <field name="student_name_id" context="{'default_is_student': 1}" />-->
+                            <field name="student_id" attrs="{'invisible':[('status', '!=', 'enrolled')], 'required':[('status', '=', 'enrolled')]}"/>
+                            <field name="birth_place_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="gender"  widget="radio" options="{'horizontal':True}"/>
+                            <field name="nationality_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
+                            <field name="email" select="1"/>
+                            <field name="address" select="1"/>
+                            <field name="marital_status" select="1" placeholder="Select"/>
+                            <field name="school_name" />
+                            <field name="graduate_year"/>
+                            <field name="roll_number"/>
+                            <field name="grade"/>
+                            <field name="student_contact" />
+                            <field name="student_id_issue_date"/>
+                            <field name="student_id_expired_date"/>
+                        </group>
+                        <group>
+                            <field name="education_level"/>
+                            <field name="occupation" invisible="1" select="1" placeholder="Select"/>
+                            <field name="blood_group" invisible="1" select="1" placeholder="Select" />
+                            <field name="academic_year_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" placeholder="Select Academic Year" />
+                            <field name="academic_month" select="1" placeholder="Select" />
+                            <field name="shift_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
+                            <field name="faculty_id" invisible="1" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
+                            <field name="department_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
+                            <field name="classroom_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="course_subject_id" widget="many2many_tags"/>
+                            <field name="semester_id" placeholder="Select" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="student_type" invisible="1" select="1" placeholder="Select" />
+                            <field name="is_admitission_button_show" invisible="1"/>
+                            <field name="dob" placeholder="Select Date"/>
+                            <field name="student_balance"/>
+                            <field name="location"/>
+                            <field name="is_alumni" invisible="1"/>
+                            <field name="is_semester_invoice" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Parent Information">
+                            <group>
+                                <group>
+                                    <field name="mothers_name"/>
+                                    <field name="parent_name"/>
+                                    <span class="o_form_label o_td_label">
+                                        <b>Address</b>
+                                    </span>
+                                    <div class="o_address_format">
+                                        <field name="parent_street_1" placeholder="Street..." class="o_address_street"/>
+                                        <field name="parent_street_2" placeholder="Street 2..." class="o_address_street"/>
+                                        <field name="parent_city" placeholder="City" class="o_address_city"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'default_country_id': country_id}"/>
+                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="relationship_id"/>
+                                    <field name="parent_contact" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+        
+        <record id="view_student_registration_search" model="ir.ui.view">
+            <field name="name">student.registration.search</field>
+            <field name="model">student.registration</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Student Registration">
+                    <field name="admission_id" select="1"/>
+                    <field name="student_id"/>
+                    <field name="student_name_id"/>
+                    <field name="student_id" />
+                    <field name="birth_place_id" select="1"/>
+                    <field name="gender" select="1"/>
+                    <field name="parent_contact" select="1"/>
+                    <field name="nationality_id" select="1"/>
+                    <field name="email" select="1"/>
+                    <field name="address" select="1"/>
+                    <field name="marital_status" select="1"/>
+                    <field name="occupation" select="1"/>
+                    <field name="blood_group" select="1"/>
+                    <field name="academic_year_id" select="1"/>
+                    <field name="academic_month" select="1"/>
+                    <field name="shift_id" select="1"/>
+                    <field name="faculty_id" select="1"/>
+                    <field name="department_id" select="1"/>
+                    <field name="classroom_id" select="1"/>
+                    <field name="student_type" select="1"/>
+                    <field name="relationship_id" select="1"/>
+                    <field name="stream" select="1"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Admission ID" name="admission_id" domain="[]" context="{'group_by':'admission_id'}"/>
+                        <filter string="Student Name" name="student_name_id" domain="[]" context="{'group_by':'student_name_id'}"/>
+                        <filter string="Gender" name="gender" domain="[]" context="{'group_by':'gender'}"/>
+                        <filter string="Nationality" name="nationality_id" domain="[]" context="{'group_by':'nationality_id'}"/>
+                        <filter string="Marital Status" name="marital_status" domain="[]" context="{'group_by':'marital_status'}"/>
+                        <filter string="Blood Group" name="blood_group" domain="[]" context="{'group_by':'blood_group'}"/>
+                        <filter string="Academic Year" name="academic_year_id" domain="[]" context="{'group_by':'academic_year_id'}"/>
+                        <filter string="Class" name="classroom_id" domain="[]" context="{'group_by':'classroom_id'}"/>
+                        <filter string="Faculty" name="faculty_id" domain="[]" context="{'group_by':'faculty_id'}"/>
+                        <filter string="Department" name="department_id" domain="[]" context="{'group_by':'department_id'}"/>
+                        <filter string="Student ID" name="student_id" domain="[]" context="{'group_by':'student_id'}"/>
+                        <filter string="School Name" name="school_name" domain="[]" context="{'group_by':'school_name'}"/>
+                        <filter string="Date of Birth" name="dob" domain="[]" context="{'group_by':'dob'}"/>
+                        <filter string="Location" name="location" domain="[]" context="{'group_by':'location'}"/>
+                    </group>
+            </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="act_open_student_registration_view">
+            <field name="name">Student Registration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.registration</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_student_registration_search"/>
+            <field name="domain">[('status', 'in', ['new', 'enrolled', 'inactive'])]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_student_registration_dropout">
+            <field name="name">Student Drop Out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.registration</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_student_registration_search"/>
+            <field name="domain">[('status', 'in', ['drop_out'])]</field>
+            <field name="context">{'default_status': 'drop_out','create':False,'edit':True}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_student_registration_edit_view">
+            <field name="name">Student Registration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.registration</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_student_registration_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{'create':False, 'edit': True}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_student_alumni_view">
+            <field name="name">Student Registration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.registration</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_student_registration_search"/>
+            <field name="context">{'default_is_alumni': True, 'default_status': 'graduated','create':False,'edit':False}</field>
+            <field name="domain">[('status', 'in', ['graduated'])]</field>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_student_registration_view_form">
+            <field name="act_window_id" ref="act_open_student_registration_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_student_registration_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_student_registration_view_tree">
+            <field name="act_window_id" ref="act_open_student_registration_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_student_registration_tree"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_student_registration_view_kanban">
+            <field name="act_window_id" ref="act_open_student_registration_view"/>
+            <field name="sequence" eval="30"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="student_registration_kanban_view"/>
+        </record>
+
+<!--        <record id="excle_formate_action" model="ir.actions.server">-->
+<!--            <field name="name">Sale Report</field>-->
+<!--            <field name="type">ir.actions.server</field>-->
+<!--            <field name="model_id" ref="model_student_data"/>-->
+<!--            <field name="state">code</field>-->
+<!--            <field name="code">-->
+<!--                action = model.excle_download_action()-->
+<!--            </field>-->
+<!--        </record>-->
+    </data>
+</odoo>

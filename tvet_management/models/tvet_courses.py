@@ -12,7 +12,7 @@ class SchoolCourse(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string="Course", tracking=True)
-    department_id = fields.Many2one('tvet.department', string="Department Name", tracking=True)
+    department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
     remarks = fields.Text(string="Remarks", tracking=True)
 
     @api.constrains('name')

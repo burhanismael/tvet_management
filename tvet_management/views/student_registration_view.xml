@@ -106,7 +106,7 @@
                     <field name="blood_group" select="1"/>
                     <field name="academic_year_id" select="1"/>
                     <field name="shift_id" select="1"/>
-                    <field name="faculty_id" select="1"/>
+<!--                    <field name="faculty_id" select="1"/>-->
                 </tree>
             </field>
         </record>
@@ -119,7 +119,7 @@
             <field name="arch" type="xml">
             <form string="Student Registration">
                 <header>
-                    <button name="student_admission_start" string="Admission Start" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('status','!=','new'), ('is_admitission_button_show','=',True)]}"/>
+                    <button name="student_admission_start" string="Admission Start" type="object" class="oe_highlight"/>
                     <field name="status" widget="statusbar" statusbar_visible="new,enrolled,drop_out,inactive,graduated" />
                 </header>
                 <sheet>
@@ -144,13 +144,14 @@
                     </div>
                     <group>
                         <group>
+                            <field name="intake_type" widget="radio"/>
                             <field name="admission_id_id" invisible="1"/>
-<!--                            <field name="student_name_id" />-->
-<!--                            <field name="student_name_id" context="{'default_is_student': 1}" />-->
+                            <field name="student_name_id"/>
                             <field name="student_id" attrs="{'invisible':[('status', '!=', 'enrolled')], 'required':[('status', '=', 'enrolled')]}"/>
                             <field name="birth_place_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             <field name="gender"  widget="radio" options="{'horizontal':True}"/>
-                            <field name="nationality_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
+<!--                            <field name="nationality_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />-->
+                            <field name="nationality_id"/>
                             <field name="email" select="1"/>
                             <field name="address" select="1"/>
                             <field name="marital_status" select="1" placeholder="Select"/>
@@ -165,11 +166,11 @@
                         <group>
                             <field name="education_level"/>
                             <field name="occupation" invisible="1" select="1" placeholder="Select"/>
-                            <field name="blood_group" invisible="1" select="1" placeholder="Select" />
+                            <field name="blood_group" invisible="0" select="1" placeholder="Select" />
                             <field name="academic_year_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" placeholder="Select Academic Year" />
                             <field name="academic_month" select="1" placeholder="Select" />
                             <field name="shift_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
-                            <field name="faculty_id" invisible="1" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
+<!--                            <field name="faculty_id" invisible="1" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />-->
                             <field name="department_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
                             <field name="classroom_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             <field name="course_subject_id" widget="many2many_tags"/>
@@ -240,7 +241,7 @@
                     <field name="academic_year_id" select="1"/>
                     <field name="academic_month" select="1"/>
                     <field name="shift_id" select="1"/>
-                    <field name="faculty_id" select="1"/>
+<!--                    <field name="faculty_id" select="1"/>-->
                     <field name="department_id" select="1"/>
                     <field name="classroom_id" select="1"/>
                     <field name="student_type" select="1"/>
@@ -255,7 +256,7 @@
                         <filter string="Blood Group" name="blood_group" domain="[]" context="{'group_by':'blood_group'}"/>
                         <filter string="Academic Year" name="academic_year_id" domain="[]" context="{'group_by':'academic_year_id'}"/>
                         <filter string="Class" name="classroom_id" domain="[]" context="{'group_by':'classroom_id'}"/>
-                        <filter string="Faculty" name="faculty_id" domain="[]" context="{'group_by':'faculty_id'}"/>
+<!--                        <filter string="Faculty" name="faculty_id" domain="[]" context="{'group_by':'faculty_id'}"/>-->
                         <filter string="Department" name="department_id" domain="[]" context="{'group_by':'department_id'}"/>
                         <filter string="Student ID" name="student_id" domain="[]" context="{'group_by':'student_id'}"/>
                         <filter string="School Name" name="school_name" domain="[]" context="{'group_by':'school_name'}"/>

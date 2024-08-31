@@ -12,7 +12,7 @@ class SchoolShift(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string="Shift", tracking=True)
-    school_department_id = fields.Many2one('tvet.department', string="Department Name", tracking=True)
+    school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
 
     @api.constrains('name', 'school_department_id')
     def _check_duplicate(self):

@@ -10,5 +10,12 @@ access_school_semester,school.semester,model_school_semester,,1,1,1,1
 access_school_shift,school.shift,model_school_shift,,1,1,1,1
 access_student_registration,student.registration,model_student_registration,,1,1,1,1
 access_student_admission,student.admission,model_student_admission,,1,1,1,1
+access_country_nationality,country_nationality,model_country_nationality,,1,1,1,1
+tvet_management.access_class_class,access_class_class,tvet_management.model_class_class,base.group_user,1,1,1,1
+tvet_management.access_class_location,access_class_location,tvet_management.model_class_location,base.group_user,1,1,1,1
+tvet_management.access_student_relationship,access_student_relationship,tvet_management.model_student_relationship,base.group_user,1,1,1,1
+tvet_management.access_exam_result_entry,access_exam_result_entry,tvet_management.model_exam_result_entry,base.group_user,1,1,1,1
+tvet_management.access_exam_entry_line,access_exam_entry_line,tvet_management.model_exam_entry_line,base.group_user,1,1,1,1
+
 
 

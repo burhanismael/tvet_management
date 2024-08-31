@@ -12,7 +12,7 @@ class StudentAdmission(models.Model):
    
     admission_id = fields.Char(string="Admission ID", tracking=True)
     student_id = fields.Char(string="Student ID", tracking=True)
-    student_name_id = fields.Many2one("res.partner", string="Student", domain="[('is_student','=',True)]", tracking=True)
+    student_name_id = fields.Many2one("res.partner", string="Student", tracking=True)
     student_type = fields.Selection([('new','New'),('transfer','Transfer')], string="Student Type", tracking=True)
     registration_type = fields.Selection([('undergraduate','Undergraduate'),('post_graduate','Post-graduate')], string="Registration Type", tracking=True)
     payment_status = fields.Selection(selection=[
@@ -33,9 +33,24 @@ class StudentAdmission(models.Model):
     identification_card = fields.Binary(string="Passport or Identification Card", tracking=True)
     is_free = fields.Boolean(default=False, tracking=True)
     html_free = fields.Html(compute="_compute_html_free", tracking=True)
-    status = fields.Selection([('draft','Draft'),('finance','Finance'),('inprogress','In Progress'),('done','Done')], default='draft', tracking=True)
-    invoice_count = fields.Integer(compute='compute_count', tracking=True)
+    status = fields.Selection([('new','New'),('req','Requirement'),('done','Done')], default='new', tracking=True)
+    invoice_count = fields.Integer( tracking=True)
     color = fields.Selection([('red', 'Red'), ('green', 'Green'), ('blue', 'Blue')], string='Color')
+    intake_type = fields.Selection([('normal', 'Normal Intake'), ('recommended', 'Recommended Intake')],
+                                   string="Intake Type", tracking=True)
+
+    secondary = fields.Binary(string="Secondary certificate")
+    passport_photo = fields.Binary(string="Passport photo")
+    national_id = fields.Binary(string='National id')
+    consent_letter = fields.Binary(string='consent letter')
+
+
+    def start_req(self):
+        self.status = "req"
+
+    def req_done(self):
+        self.status = "done"
+
 
     @api.onchange('student_photo')
     def _onchange_student_photo(self):
@@ -85,75 +100,76 @@ class StudentAdmission(models.Model):
                 if record.status != 'enrolled':
                     record.status = 'enrolled'
 
-    def get_invoice(self):
-        # return {
-        #     "type": "ir.actions.act_window",
-        #     "view_mode": "form",
-        #     "res_model": "account.move",
-        #     "name": "Invoices",
-        #     "domain":[('move_type', '=', 'out_invoice')],
-        #     "context": {
-        #         'default_move_type': 'out_invoice',
-        #         'default_admission_id': self.admission_id,
-        #         'default_is_student': 1,
-        #         'default_partner_id': self.student_name_id.id,
-        #         },
-        #     }
-        for rec in self:
-            student_faculty_id = self.env['student.registration'].search([('admission_id', '=', rec.admission_id)], limit=1)
-            product_id = self.env['product.product'].search([('faculty_id', '=', student_faculty_id.faculty_id.id),('is_admission_product', '=', True)])
-            if not product_id:
-                raise ValidationError("%s's fee is not created" % student_faculty_id.faculty_id.name)
-            product_lines = []
-            for line in product_id:
-                product_lines.append((0, 0, {
-                                'product_id' : line.id,
-                                'price_unit' : line.fee_amount,
-                            }))
-            vals = {
-                'move_type': 'out_invoice',
-                'admission_id': rec.admission_id,
-                'is_student': 1,
-                'partner_id': rec.student_name_id.id,
-                'invoice_line_ids': product_lines
-            }
-            account_move_id = self.env['account.move'].create(vals)
-            return {
-                'type': 'ir.actions.act_window',
-                'name': 'My Action Name',
-                'view_type': 'form',
-                'view_mode': 'form',
-                'res_model': 'account.move',
-                'res_id': account_move_id.id,
-                'target': 'current',
-            }
-
-    def compute_count(self):
-        for record in self:
-            invoice = self.env['account.move'].search_count([('admission_id', '=', self.admission_id)])
-            record.invoice_count = invoice
-
-    def write(self, vals):
-        res = super(StudentAdmission, self).write(vals)
-        if self.status == 'inprogress' and self.secondary_certificate and self.blood_group_certificate and self.student_photo and self.registration_type == 'undergraduate':
-            self.status = 'done'
-            student_id = self.env['student.registration'].search([('admission_id', '=', self.admission_id)],limit=1)
-            student_id.status = 'enrolled'
-        elif self.status == 'done' and self.registration_type == 'undergraduate':
-            if not self.secondary_certificate or not self.blood_group_certificate or not self.student_photo:
-                self.status = 'inprogress'
-                student_id = self.env['student.registration'].search([('admission_id', '=', self.admission_id)], limit=1)
-                student_id.status = 'new'
-
-
-
-        elif self.status == 'inprogress' and self.degree_certificate and self.identification_card  and self.student_photo and self.registration_type == 'post_graduate':
-            self.status = 'done'
-            student_id = self.env['student.registration'].search([('admission_id', '=', self.admission_id)],limit=1)
-            student_id.status = 'enrolled'
-        elif self.status == 'done' and self.registration_type == 'post_graduate':
-            if not self.degree_certificate or not self.identification_card or not self.student_photo:
-                self.status = 'inprogress'
-                student_id = self.env['student.registration'].search([('admission_id', '=', self.admission_id)], limit=1)
-                student_id.status = 'new'
-        return res
+    # def get_invoice(self):
+    #     # return {
+    #     #     "type": "ir.actions.act_window",
+    #     #     "view_mode": "form",
+    #     #     "res_model": "account.move",
+    #     #     "name": "Invoices",
+    #     #     "domain":[('move_type', '=', 'out_invoice')],
+    #     #     "context": {
+    #     #         'default_move_type': 'out_invoice',
+    #     #         'default_admission_id': self.admission_id,
+    #     #         'default_is_student': 1,
+    #     #         'default_partner_id': self.student_name_id.id,
+    #     #         },
+    #     #     }
+    #     for rec in self:
+    #         student_faculty_id = self.env['student.registration'].search([('admission_id', '=', rec.admission_id)], limit=1)
+    #         product_id = self.env['product.product'].search([('faculty_id', '=', student_faculty_id.faculty_id.id),('is_admission_product', '=', True)])
+    #         if not product_id:
+    #             raise ValidationError("%s's fee is not created" % student_faculty_id.faculty_id.name)
+    #         product_lines = []
+    #         for line in product_id:
+    #             product_lines.append((0, 0, {
+    #                             'product_id' : line.id,
+    #                             'price_unit' : line.fee_amount,
+    #                         }))
+    #         vals = {
+    #             'move_type': 'out_invoice',
+    #             'admission_id': rec.admission_id,
+    #             'is_student': 1,
+    #             'partner_id': rec.student_name_id.id,
+    #             'invoice_line_ids': product_lines
+    #         }
+    #         account_move_id = self.env['account.move'].create(vals)
+    #         return {
+    #             'type': 'ir.actions.act_window',
+    #             'name': 'My Action Name',
+    #             'view_type': 'form',
+    #             'view_mode': 'form',
+    #             'res_model': 'account.move',
+    #             'res_id': account_move_id.id,
+    #             'target': 'current',
+    #         }
+    #
+    # def compute_count(self):
+    #     for record in self:
+    #         if self.admission_id:
+    #             invoice = self.env['account.move'].search_count([('admission_id', '=', self.admission_id)])
+    #             record.invoice_count = invoice
+    #
+    # def write(self, vals):
+    #     res = super(StudentAdmission, self).write(vals)
+    #     if self.status == 'inprogress' and self.secondary_certificate and self.blood_group_certificate and self.student_photo and self.registration_type == 'undergraduate':
+    #         self.status = 'done'
+    #         student_id = self.env['student.registration'].search([('admission_id', '=', self.admission_id)],limit=1)
+    #         student_id.status = 'enrolled'
+    #     elif self.status == 'done' and self.registration_type == 'undergraduate':
+    #         if not self.secondary_certificate or not self.blood_group_certificate or not self.student_photo:
+    #             self.status = 'inprogress'
+    #             student_id = self.env['student.registration'].search([('admission_id', '=', self.admission_id)], limit=1)
+    #             student_id.status = 'new'
+    #
+    #
+    #
+    #     elif self.status == 'inprogress' and self.degree_certificate and self.identification_card  and self.student_photo and self.registration_type == 'post_graduate':
+    #         self.status = 'done'
+    #         student_id = self.env['student.registration'].search([('admission_id', '=', self.admission_id)],limit=1)
+    #         student_id.status = 'enrolled'
+    #     elif self.status == 'done' and self.registration_type == 'post_graduate':
+    #         if not self.degree_certificate or not self.identification_card or not self.student_photo:
+    #             self.status = 'inprogress'
+    #             student_id = self.env['student.registration'].search([('admission_id', '=', self.admission_id)], limit=1)
+    #             student_id.status = 'new'
+    #     return res

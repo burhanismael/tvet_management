@@ -9,3 +9,7 @@ from . import school_class
 from . import school_shift
 from . import student_registration
 from . import student_admission
+from . import nationality
+from . import class_location
+from . import student_relationship
+from . import exam_result_entry

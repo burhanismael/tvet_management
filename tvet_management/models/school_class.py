@@ -15,8 +15,8 @@ class ClassRoom(models.Model):
     class_year = fields.Char(string="Class Year", tracking=True)
     academic_year_id = fields.Many2one('academic.year', string="Class Year", tracking=True)
     shift_id = fields.Many2one('school.shift', string="Shift", tracking=True)
-    school_department_id = fields.Many2one('tvet.department', string="Department Name", tracking=True)
-    semester_id = fields.Many2one('tvet.semester', string="Current Semester")
+    school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
+    semester_id = fields.Many2one('school.semester', string="Current Semester")
     class_room_ids = fields.One2many('class.class', 'relation_id', string="class name")
 
 
@@ -41,5 +41,5 @@ class classOnetomany(models.Model):
     relation_id = fields.Many2one('class.room', string="class Room name")
     relation_name = fields.Char(related='relation_id.name', store=True)
     # name = fields.Char('Class Name')
-    semester_id = fields.Many2one('semester.semester', string="Semester")
-    cource_ids = fields.Many2many('course.subject', string="Course", tracking=True)
+    semester_id = fields.Many2one('school.semester', string="Semester")
+    cource_ids = fields.Many2many('school.course', string="Course", tracking=True)

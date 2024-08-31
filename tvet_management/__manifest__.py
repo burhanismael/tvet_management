@@ -23,6 +23,11 @@
         'views/school_semester_view.xml',
         'views/school_shift_view.xml',
         'views/student_registration_view.xml',
+        'views/nationality_view.xml',
+        'views/class_location_view.xml',
+        'views/student_relationship_view.xml',
+        'views/student_admission_view.xml',
+        'views/exam_result_entry_view.xml',
 
 
         'views/menu_items.xml',

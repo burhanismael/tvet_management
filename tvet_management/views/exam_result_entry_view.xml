@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="view_exam_result_tree" model="ir.ui.view">
+            <field name="name">exam.result.entry.tree</field>
+            <field name="model">exam.result.entry</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Exam Result Entry">
+                    <field name="class_room_id"/>
+                    <field name="semester_id"/>
+                    <field name="course_subject_id"/>
+                    <field name="academic_year_id"/>
+                    <field name="upload_file"/>
+                </tree>
+            </field>
+        </record>
+
+
+        <record id="view_exam_result_form" model="ir.ui.view">
+            <field name="name">exam.result.entry.form</field>
+            <field name="model">exam.result.entry</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Exam Result Entry" duplicate="0">
+                    <header>
+                        <button name="action_approve"
+                                attrs="{'invisible': [('status','!=','draft')]}"
+                                class="oe_highlight"
+                                string="Confirm" type="object" groups="bosaso_university.lecturer_access"/>
+                        <field name="is_hide_result" invisible="1"/>
+                        <button name="action_create_result"
+                                attrs="{'invisible': ['|', ('status','!=','approved'), ('is_hide_result', '!=', False)]}"
+                                class="oe_highlight"
+                                string="Create Result" type="object"/>
+                        <field name="status"
+                               statusbar_visible="draft,approved"
+                               widget="statusbar"/>
+                    </header>
+                    <sheet>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="open_exam_result" type="object" class="oe_stat_button" icon="fa-id-card" attrs="{'invisible': [('result_count', '=', 0)]}">-->
+<!--                                <field name="result_count" widget="statinfo" string="Result"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" readonly="1" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="date"/>
+                                <field name="class_room_id" placeholder="Class Name" required="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                <field name="semester_id" placeholder="Semester" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                <field name="course_subject_ids" invisible="1"/>
+                                <field name="course_subject_id" placeholder="Course Name"
+                                       required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            </group>
+                            <group>
+                                <field name="department_id"/>
+                                <field name="upload_file" placeholder="Upload file" invisible="1"/>
+                                <field name="academic_year_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="student_ids" attrs="{'readonly':[('status', '=', 'approved')]}" force_save="1">
+                                <tree editable="bottom">
+                                    <field name="registration_id" invisible="1"/>
+                                    <field name="student_id" force_save="1" readonly="1"/>
+                                    <field name="presentation"/>
+                                    <field name="practical"/>
+                                    <field name="quiz"/>
+                                    <field name="total"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field name="registration_id" invisible="1"/>
+                                            <field name="student_id" force_save="1" readonly="1"/>
+                                            <field name="presentation" force_save="1" readonly="1"/>
+                                            <field name="practical" force_save="1" readonly="1"/>
+                                            <field name="quiz" force_save="1" readonly="1"/>
+                                            <field name="total" force_save="1" readonly="1"/>
+                                        </group>
+                                        <group></group>
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_exam_result_search" model="ir.ui.view">
+            <field name="name">exam.result.entry.search</field>
+            <field name="model">exam.result.entry</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Exam Result Entry">
+                    <field name="class_room_id"/>
+                    <field name="semester_id"/>
+                    <field name="course_subject_id"/>
+                    <field name="academic_year_id"/>
+                    <field name="upload_file"/>
+                </search>
+            </field>
+        </record>
+
+
+        <record id="act_exam_result_view" model="ir.actions.act_window">
+            <field name="name">Exam Result Entry</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exam.result.entry</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_exam_result_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+        <record id="act_exam_result_view_form" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="act_exam_result_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_exam_result_form"/>
+        </record>
+
+        <record id="act_exam_result_view_tree" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="act_exam_result_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_exam_result_tree"/>
+        </record>
+
+    </data>
+</odoo>

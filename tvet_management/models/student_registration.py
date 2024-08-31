@@ -53,7 +53,7 @@ class StudentRegistration(models.Model):
 
     stream = fields.Selection([('science', 'Science'), ('arts', 'Arts')], string="Stream", tracking=True)
     student_id = fields.Char(string="Student ID", tracking=True, copy=False)
-    student_name_id = fields.Many2one('res.partner', string="Student Name", domain="[('is_student','=',True)]", tracking=True)
+    student_name_id = fields.Many2one('res.partner', string="Student Name", tracking=True)
     is_admitission_button_show = fields.Boolean(default=False, tracking=True)
 
     nationality_id = fields.Many2one('country.nationality', string="Nationality", tracking=True)
@@ -72,7 +72,7 @@ class StudentRegistration(models.Model):
     is_alumni = fields.Boolean(default=False, tracking=True)
     location = fields.Many2one('class.location', string="Location", tracking=True)
     is_semester_invoice = fields.Boolean(tracking=True)
-    course_subject_id = fields.Many2many('course.subject', string='Course', tracking=True)
+    course_subject_id = fields.Many2many('school.course', string='Course', tracking=True)
     student_id_issue_date = fields.Date('Student ID Issue Date', tracking=True)
     student_id_expired_date = fields.Date('Student ID Expired Date', tracking=True)
     is_user = fields.Boolean(string="Is User Create", tracking=True)
@@ -81,11 +81,12 @@ class StudentRegistration(models.Model):
     color = fields.Selection([('red', 'Red'), ('green', 'Green'), ('blue', 'Blue')], string='Color')
 
 
-    # @api.constrains('student_id')
-    # def check_student_id_dublicate(self):
-    #     student_ids = self.env['student.registration'].search([('student_id', '=', self.student_id)])
-    #     if len(student_ids) > 1:
-    #         raise ValidationError(_('Student Id is already available'))
+    @api.constrains('student_id')
+    def check_student_id_dublicate(self):
+        if self.student_id:
+            student_ids = self.env['student.registration'].search([('student_id', '=', self.student_id)])
+            if len(student_ids) > 1:
+                raise ValidationError(_('Student Id is already available'))
 
     @api.onchange('blood_group')
     def update_admission_blood_group(self):
@@ -112,10 +113,11 @@ class StudentRegistration(models.Model):
 
     def _compute_image(self):
         for rec in self:
-            admission_id = self.env['student.admission'].search([('admission_id', '=', rec.admission_id)])
-            rec.admission_id_id = admission_id.id
+            if rec.admission_id:
+                admission_id = self.env['student.admission'].search([('admission_id', '=', rec.admission_id)])
+                rec.admission_id_id = admission_id.id
 
-    admission_id_id = fields.Many2one('student.admission', compute='_compute_image', store=False)
+    admission_id_id = fields.Many2one('student.admission', store=False)
     image = fields.Binary(string="Student Photo", store=True)
 
     @api.constrains('email', 'student_contact')
@@ -173,13 +175,11 @@ class StudentRegistration(models.Model):
         self.is_admitission_button_show = True
         vals = {
             'student_name_id': self.student_name_id.id,
-            'admission_id': self.admission_id,
-            'student_id': self.student_id,
-            'student_type': self.student_type,
-            'registration_type': self.registration_type,
-            'blood_group': self.blood_group,
-            'contact': self.student_contact,
             'parent_contact': self.parent_contact,
+            'contact': self.student_contact,
+            'student_id': self.student_id if self.student_id else "",
+            'intake_type': self.intake_type,
+            'admission_id': self.admission_id,
         }
         return self.env['student.admission'].create(vals)
 

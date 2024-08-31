@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+            <record model="ir.ui.view" id="student_admission_kanban_view">
+            <field name="name">student.admission.kanban</field>
+            <field name="model">student.admission</field>
+            <field name="arch" type="xml">
+                <kanban create="1" class="o_res_partner_kanban">
+                    <field name="color"/>
+                    <field name="id"/>
+                    <field name="student_name_id"/>
+                    <field name="student_id"/>
+                    <field name="student_type"/>
+                    <field name="registration_type"/>
+                    <field name="contact"/>
+                    <field name="blood_group"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <t t-set="color" t-value="kanban_color(record.color.raw_value || record.student_name_id.raw_value)"/>
+                            <div t-att-class="color + (record.color.raw_value == 1 ? ' oe_kanban_color_alert' : '')">
+                                <div class="oe_kanban_box oe_kanban_color_border">
+                                    <div class="oe_kanban_box_header oe_kanban_color_bgdark oe_kanban_color_border oe_kanban_draghandle">
+                                        <table class="oe_kanban_table">
+                                            <tr>
+                                                <td class="oe_kanban_title1" align="left" valign="middle"
+                                                    style="padding-left:10px;">
+                                                    <h5>
+                                                        <a type="open">
+                                                            <field name="student_name_id"/>
+                                                        </a>
+                                                    </h5>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    <div class="oe_kanban_box_content oe_kanban_color_bglight oe_kanban_box_show_onclick_trigger oe_kanban_color_border">
+                                        <table class="oe_kanban_table">
+                                            <tr width="300">
+                                                <td valign="top" width="64" align="left">
+                                                    <a type="open">
+                                                        <img heigh="80" width="80"
+                                                             t-att-src="kanban_image('student.admission', 'student_photo', record.id.raw_value)"
+                                                             alt="image"/>
+                                                    </a>
+                                                </td>
+                                                <td valign="top" align="left" style="padding-left:10px;">
+                                                    <table>
+                                                        <tr>
+                                                            <td>Student ID:</td>
+                                                            <td style="padding-left:10px;">
+                                                                <b>
+                                                                    <field name="student_id"/>
+                                                                </b>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Registr. Type:</td>
+                                                            <td style="padding-left:10px;">
+                                                                <b>
+                                                                    <field name="registration_type"/>
+                                                                </b>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Student Type:</td>
+                                                            <td style="padding-left:10px;">
+                                                                <b>
+                                                                    <field name="student_type"/>
+                                                                </b>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Contact:</td>
+                                                            <td style="padding-left:10px;">
+                                                                <b>
+                                                                    <field name="contact"/>
+                                                                </b>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Blood Group:</td>
+                                                            <td style="padding-left:10px;">
+                                                                <b>
+                                                                    <field name="blood_group"/>
+                                                                </b>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="view_student_admission_tree" model="ir.ui.view">
+            <field name="name">student.admission.tree</field>
+            <field name="model">student.admission</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Student Admission">
+                    <field name="admission_id"/>
+                    <field name="student_id"/>
+                    <field name="student_name_id"/>
+                    <field name="student_type"/>
+<!--                    <field name="payment_status"/>-->
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_student_admission_form" model="ir.ui.view">
+            <field name="name">student.admission.form</field>
+            <field name="model">student.admission</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Student Admission">
+                    <header>
+                        <button class="oe_highlight" type="object" name="start_req" string="Start Requirement"
+                                attrs="{'invisible':[('status', 'in', ['req', 'done'])]}"/>
+                        <button class="oe_highlight" type="object" name="req_done" string="Requirement Done"
+                                attrs="{'invisible':[('status', 'in', ['new', 'done'])]}"/>
+                        <field name="status" widget="statusbar"
+                               readonly="0" force_save="1" options="{'clickable': '1'}"
+                               statusbar_visible="draft,req,done"/>
+                    </header>
+                    <sheet>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="action_invoice" type="object" class="oe_stat_button" icon="fa-file-text-o"-->
+<!--                                    context="{-->
+<!--                                  'default_partner_id': student_name_id}">-->
+<!--                                <div class="o_field_widget o_stat_info">-->
+<!--                                    <field string="Invoice" name="invoice_count" widget="statinfo"/>-->
+<!--                                </div>-->
+<!--                            </button>-->
+<!--                            &lt;!&ndash; <button name="action_invoice" type="object" class="oe_stat_button" icon="fa-file-text-o" context="{-->
+<!--                                      'default_partner_id': student_name_id}">-->
+<!--                                <div class="o_field_widget o_stat_info">-->
+<!--                                    <span class="o_stat_text">Invoice</span>-->
+<!--                                </div>-->
+<!--                            </button> &ndash;&gt;-->
+<!--                            &lt;!&ndash; <button name="action_payment" type="object" class="oe_stat_button" icon="fa-money">-->
+<!--                                <div class="o_field_widget o_stat_info">-->
+<!--                                    <span class="o_stat_text">Payment</span>-->
+<!--                                </div>-->
+<!--                            </button> &ndash;&gt;-->
+<!--                            &lt;!&ndash; <button name="action_free" type="object" class="oe_stat_button" icon="fa-meh-o" attrs="{'invisible':[('is_free', '=', True)]}">-->
+<!--                                <div class="o_field_widget o_stat_info">-->
+<!--                                    <span class="o_stat_text">Free</span>-->
+<!--                                </div>-->
+<!--                            </button> &ndash;&gt;-->
+<!--                            <button name="action_paid" type="object" class="oe_stat_button" icon="fa-check-square-o"-->
+<!--                                    attrs="{'invisible':[('is_free', '=', False)]}">-->
+<!--                                <div class="o_field_widget o_stat_info">-->
+<!--                                    <span class="o_stat_text">Paid</span>-->
+<!--                                </div>-->
+<!--                            </button>-->
+<!--                        </div>-->
+                        <!--                    attrs="{'required':[('registration_type', '=', 'post_graduate'),('status', '=', 'inprogress')]}"-->
+                        <field name="student_photo" widget="image" class="oe_avatar" nolabel="1"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="admission_id" readonly="1"/>
+                            </h1>
+                            <h1>
+                                <field name="html_free"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="student_name_id"/>
+                                <field name="student_id"/>
+                                <field name="intake_type"/>
+                                <field name="student_type" invisible="1"/>
+                                <field name="blood_group" placeholder="select" required="0" invisible="1"/>
+                            </group>
+                            <group>
+<!--                                <field name="payment_status"/>-->
+                                <field name="contact" required="1"/>
+                                <field name="parent_contact" required="1"/>
+                                <field name="registration_type" placeholder="select" attrs="{'invisible': 1}"/>
+                                <field name="is_free" invisible="1"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Document">
+                                <group>
+                                    <group>
+                                        <field name="secondary" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
+                                        <field name="passport_photo" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
+                                    </group>
+                                    <group>
+                                        <field name="national_id" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
+                                        <field name="consent_letter" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_student_admission_search" model="ir.ui.view">
+            <field name="name">student.admission.search</field>
+            <field name="model">student.admission</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Student Admission">
+                    <field name="student_name_id" select="True"/>
+                    <field name="admission_id"/>
+                    <field name="student_id"/>
+                    <field name="contact"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_student_admission_view">
+            <field name="name">Student Admission</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.admission</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_student_admission_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_student_admission_view_form">
+            <field name="act_window_id" ref="act_open_student_admission_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_student_admission_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_student_admission_view_tree">
+            <field name="act_window_id" ref="act_open_student_admission_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_student_admission_tree"/>
+        </record>
+
+<!--        <record model="ir.actions.act_window.view" id="act_open_student_admission_view_kanban">-->
+<!--            <field name="act_window_id" ref="act_open_student_admission_view"/>-->
+<!--            <field name="sequence" eval="5"/>-->
+<!--            <field name="view_mode">kanban</field>-->
+<!--            <field name="view_id" ref="student_admission_kanban_view"/>-->
+<!--        </record>-->
+
+
+    </data>
+</odoo>

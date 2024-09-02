@@ -80,6 +80,8 @@ class StudentRegistration(models.Model):
     mothers_name = fields.Char(string="Mother's Name", required=True)
     color = fields.Selection([('red', 'Red'), ('green', 'Green'), ('blue', 'Blue')], string='Color')
 
+    special_need_ids = fields.Many2many('special.need', string="Special Need")
+
 
     @api.constrains('student_id')
     def check_student_id_dublicate(self):

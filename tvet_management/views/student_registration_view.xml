@@ -207,6 +207,13 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Special Need">
+                            <group>
+                                <group>
+                                    <field name="special_need_ids" widget="many2many_tags"/>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">

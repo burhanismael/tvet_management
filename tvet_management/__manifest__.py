@@ -29,6 +29,7 @@
         'views/student_admission_view.xml',
         'views/exam_result_entry_view.xml',
         'views/special_need.xml',
+        'views/idp_name_view.xml',
 
 
         'views/menu_items.xml',

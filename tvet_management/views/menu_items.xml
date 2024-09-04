@@ -39,6 +39,7 @@
 
 
     <menuitem id="menu_tvet_project" parent="menu_tvet_configuration" name="Project" sequence="6" action="action_tvet_project"/>
-    <menuitem id="menu_special_need" parent="menu_tvet_configuration" name="Special Needs" sequence="6" action="act_open_special_need_view"/>"/>
+    <menuitem id="menu_special_need" parent="menu_tvet_configuration" name="Special Needs" sequence="6" action="act_open_special_need_view"/>
+    <menuitem id="menu_idp_name" parent="menu_tvet_configuration" name="IDP Name" sequence="7" action="act_open_idp_name_view"/>
 
 </odoo>

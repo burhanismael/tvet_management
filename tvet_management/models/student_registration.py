@@ -17,7 +17,7 @@ class StudentRegistration(models.Model):
     education_level = fields.Selection([('intermediate', 'Intermediate'), ('secondary', 'Secondary'),
                                         ('diploma', 'Diploma'), ('degree', 'Degree')])
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender", tracking=True)
-    parent_contact = fields.Char(string="Parent contact", required=True, tracking=True)
+    parent_contact = fields.Char(string="Parent contact", tracking=True)
     intake_type = fields.Selection([('normal', 'Normal Intake'), ('recommended', 'Recommended Intake')],
                                    string="Intake Type", tracking=True)
     status = fields.Selection([('new', 'New'), ('enrolled', 'Enrolled'), ('drop_out', 'Drop Out'), ('inactive', 'Inactive'),
@@ -40,7 +40,7 @@ class StudentRegistration(models.Model):
     occupation = fields.Selection([('employed', 'Employed'), ('unemployed', 'Unemployed')], string="Occupation", tracking=True)
     blood_group = fields.Selection(
         [('a+', 'A+'), ('a-', 'A-'), ('ab+', 'AB+'), ('ab-', 'AB-'), ('b+', 'B+'), ('b-', 'B-'), ('o+', 'O+'),
-         ('o-', 'O-')], string="Blood Group", required=True, tracking=True)
+         ('o-', 'O-')], string="Blood Group", tracking=True)
     academic_year_id = fields.Many2one('academic.year', string="Academic Year", tracking=True)
     academic_month = fields.Selection(
         [('january', 'January'), ('february', 'February'), ('march', 'March'), ('april', 'April'), ('may-', 'May'),
@@ -65,8 +65,8 @@ class StudentRegistration(models.Model):
     parent_name = fields.Char(string="Parent Name", tracking=True)
     parent_street_1 = fields.Char(string="Parent Street1", tracking=True)
     parent_street_2 = fields.Char(string="Parent Street2", tracking=True)
-    parent_city = fields.Char(string="Parent City", tracking=True)
-    state_id = fields.Many2one('res.country.state', string="Parent State", domain="[('country_id','=?',country_id)]", tracking=True)
+    parent_city = fields.Char(string="City", tracking=True)
+    state_id = fields.Many2one('res.country.state', string="State", tracking=True)
     country_id = fields.Many2one('res.country', string="Parent Country", tracking=True)
     student_balance = fields.Integer(string="Student Balance", tracking=True)
     is_alumni = fields.Boolean(default=False, tracking=True)
@@ -77,10 +77,12 @@ class StudentRegistration(models.Model):
     student_id_expired_date = fields.Date('Student ID Expired Date', tracking=True)
     is_user = fields.Boolean(string="Is User Create", tracking=True)
     student_user_id = fields.Many2one('res.users', string="student User Id", tracking=True)
-    mothers_name = fields.Char(string="Mother's Name", required=True)
+    mothers_name = fields.Char(string="Mother's Name")
     color = fields.Selection([('red', 'Red'), ('green', 'Green'), ('blue', 'Blue')], string='Color')
 
     special_need_ids = fields.Many2many('special.need', string="Special Need")
+    project_id = fields.Many2one('tvet.project', string="Project")
+    idp_name_id = fields.Many2one('idp.name', string="IDP Name")
 
 
     @api.constrains('student_id')

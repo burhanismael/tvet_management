@@ -17,6 +17,8 @@ tvet_management.access_student_relationship,access_student_relationship,tvet_man
 tvet_management.access_exam_result_entry,access_exam_result_entry,tvet_management.model_exam_result_entry,base.group_user,1,1,1,1
 tvet_management.access_exam_entry_line,access_exam_entry_line,tvet_management.model_exam_entry_line,base.group_user,1,1,1,1
 tvet_management.access_special_need,access_special_need,tvet_management.model_special_need,base.group_user,1,1,1,1
+tvet_management.access_idp_name,access_idp_name,tvet_management.model_idp_name,base.group_user,1,1,1,1
+
 
 
 

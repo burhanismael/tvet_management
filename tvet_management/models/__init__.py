@@ -14,3 +14,4 @@ from . import class_location
 from . import student_relationship
 from . import exam_result_entry
 from . import special_needs
+from . import idp_name

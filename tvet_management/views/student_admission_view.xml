@@ -128,8 +128,7 @@
                         <button class="oe_highlight" type="object" name="req_done" string="Requirement Done"
                                 attrs="{'invisible':[('status', 'in', ['new', 'done'])]}"/>
                         <field name="status" widget="statusbar"
-                               readonly="0" force_save="1" options="{'clickable': '1'}"
-                               statusbar_visible="draft,req,done"/>
+                               statusbar_visible="new,req,done"/>
                     </header>
                     <sheet>
 <!--                        <div class="oe_button_box" name="button_box">-->
@@ -194,7 +193,7 @@
                                 <group>
                                     <group>
                                         <field name="secondary" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
-                                        <field name="passport_photo" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
+<!--                                        <field name="passport_photo" attrs="{'required': [('intake_type', '=', 'normal')]}"/>-->
                                     </group>
                                     <group>
                                         <field name="national_id" attrs="{'required': [('intake_type', '=', 'normal')]}"/>

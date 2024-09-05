@@ -63,6 +63,7 @@
                             <group>
                                 <field name="department_id"/>
                                 <field name="upload_file" placeholder="Upload file" invisible="1"/>
+                                <field name="exam_type_id"/>
                                 <field name="academic_year_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                             </group>
                         </group>

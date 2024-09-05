@@ -17,6 +17,7 @@ class ExamResult(models.Model):
     upload_file = fields.Binary(string="Upload file", tracking=True)
     student_ids = fields.One2many('exam.entry.line', 'exam_entry_id',
                                   string="Student", tracking=True)
+    exam_type_id = fields.Many2one('exam.type', string="Exam Type")
     is_hide_result = fields.Boolean(string="IS Hide Result", tracking=True)
     status = fields.Selection(
         [
@@ -177,10 +178,10 @@ class ExamResult(models.Model):
     def search(self, args, **kwargs):
         if self.env.user.has_group('bosaso_university.lecturer_access') and not self.env.user.has_group('base.group_system'):
             lecturer_id = self.env['create.lecturer'].search([('user_id', '=', self.env.user.id)])
-            approve_lecturer_id = self.env['approve.lecturer'].search([('lecturer_name_id', '=', lecturer_id.id)])
-            course_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('course_id')
-            class_room_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('class_id')
-            args += [('course_subject_id', 'in', course_ids.ids), ('class_room_id', 'in', class_room_ids.ids)]
+            # approve_lecturer_id = self.env['approve.lecturer'].search([('lecturer_name_id', '=', lecturer_id.id)])
+            # course_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('course_id')
+            # class_room_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('class_id')
+            # args += [('course_subject_id', 'in', course_ids.ids), ('class_room_id', 'in', class_room_ids.ids)]
         return super(ExamResult, self).search(args, **kwargs)
 
 

@@ -14,6 +14,7 @@
     <menuitem id="menu_tvet_academic" parent="menu_tvet_root" name="Academic" sequence="3"/>
 
     <menuitem id="menu_tvet_examination" parent="menu_tvet_root" name="Examinations" sequence="2"/>
+    <menuitem id="menu_tvet_acadamic" parent="menu_tvet_root" name="Academic" sequence="3"/>
     <menuitem id="menu_tvet_examination_entry" parent="menu_tvet_examination" name="Exam Result Entry" action="act_exam_result_view" sequence="2"/>
 
     <menuitem id="menu_tvet_configuration" parent="menu_tvet_root" name="Configuration" sequence="4"/>
@@ -34,6 +35,12 @@
     <menuitem id="menu_tvet_semester" parent="menu_tvet_configuration" name="Semester" sequence="5" action="act_open_semester_view"/>
 
     <menuitem id="menu_tvet_shift" parent="menu_tvet_configuration" name="Shifts" sequence="5" action="act_open_school_shift_view"/>
+    <menuitem id="menu_student_drop_out" parent="menu_tvet_student" sequence="3" name="Drop Out Student" action="act_open_student_registration_dropout"/>
+    <menuitem id="menu_student_time_table" parent="menu_tvet_acadamic" sequence="3" name="Timetable" action="act_open_manage_timetable_view"/>
+    <menuitem id="menu_create_lecturer" parent="menu_tvet_acadamic" sequence="2" name="Lecturer" action="act_open_create_lecturer_view"/>
+    <menuitem id="menu_unassigned_lecturer" parent="menu_tvet_acadamic" sequence="3" name="Unassigned Lecturer" action="act_open_unassigned_lecturer_view"/>
+    <menuitem id="menu_assing_lecturer" parent="menu_tvet_acadamic" sequence="3" name="Assign Lecturer" action="act_open_assing_lecturer_view"/>
+<!--    <menuitem id="menu_approve_lectuere" parent="menu_tvet_acadamic" sequence="3" name="Approve Assigned Lecturer" action="act_open_approve_lectuere_view"/>-->
 
 
 
@@ -41,5 +48,6 @@
     <menuitem id="menu_tvet_project" parent="menu_tvet_configuration" name="Project" sequence="6" action="action_tvet_project"/>
     <menuitem id="menu_special_need" parent="menu_tvet_configuration" name="Special Needs" sequence="6" action="act_open_special_need_view"/>
     <menuitem id="menu_idp_name" parent="menu_tvet_configuration" name="IDP Name" sequence="7" action="act_open_idp_name_view"/>
+    <menuitem id="menu_exam_type" parent="menu_tvet_configuration" name="Exam Type" sequence="7" action="act_open_exam_type_view"/>
 
 </odoo>

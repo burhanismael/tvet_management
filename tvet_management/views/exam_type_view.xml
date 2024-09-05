@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_exam_type_tree" model="ir.ui.view">
+            <field name="name">exam.type.tree</field>
+            <field name="model">exam.type</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Exam Type">
+                <field name="exam_type"/>
+                <field name="maximum_mark"/>
+<!--                <field name="required_mark"/>-->
+                <field name="remarks"/>
+            </tree>
+            </field>
+        </record>
+        
+        <record id="view_exam_type_form" model="ir.ui.view">
+            <field name="name">exam.type.form</field>
+            <field name="model">exam.type</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Exam Type">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="exam_type" required="1" placeholder="Exam Type"/>
+                        </group>
+                        <group>
+                            <field name="maximum_mark" required="1" placeholder="Maximum Marks"/>
+                            <field name="is_portal"/>
+<!--                            <field name="required_mark" required="1" placeholder="Required Marks"/>-->
+                        </group>
+                    </group>
+                    <group>
+                         <field name="remarks" placeholder="Remarks" nolabel="1"/>
+                     </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+
+        
+        <record id="view_exam_type_search" model="ir.ui.view">
+            <field name="name">exam.type.search</field>
+            <field name="model">exam.type</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Exam Type">
+                <field name="exam_type"/>
+                <field name="required_mark"/>
+                <field name="remarks"/>
+            </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="act_open_exam_type_view">
+            <field name="name">Exam Type</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">exam.type</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_exam_type_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_exam_type_view_form">
+            <field name="act_window_id" ref="act_open_exam_type_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_exam_type_form"/>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_exam_type_view_tree">
+            <field name="act_window_id" ref="act_open_exam_type_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_exam_type_tree"/>
+        </record>
+    </data>
+</odoo>

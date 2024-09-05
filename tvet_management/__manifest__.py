@@ -30,8 +30,11 @@
         'views/exam_result_entry_view.xml',
         'views/special_need.xml',
         'views/idp_name_view.xml',
-
-
+        'views/manage_timetable_view.xml',
+        'views/create_lecturer_view.xml',
+        'views/assign_lecturer_view.xml',
+        'views/assign_lecturer_view.xml',
+        'views/exam_type_view.xml',
         'views/menu_items.xml',
         
     ],

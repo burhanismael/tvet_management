@@ -337,6 +337,16 @@
             <field name="view_id" ref="student_registration_kanban_view"/>
         </record>
 
+        <record model="ir.actions.act_window" id="act_open_student_registration_dropout">
+            <field name="name">Student Drop Out</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">student.registration</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="search_view_id" ref="view_student_registration_search"/>
+            <field name="domain">[('status', 'in', ['drop_out'])]</field>
+            <field name="context">{'default_status': 'drop_out','create':False,'edit':True}</field>
+        </record>
+
 <!--        <record id="excle_formate_action" model="ir.actions.server">-->
 <!--            <field name="name">Sale Report</field>-->
 <!--            <field name="type">ir.actions.server</field>-->

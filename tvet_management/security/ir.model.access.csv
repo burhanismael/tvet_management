@@ -18,7 +18,9 @@ tvet_management.access_exam_result_entry,access_exam_result_entry,tvet_managemen
 tvet_management.access_exam_entry_line,access_exam_entry_line,tvet_management.model_exam_entry_line,base.group_user,1,1,1,1
 tvet_management.access_special_need,access_special_need,tvet_management.model_special_need,base.group_user,1,1,1,1
 tvet_management.access_idp_name,access_idp_name,tvet_management.model_idp_name,base.group_user,1,1,1,1
-
-
-
-
+tvet_management.access_manage_timetable,access_manage_timetable,tvet_management.model_manage_timetable,base.group_user,1,1,1,1
+tvet_management.access_create_lecturer,access_create_lecturer,tvet_management.model_create_lecturer,base.group_user,1,1,1,1
+tvet_management.access_create_lecturer_qualification,access_create_lecturer_qualification,tvet_management.model_create_lecturer_qualification,base.group_user,1,1,1,1
+tvet_management.access_assign_lecturer,access_assign_lecturer,tvet_management.model_assign_lecturer,base.group_user,1,1,1,1
+tvet_management.access_assign_lecturer_line,access_assign_lecturer_line,tvet_management.model_assign_lecturer_line,base.group_user,1,1,1,1
+tvet_management.access_exam_type,access_exam_type,tvet_management.model_exam_type,base.group_user,1,1,1,1

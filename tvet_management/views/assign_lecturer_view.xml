@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_assing_lecturer_tree" model="ir.ui.view">
+            <field name="name">assign.lecturer.tree</field>
+            <field name="model">assign.lecturer</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Assign Lecturer">
+                <field name="lecturer_name_id"/>
+                <field name="class_id"/>
+                <field name='course_ids' widget="many2many_tags" />
+                <field name="semester_id"/>
+            </tree>
+            </field>
+        </record>
+        
+        <record id="view_assing_lecturer_form" model="ir.ui.view">
+            <field name="name">assign.lecturer.form</field>
+            <field name="model">assign.lecturer</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Assign Lecturer">
+                <header>
+                    <button class="oe_highlight" type="object" name="action_approve" string="Submit For Approval" attrs="{'invisible':[('status', '!=', 'draft')]}">
+                    </button>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,approved" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="lecturer_name_id"  required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="class_id"  required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name='course_ids' widget="many2many_tags" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="school_department_id" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="semester_id"  required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Course" name="subject">
+                            <field name="assign_lecturer_line_ids" widget="select_and_not_">
+                                <tree editable="bottom">
+                                    <field name="course_code_id"/>
+                                    <field name="course_name_id" required="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+        
+        <record id="view_assing_lecturer_search" model="ir.ui.view">
+            <field name="name">assign.lecturer.search</field>
+            <field name="model">assign.lecturer</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Assign Lecturer">
+                <field name="lecturer_name_id"/>
+                <field name="class_id"/>
+                <field name="semester_id"/>
+            </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="act_open_assing_lecturer_view">
+            <field name="name">Assign Lecturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">assign.lecturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_assing_lecturer_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_assing_lecturer_view_form">
+            <field name="act_window_id" ref="act_open_assing_lecturer_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_assing_lecturer_form"/>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_assing_lecturer_view_tree">
+            <field name="act_window_id" ref="act_open_assing_lecturer_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_assing_lecturer_tree"/>
+        </record>
+    </data>
+</odoo>

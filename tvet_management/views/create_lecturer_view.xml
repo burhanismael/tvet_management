@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_create_lecturer_tree" model="ir.ui.view">
+            <field name="name">create.lecturer.tree</field>
+            <field name="model">create.lecturer</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Lecturer">
+                <field name="name"/>
+            </tree>
+            </field>
+        </record>
+        
+        <record id="view_create_lecturer_form" model="ir.ui.view">
+            <field name="name">create.lecturer.form</field>
+            <field name="model">create.lecturer</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Lecturer">
+                <header>
+                    <button name="action_create_user" type ="object" string="Create User" data-hotkey="z" class="btn btn-secondary"/>
+                </header>
+                <sheet>
+                    <field name="lecturer_photo" widget="image" class="oe_avatar" nolabel="1"/>
+                    <div class="oe_title">
+                        <h1 class="d-flex">
+                            <field name="name" placeholder="Lecturer's Name" required="True"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sequence_no" invisible="1"/>
+<!--                            <field name="user_id" readonly="1" attrs="{'invisible': [('user_id','=', False)]}"/>-->
+                        </group>
+                        <group>
+<!--                            <field name= "faculty_id" required="1"  options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Personal Information">
+                            <group>
+                                <group>
+                                    <field name="dob"/>
+                                    <field name="user_id" string="Lecturer partner"/>
+                                    <field name="mobile_number"/>
+                                    <field name="email"/>
+                                    <field name="gender" widget="radio" options="{'horizontal':True}"/>
+                                    <field name="allocated_department"/>
+                                </group>
+                                <group>
+                                    <field name="blood_group" placeholder="Select"/>
+                                    <field name="visa_details"/>
+                                    <field name="qualification" placeholder="Select"/>
+                                    <field name="employee_type" placeholder="Select"/>
+                                    <field name="is_assign_lecturer" invisible='1'/>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Address">
+                            <group>
+                                <group>
+                                    <span class="o_form_label o_td_label">
+                                        <b>Address</b>
+                                    </span>
+                                    <div class="o_address_format">
+                                        <field name="street_1" placeholder="Street..." class="o_address_street"/>
+                                        <field name="street_2" placeholder="Street 2..." class="o_address_street"/>
+                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options="{'no_open': True, 'no_quick_create': True}" context="{'default_country_id': country_id}"/>
+                                        <field name="pin_code" placeholder="ZIP" class="o_address_zip"/>
+                                        <field name="country_id" placeholder="Country" class="o_address_country" options='{"no_open": True, "no_create": True}'/>
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Qualification">
+                            <group>
+                                <field name="qualification_ids" nolabel='1'>
+                                    <tree editable="bottom">
+                                        <field name="degree"/>
+                                        <field name="specialization"/>
+                                        <field name="year"/>
+                                        <field name="institute"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+        
+        <record id="view_create_lecturer_search" model="ir.ui.view">
+            <field name="name">create.lecturer.search</field>
+            <field name="model">create.lecturer</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Lecturer">
+                <field name="name" select="True"/>
+            </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="act_open_create_lecturer_view">
+            <field name="name">Lecturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">create.lecturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_create_lecturer_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_unassigned_lecturer_view">
+            <field name="name">Unassigned Lecturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">create.lecturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_create_lecturer_search"/>
+            <field name="domain">[('is_assign_lecturer', '=', False)]</field>
+            <field name="context">{'create':False, 'edit': False}</field>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_create_lecturer_view_form">
+            <field name="act_window_id" ref="act_open_create_lecturer_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_create_lecturer_form"/>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_create_lecturer_view_tree">
+            <field name="act_window_id" ref="act_open_create_lecturer_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_create_lecturer_tree"/>
+        </record>
+   </data>
+</odoo>

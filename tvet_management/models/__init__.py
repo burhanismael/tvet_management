@@ -15,3 +15,7 @@ from . import student_relationship
 from . import exam_result_entry
 from . import special_needs
 from . import idp_name
+from . import manage_timetable
+from . import create_lecturer
+from . import assign_lecturer
+from . import exam_type

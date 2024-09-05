@@ -25,7 +25,7 @@ class StudentRegistration(models.Model):
     shift_id = fields.Many2one('school.shift', string="Shift", required=True, tracking=True)
     faculty_id = fields.Many2one('school.faculty', string="Faculty", tracking=True)
     department_id = fields.Many2one('school.department', string="Department", tracking=True)
-    classroom_id = fields.Many2one('class.room', string="Class", tracking=True)
+    classroom_id = fields.Many2one('class.room', string="Course", tracking=True)
     semester_id = fields.Many2one('school.semester', string="Semester", domain="[('class_id', '=', classroom_id)]",
                                   tracking=True)
     dob = fields.Date(string="DOB", tracking=True)
@@ -72,7 +72,7 @@ class StudentRegistration(models.Model):
     is_alumni = fields.Boolean(default=False, tracking=True)
     location = fields.Many2one('class.location', string="Location", tracking=True)
     is_semester_invoice = fields.Boolean(tracking=True)
-    course_subject_id = fields.Many2many('school.course', string='Course', tracking=True)
+    course_subject_id = fields.Many2many('school.course', string='Subject', tracking=True)
     student_id_issue_date = fields.Date('Student ID Issue Date', tracking=True)
     student_id_expired_date = fields.Date('Student ID Expired Date', tracking=True)
     is_user = fields.Boolean(string="Is User Create", tracking=True)

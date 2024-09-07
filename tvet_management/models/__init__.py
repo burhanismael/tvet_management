@@ -19,3 +19,4 @@ from . import manage_timetable
 from . import create_lecturer
 from . import assign_lecturer
 from . import exam_type
+from . import attendance_sheet

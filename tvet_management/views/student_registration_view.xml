@@ -158,8 +158,8 @@
                             <field name="roll_number"/>
                             <field name="grade"/>
                             <field name="student_contact" />
-                            <field name="student_id_issue_date"/>
-                            <field name="student_id_expired_date"/>
+<!--                            <field name="student_id_issue_date"/>-->
+<!--                            <field name="student_id_expired_date"/>-->
                         </group>
                         <group>
                             <field name="education_level"/>

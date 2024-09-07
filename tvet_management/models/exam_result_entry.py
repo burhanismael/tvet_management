@@ -9,22 +9,22 @@ class ExamResult(models.Model):
     name = fields.Char('Name', copy=False, default='New', tracking=True)
     date = fields.Date(string='Date', tracking=True)
     department_id = fields.Many2one('school.department', string='Department', tracking=True)
+    exam_type_id = fields.Many2one('exam.type', string="Exam Type", tracking=True)
     class_room_id = fields.Many2one('class.room', string="Class Name", tracking=True)
     semester_id = fields.Many2one('school.semester', string="Semester", tracking=True)
-    course_subject_ids = fields.Many2many('school.course', string="Course Name", compute="_compute_course_subject_ids", store=True, tracking=True)
+    # course_subject_ids = fields.Many2many('school.course', string="Course Name", compute="_compute_course_subject_ids", store=True, tracking=True)
     course_subject_id = fields.Many2one('school.course', string="Course Name", tracking=True)
     academic_year_id = fields.Many2one('academic.year', string="Academic Year", tracking=True)
     upload_file = fields.Binary(string="Upload file", tracking=True)
     student_ids = fields.One2many('exam.entry.line', 'exam_entry_id',
                                   string="Student", tracking=True)
-    exam_type_id = fields.Many2one('exam.type', string="Exam Type")
     is_hide_result = fields.Boolean(string="IS Hide Result", tracking=True)
     status = fields.Selection(
         [
             ('draft', 'Draft'),
             ('approved', 'Confirmed')
         ], default="draft", copy=False, tracking=True)
-    # result_count = fields.Integer(string="Result Count", compute='_compute_result_count', tracking=True)
+    result_count = fields.Integer(string="Result Count", compute='_compute_result_count', tracking=True)
 
 
     @api.onchange('class_room_id')
@@ -67,6 +67,7 @@ class ExamResult(models.Model):
                          ('semester_id', '=', vals.get('semester_id')),
                          ('department_id', '=', vals.get('department_id')),
                          ('date', '=', vals.get('date')),
+                         ('exam_type_id', '=', vals.get('exam_type_id')),
                          ('academic_year_id', '=', vals.get('academic_year_id'))
                          ])
         if a:
@@ -98,16 +99,16 @@ class ExamResult(models.Model):
 
         return super(ExamResult, self).write(vals)
 
-    # @api.depends('class_room_id')
+    @api.depends('class_room_id')
     # def _compute_course_subject_ids(self):
     #     for result in self:
-    #         if result.class_room_id:
-    #             class_room_id = result.env['class.room'].search([('id', '=', result.class_room_id.id)])
+    #         class_room_id = result.env['class.room'].search([('id', '=', result.class_room_id.id)])
+    #         if class_room_id:
     #             course_ids = class_room_id.mapped('cource_ids')
-    #             if course_ids:
-    #                 result.course_subject_ids = course_ids.ids
-    #             else:
-    #                 result.course_subject_ids = []
+    #         if course_ids:
+    #             result.course_subject_ids = course_ids.ids
+    #         else:
+    #             result.course_subject_ids = []
 
     # def _compute_result_count(self):
     #     for result in self:
@@ -140,18 +141,20 @@ class ExamResult(models.Model):
 
     @api.onchange('class_room_id')
     def onchange_class_id(self):
-        print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
         for rec in self:
             if rec.class_room_id:
                 rec.semester_id = rec.semester_id.id
+                attendance_company = self.env.company.at_dance
                 if rec.class_room_id:
                     student_ids = self.env['student.registration'].search(
-                        [('classroom_id', '=', rec.class_room_id.id)])
-                    print("cccccccccccccccccccccccccccccccccccccccccccccc", student_ids)
+                        [('classroom_id', '=', rec.class_room_id.id), ('status', '=', 'enrolled')])
                     list_line = []
                     for student in student_ids:
                         list_line.append((0, 0, {'student_id': student.id,
                                                  'registration_id': student.student_id,
+                                                         'status': 'present',
+                                                         'room': "",
+                                                         'note': "",
                                                          }))
                 for line in rec.student_ids:
                     line.unlink()
@@ -165,6 +168,7 @@ class ExamResult(models.Model):
             'view_mode': 'form',
             'view_id': self.env.ref('bosaso_university.view_exam_result_entry_form').id,
             'context': {'department_id' : self.department_id.id,
+                        'exam_type_id' : self.exam_type_id.id,
                         'class_id': self.class_room_id.id,
                         'academic_year_id': self.academic_year_id.id,
                         'semester_id': self.semester_id.id,
@@ -178,10 +182,10 @@ class ExamResult(models.Model):
     def search(self, args, **kwargs):
         if self.env.user.has_group('bosaso_university.lecturer_access') and not self.env.user.has_group('base.group_system'):
             lecturer_id = self.env['create.lecturer'].search([('user_id', '=', self.env.user.id)])
-            # approve_lecturer_id = self.env['approve.lecturer'].search([('lecturer_name_id', '=', lecturer_id.id)])
-            # course_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('course_id')
-            # class_room_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('class_id')
-            # args += [('course_subject_id', 'in', course_ids.ids), ('class_room_id', 'in', class_room_ids.ids)]
+            approve_lecturer_id = self.env['approve.lecturer'].search([('lecturer_name_id', '=', lecturer_id.id)])
+            course_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('course_id')
+            class_room_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('class_id')
+            args += [('course_subject_id', 'in', course_ids.ids), ('class_room_id', 'in', class_room_ids.ids)]
         return super(ExamResult, self).search(args, **kwargs)
 
 
@@ -191,16 +195,10 @@ class AttendanceAddSheetLine(models.Model):
 
     exam_entry_id = fields.Many2one('exam.result.entry', tracking=True)
     student_id = fields.Many2one('student.registration', string="Student", tracking=True)
-    presentation = fields.Integer(string='presentation')
-    practical = fields.Integer(string='Practical')
-    quiz = fields.Integer(string='quiz')
-    total = fields.Integer('Semester activity')
+    status = fields.Selection([('present', 'Present'), ('absent', 'Absent')], 'Status', default='present', tracking=True)
+    room = fields.Char('Room', tracking=True)
+    note = fields.Char('Note', tracking=True)
     registration_id = fields.Char('student id', tracking=True)
-
-
-    @api.onchange('presentation','practical','quiz')
-    def calculate(self):
-        self.total = self.presentation + self.practical + self.quiz
 
     @api.model_create_multi
     def create(self, vals_list):

@@ -9,6 +9,7 @@
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="Exam Result Entry">
+                    <field name="exam_type_id"/>
                     <field name="class_room_id"/>
                     <field name="semester_id"/>
                     <field name="course_subject_id"/>
@@ -41,11 +42,11 @@
                                widget="statusbar"/>
                     </header>
                     <sheet>
-<!--                        <div class="oe_button_box" name="button_box">-->
-<!--                            <button name="open_exam_result" type="object" class="oe_stat_button" icon="fa-id-card" attrs="{'invisible': [('result_count', '=', 0)]}">-->
-<!--                                <field name="result_count" widget="statinfo" string="Result"/>-->
-<!--                            </button>-->
-<!--                        </div>-->
+                        <div class="oe_button_box" name="button_box">
+                            <button name="open_exam_result" type="object" class="oe_stat_button" icon="fa-id-card" attrs="{'invisible': [('result_count', '=', 0)]}">
+                                <field name="result_count" widget="statinfo" string="Result"/>
+                            </button>
+                        </div>
                         <div class="oe_title">
                             <h1>
                                 <field name="name" readonly="1" required="1"/>
@@ -58,12 +59,12 @@
                                 <field name="semester_id" placeholder="Semester" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                                 <field name="course_subject_ids" invisible="1"/>
                                 <field name="course_subject_id" placeholder="Course Name"
-                                       required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                       required="1" domain="[('id', 'in', course_subject_ids)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             </group>
                             <group>
                                 <field name="department_id"/>
                                 <field name="upload_file" placeholder="Upload file" invisible="1"/>
-                                <field name="exam_type_id"/>
+                                <field name="exam_type_id" placeholder="Exam Type" required="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                                 <field name="academic_year_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                             </group>
                         </group>
@@ -72,20 +73,18 @@
                                 <tree editable="bottom">
                                     <field name="registration_id" invisible="1"/>
                                     <field name="student_id" force_save="1" readonly="1"/>
-                                    <field name="presentation"/>
-                                    <field name="practical"/>
-                                    <field name="quiz"/>
-                                    <field name="total"/>
+                                    <field name="status"/>
+                                    <field name="room"/>
+                                    <field name="note"/>
                                 </tree>
                                 <form>
                                     <group>
                                         <group>
-                                            <field name="registration_id" invisible="1"/>
+                                            <field name="registration_id" invisible="0"/>
                                             <field name="student_id" force_save="1" readonly="1"/>
-                                            <field name="presentation" force_save="1" readonly="1"/>
-                                            <field name="practical" force_save="1" readonly="1"/>
-                                            <field name="quiz" force_save="1" readonly="1"/>
-                                            <field name="total" force_save="1" readonly="1"/>
+                                            <field name="status"/>
+                                            <field name="room"/>
+                                            <field name="note"/>
                                         </group>
                                         <group></group>
                                     </group>
@@ -109,6 +108,7 @@
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <search string="Exam Result Entry">
+                    <field name="exam_type_id"/>
                     <field name="class_room_id"/>
                     <field name="semester_id"/>
                     <field name="course_subject_id"/>

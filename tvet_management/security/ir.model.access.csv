@@ -24,3 +24,5 @@ tvet_management.access_create_lecturer_qualification,access_create_lecturer_qual
 tvet_management.access_assign_lecturer,access_assign_lecturer,tvet_management.model_assign_lecturer,base.group_user,1,1,1,1
 tvet_management.access_assign_lecturer_line,access_assign_lecturer_line,tvet_management.model_assign_lecturer_line,base.group_user,1,1,1,1
 tvet_management.access_exam_type,access_exam_type,tvet_management.model_exam_type,base.group_user,1,1,1,1
+tvet_management.access_attendance_sheet,access_attendance_sheet,tvet_management.model_attendance_sheet,base.group_user,1,1,1,1
+tvet_management.access_attendance_sheet_line,access_attendance_sheet_line,tvet_management.model_attendance_sheet_line,base.group_user,1,1,1,1

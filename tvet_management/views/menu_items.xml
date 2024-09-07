@@ -16,6 +16,8 @@
     <menuitem id="menu_tvet_examination" parent="menu_tvet_root" name="Examinations" sequence="2"/>
     <menuitem id="menu_tvet_acadamic" parent="menu_tvet_root" name="Academic" sequence="3"/>
     <menuitem id="menu_tvet_examination_entry" parent="menu_tvet_examination" name="Exam Result Entry" action="act_exam_result_view" sequence="2"/>
+    <menuitem id="menu_location" parent="menu_tvet_examination" name="Location" action="act_open_class_location_view" sequence="2"/>
+    <menuitem id="menu_attendance" parent="menu_tvet_examination" name="Attendance Sheet" action="act_open_att_view_view" sequence="2"/>
 
     <menuitem id="menu_tvet_configuration" parent="menu_tvet_root" name="Configuration" sequence="4"/>
 

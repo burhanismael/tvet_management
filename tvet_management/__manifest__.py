@@ -35,8 +35,9 @@
         'views/assign_lecturer_view.xml',
         'views/assign_lecturer_view.xml',
         'views/exam_type_view.xml',
+        'views/attendance_sheet_view.xml',
         'views/menu_items.xml',
-        
+
     ],
     'demo': [
     ],

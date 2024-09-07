@@ -42,14 +42,14 @@
                                widget="statusbar"/>
                     </header>
                     <sheet>
-                        <div class="oe_button_box" name="button_box">
-                            <button name="open_exam_result" type="object" class="oe_stat_button" icon="fa-id-card" attrs="{'invisible': [('result_count', '=', 0)]}">
-                                <field name="result_count" widget="statinfo" string="Result"/>
-                            </button>
-                        </div>
+<!--                        <div class="oe_button_box" name="button_box">-->
+<!--                            <button name="open_exam_result" type="object" class="oe_stat_button" icon="fa-id-card" attrs="{'invisible': [('result_count', '=', 0)]}">-->
+<!--                                <field name="result_count" widget="statinfo" string="Result"/>-->
+<!--                            </button>-->
+<!--                        </div>-->
                         <div class="oe_title">
                             <h1>
-                                <field name="name" readonly="1" required="1"/>
+                                <field name="name" readonly="1"/>
                             </h1>
                         </div>
                         <group>
@@ -57,9 +57,9 @@
                                 <field name="date"/>
                                 <field name="class_room_id" placeholder="Class Name" required="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
                                 <field name="semester_id" placeholder="Semester" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
-                                <field name="course_subject_ids" invisible="1"/>
-                                <field name="course_subject_id" placeholder="Course Name"
-                                       required="1" domain="[('id', 'in', course_subject_ids)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+<!--                                <field name="course_subject_ids" invisible="1"/>-->
+<!--                                <field name="course_subject_id" placeholder="Course Name"-->
+<!--                                       required="1" domain="[('id', 'in', course_subject_ids)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
                             </group>
                             <group>
                                 <field name="department_id"/>
@@ -73,18 +73,27 @@
                                 <tree editable="bottom">
                                     <field name="registration_id" invisible="1"/>
                                     <field name="student_id" force_save="1" readonly="1"/>
-                                    <field name="status"/>
-                                    <field name="room"/>
-                                    <field name="note"/>
+                                    <field name="prasent"/>
+                                    <field name="practical"/>
+                                    <field name="quiz"/>
+                                    <field name="sem_activity"/>
+<!--                                    <field name="status"/>-->
+<!--                                    <field name="room"/>-->
+<!--                                    <field name="note"/>-->
+
                                 </tree>
                                 <form>
                                     <group>
                                         <group>
                                             <field name="registration_id" invisible="0"/>
                                             <field name="student_id" force_save="1" readonly="1"/>
-                                            <field name="status"/>
-                                            <field name="room"/>
-                                            <field name="note"/>
+                                            <field name="prasent"/>
+                                            <field name="practical"/>
+                                            <field name="quiz"/>
+                                            <field name="sem_activity"/>
+<!--                                            <field name="status"/>-->
+<!--                                            <field name="room"/>-->
+<!--                                            <field name="note"/>-->
                                         </group>
                                         <group></group>
                                     </group>

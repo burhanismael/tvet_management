@@ -24,7 +24,7 @@ class ExamResult(models.Model):
             ('draft', 'Draft'),
             ('approved', 'Confirmed')
         ], default="draft", copy=False, tracking=True)
-    result_count = fields.Integer(string="Result Count", compute='_compute_result_count', tracking=True)
+    # result_count = fields.Integer(string="Result Count", compute='_compute_result_count', tracking=True)
 
 
     @api.onchange('class_room_id')
@@ -144,7 +144,7 @@ class ExamResult(models.Model):
         for rec in self:
             if rec.class_room_id:
                 rec.semester_id = rec.semester_id.id
-                attendance_company = self.env.company.at_dance
+                # attendance_company = self.env.company.at_dance
                 if rec.class_room_id:
                     student_ids = self.env['student.registration'].search(
                         [('classroom_id', '=', rec.class_room_id.id), ('status', '=', 'enrolled')])
@@ -195,10 +195,26 @@ class AttendanceAddSheetLine(models.Model):
 
     exam_entry_id = fields.Many2one('exam.result.entry', tracking=True)
     student_id = fields.Many2one('student.registration', string="Student", tracking=True)
-    status = fields.Selection([('present', 'Present'), ('absent', 'Absent')], 'Status', default='present', tracking=True)
-    room = fields.Char('Room', tracking=True)
-    note = fields.Char('Note', tracking=True)
+    # status = fields.Selection([('present', 'Present'), ('absent', 'Absent')], 'Status', default='present', tracking=True)
+    # room = fields.Char('Room', tracking=True)
+    # note = fields.Char('Note', tracking=True)
+    prasent = fields.Float('presentation')
+    practical = fields.Float('practical')
+    quiz = fields.Float('QUIZ')
+    sem_activity = fields.Integer('Sem Activity')
     registration_id = fields.Char('student id', tracking=True)
+
+
+    @api.onchange('prasent','practical','quiz')
+    def get_value(self):
+        if self.exam_entry_id.exam_type_id.maximum_mark < self.prasent:
+            raise ValidationError(_('You can not create a exam type maximum mark'))
+        if self.exam_entry_id.exam_type_id.maximum_mark < self.practical:
+            raise ValidationError(_('You can not create a exam type maximum mark'))
+        if self.exam_entry_id.exam_type_id.maximum_mark < self.quiz:
+            raise ValidationError(_('You can not create a exam type maximum mark'))
+
+        self.sem_activity = self.prasent + self.practical + self.quiz
 
     @api.model_create_multi
     def create(self, vals_list):

@@ -42,7 +42,7 @@ class AttendanceSheet(models.Model):
     @api.onchange('class_id')
     def onchange_class_id(self):
         for rec in self:
-            semester_id = self.env['semester.semester'].search([('class_id', '=', rec.class_id.id)])
+            semester_id = self.env['school.semester'].search([('class_id', '=', rec.class_id.id)])
             rec.semester_id = semester_id.ids
             if rec.class_id:
                 student_ids = self.env['student.registration'].search([('classroom_id', '=', rec.class_id.id), ('status', '=', 'enrolled')])
@@ -60,13 +60,13 @@ class AttendanceSheet(models.Model):
         self.semester_id = self.class_id.semester_id.id
 
 
-    semester_id = fields.Many2one('semester.semester', string="Semester Name", readonly=True)
+    semester_id = fields.Many2one('school.semester', string="Semester Name", readonly=True)
 
-    def _domain_course(self):
+    '''def _domain_course(self):
         approve_lecturer_line_ids = self.env['approve.lecturer.line'].search([('lecturer_id.user_id', '=', self.env.user.id)])
-        return [('id', 'in', approve_lecturer_line_ids.mapped('course_id').ids)]
+        return [('id', 'in', approve_lecturer_line_ids.mapped('course_id').ids)]'''
 
-    course_name_id = fields.Many2one('course.subject', string="Course Name")
+    course_name_id = fields.Many2one('school.course', string="Course Name")
 
     @api.model
     def create(self, vals):
@@ -75,19 +75,19 @@ class AttendanceSheet(models.Model):
         res = super(AttendanceSheet, self).create(vals)
         return res
 
-    @api.onchange('class_id')
-    def domain_semseter_data(self):
-        if self.class_id:
-            approve_lecturer_line_ids = self.env['approve.lecturer.line'].search([('lecturer_id.user_id', '=', self.env.user.id), ('approve_lecturer_id.status', '=', 'approve'), ('class_id', '=', self.class_id.id)])
-            domain = [('id', 'in', approve_lecturer_line_ids.mapped('semester_name_id').ids)]
-            return {'domain': {'semester_id': domain}}
-
-    @api.onchange('class_id', 'semester_id')
-    def domain_class_data(self):
-        if self.class_id and self.semester_id:
-            approve_lecturer_line_ids = self.env['approve.lecturer.line'].search([('lecturer_id.user_id', '=', self.env.user.id), ('approve_lecturer_id.status', '=', 'approve'), ('class_id', '=', self.class_id.id), ('semester_name_id', '=', self.semester_id.id)])
-            domain = [('id', 'in', approve_lecturer_line_ids.mapped('course_id').ids)]
-            return {'domain': {'course_name_id': domain}}
+    # @api.onchange('class_id')
+    # def domain_semseter_data(self):
+    #     if self.class_id:
+    #         approve_lecturer_line_ids = self.env['approve.lecturer.line'].search([('lecturer_id.user_id', '=', self.env.user.id), ('approve_lecturer_id.status', '=', 'approve'), ('class_id', '=', self.class_id.id)])
+    #         domain = [('id', 'in', approve_lecturer_line_ids.mapped('semester_name_id').ids)]
+    #         return {'domain': {'semester_id': domain}}
+    #
+    # @api.onchange('class_id', 'semester_id')
+    # def domain_class_data(self):
+    #     if self.class_id and self.semester_id:
+    #         approve_lecturer_line_ids = self.env['approve.lecturer.line'].search([('lecturer_id.user_id', '=', self.env.user.id), ('approve_lecturer_id.status', '=', 'approve'), ('class_id', '=', self.class_id.id), ('semester_name_id', '=', self.semester_id.id)])
+    #         domain = [('id', 'in', approve_lecturer_line_ids.mapped('course_id').ids)]
+    #         return {'domain': {'course_name_id': domain}}
 
 
     def unlink(self):
@@ -118,14 +118,14 @@ class AttendanceSheetLine(models.Model):
     signature = fields.Char('Signature', tracking=True)
     checkbox = fields.Boolean('Present', default=True, tracking=True)
     checkbox2 = fields.Boolean('Absent', tracking=True)
-    action_attandance = fields.Selection([('present', 'Present'), ('absent', 'Absent')], required=True, string="Attandance", tracking=True)
+    action_attandance = fields.Selection([('present', 'Present'), ('absent', 'Absent')], string="Attandance", tracking=True)
     remarks = fields.Char('Remarks', tracking=True)
 
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
     class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
-    semester_id = fields.Many2one('semester.semester', string="Semester Name",
+    semester_id = fields.Many2one('school.semester', string="Semester Name",
                                   domain="[('class_id', '=', class_id)]", tracking=True)
-    course_name_id = fields.Many2one('course.subject', string="Course Name", tracking=True)
+    course_name_id = fields.Many2one('school.course', string="Course Name", tracking=True)
     date = fields.Date('Date', tracking=True)
 
     @api.onchange('checkbox')

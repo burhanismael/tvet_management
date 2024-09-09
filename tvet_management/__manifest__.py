@@ -37,6 +37,9 @@
         'views/exam_type_view.xml',
         'views/attendance_sheet_view.xml',
         'views/menu_items.xml',
+        'views/assign_course.xml',
+        'views/approve_course_view.xml',
+        'views/approve_lecturer_view.xml',
 
     ],
     'demo': [

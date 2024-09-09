@@ -31,7 +31,7 @@
                         <button name="action_approve"
                                 attrs="{'invisible': [('status','!=','draft')]}"
                                 class="oe_highlight"
-                                string="Confirm" type="object" groups="bosaso_university.lecturer_access"/>
+                                string="Confirm" type="object"/>
                         <field name="is_hide_result" invisible="1"/>
                         <button name="action_create_result"
                                 attrs="{'invisible': ['|', ('status','!=','approved'), ('is_hide_result', '!=', False)]}"

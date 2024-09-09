@@ -12,7 +12,6 @@ class SchoolSemester(models.Model):
 
     semester_name = fields.Char(string="Semester", tracking=True)
     sem_number = fields.Integer(string="Sequence", tracking=True)
-    # school_shift_id = fields.Many2one('school.shift', string=" Class Name")
     class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
     academic_year_id = fields.Many2one('academic.year', string="Academic Year", tracking=True)
 

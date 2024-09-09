@@ -14,6 +14,7 @@ class SchoolCourse(models.Model):
     name = fields.Char(string="Course", tracking=True)
     department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
     remarks = fields.Text(string="Remarks", tracking=True)
+    course_code = fields.Char(string="Course Code")
 
     @api.constrains('name')
     def _check_duplicate(self):

@@ -20,3 +20,6 @@ from . import create_lecturer
 from . import assign_lecturer
 from . import exam_type
 from . import attendance_sheet
+from . import assign_course
+from . import approve_course
+from . import approve_lecturer

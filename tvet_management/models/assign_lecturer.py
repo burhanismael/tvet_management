@@ -50,7 +50,7 @@ class AssignLecturer(models.Model):
                 'semester_id' : self.semester_id.id,
                 'approve_lecturer_line_ids' : course_lines,
             }
-        # self.env['approve.lecturer'].create(vals)
+        self.env['approve.lecturer'].create(vals)
         self.status = 'approved'
         self.lecturer_name_id.is_assign_lecturer = True
 
@@ -59,29 +59,29 @@ class AssignLecturer(models.Model):
         self.class_id = False
         self.semester_id = False
 
-    # @api.onchange('semester_id')
-    # def onchange_assign_lecturer(self):
-    #     if self.assign_lecturer_line_ids:
-    #         self.assign_lecturer_line_ids = False
-    #         self.course_ids = False
-    #     for rec in self:
-    #         if rec.semester_id:
-    #             course = rec.env['approve.course'].search([('class_id','=',rec.class_id.id),
-    #                                                     ('semester_name_id', '=', rec.semester_id.id),
-    #                                                     ('school_department_id', '=', rec.school_department_id.id),
-    #                                                     ('status', '=', 'approved')])
-    #             course_list = []
-    #             for course_id in course:
-    #                 for line in course_id.course_approve_line_ids:
-    #                     for line_course_id in line.course:
-    #                         course_list.append(line_course_id.id)
-    #                         rec.update({
-    #                             'assign_lecturer_line_ids': [(0, 0, {
-    #                                         "course_name_id" : line_course_id.id,
-    #                                         'course_code_id' : line_course_id.course_code
-    #                                     })],
-    #                             })
-    #             rec.course_ids = [(6, 0, course_list)]
+    @api.onchange('semester_id')
+    def onchange_assign_lecturer(self):
+        if self.assign_lecturer_line_ids:
+            self.assign_lecturer_line_ids = False
+            self.course_ids = False
+        for rec in self:
+            if rec.semester_id:
+                course = rec.env['approve.course'].search([('class_id','=',rec.class_id.id),
+                                                        ('semester_name_id', '=', rec.semester_id.id),
+                                                        ('school_department_id', '=', rec.school_department_id.id),
+                                                        ('status', '=', 'approved')])
+                course_list = []
+                for course_id in course:
+                    for line in course_id.course_approve_line_ids:
+                        for line_course_id in line.course:
+                            course_list.append(line_course_id.id)
+                            rec.update({
+                                'assign_lecturer_line_ids': [(0, 0, {
+                                            "course_name_id" : line_course_id.id,
+                                            'course_code_id' : line_course_id.course_code
+                                        })],
+                                })
+                rec.course_ids = [(6, 0, course_list)]
 
 class AssignLecturerLine(models.Model):
     _name = "assign.lecturer.line"
@@ -92,10 +92,10 @@ class AssignLecturerLine(models.Model):
     course_code_id = fields.Char(string="Course Code", tracking=True)
     assign_lecturer_id = fields.Many2one('assign.lecturer', tracking=True)
 
-    # @api.onchange('course_name_id')
-    # def sem_based_domain(self):
-    #     if self.semeter_id:
-    #         rooms_ids = self.assign_lecturer_id.class_id.class_room_ids.filtered(lambda x: x.semester_id.id == self.semeter_id.id)
-    #         course_ids = rooms_ids.mapped('cource_ids')
-    #         domain = [('id', 'in', course_ids.ids)]
-    #         return {'domain': {'course_name_id': domain}}
+    @api.onchange('course_name_id')
+    def sem_based_domain(self):
+        if self.semeter_id:
+            rooms_ids = self.assign_lecturer_id.class_id.class_room_ids.filtered(lambda x: x.semester_id.id == self.semeter_id.id)
+            course_ids = rooms_ids.mapped('cource_ids')
+            domain = [('id', 'in', course_ids.ids)]
+            return {'domain': {'course_name_id': domain}}

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_assign_course_tree" model="ir.ui.view">
+            <field name="name">assign.course.tree</field>
+            <field name="model">assign.course</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Assign Course">
+                    <field name="school_department_id"/>
+                    <field name="school_shift_id" invisible="1"/>
+                    <field name="class_id"/>
+                    <field name="semester_name_id"/>
+                    <field name="aca_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_assign_course_form" model="ir.ui.view">
+            <field name="name">assign.course.form</field>
+            <field name="model">assign.course</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="Assign Course">
+                    <header>
+                        <button name="action_approve"
+                                states="draft" class="oe_highlight" type="object" string="Submit For Approval"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,approved"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="school_department_id" required="1"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            </group>
+                            <group>
+                                <field name="class_id" required="1"
+                                       context="{'default_school_department_id': school_department_id}"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            </group>
+                            <group>
+                                <field name="semester_name_id" required="1"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <field name="aca_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            </group>
+                            <group>
+                                <field name="course_subject_id" required="1" widget="many2many_tags"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <field name="is_assign_course" invisible="1"/>
+                                <!-- <field name="is_assign_course_check" invisible="1"/> -->
+                            </group>
+                        </group>
+                        <!--                <notebook>-->
+                        <!--                    <page string="Course" name="subject">-->
+                        <!--                        <field name="course_subject_line_ids" widget="select_and_not_">-->
+                        <!--                            <tree editable="bottom">-->
+                        <!--                                <field name="course_name_id"/>-->
+                        <!--                                <field name="course_code"/>-->
+                        <!--                                <field name="credit_hrs"/>-->
+                        <!--                                <field name="remarks"/>-->
+                        <!--                            </tree>-->
+                        <!--                        </field>-->
+                        <!--                    </page>-->
+                        <!--                </notebook>-->
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_assign_course_search" model="ir.ui.view">
+            <field name="name">assign.course.search</field>
+            <field name="model">assign.course</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="Assign Course">
+                    <field name="school_department_id"/>
+                    <field name="school_shift_id"/>
+                    <field name="semester_name_id"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_assign_course_view">
+            <field name="name">Assign Course</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">assign.course</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_assign_course_search"/>
+            <field name="domain">[('is_assign_course', '=', False)]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_assign_course_view_form">
+            <field name="act_window_id" ref="act_open_assign_course_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_assign_course_form"/>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_assign_course_view_tree">
+            <field name="act_window_id" ref="act_open_assign_course_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_assign_course_tree"/>
+        </record>
+
+        <menuitem id="menu_assign_course"
+            name="Assign Course"
+            parent = "menu_tvet_acadamic"
+            sequence="2"
+            action="act_open_assign_course_view"/>
+    </data>
+</odoo>

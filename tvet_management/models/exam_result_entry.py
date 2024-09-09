@@ -135,7 +135,7 @@ class ExamResult(models.Model):
 
     def unlink(self):
         for rec in self:
-            if rec.status == 'approved' and not self.env.user.has_group('bosaso_university.delete_records_exam_entry_access'):
+            if rec.status == 'approved' and not self.env.user.has_group('tvet_management.delete_records_exam_entry_access'):
                 raise ValidationError('You can not delete This record Please contect Administator .')
         return super(ExamResult, self).unlink()
 
@@ -161,12 +161,12 @@ class ExamResult(models.Model):
                 rec.student_ids = list_line
 
     def action_create_result(self):
-        view_id = self.env.ref('bosaso_university.view_exam_result_entry_tree').id
+        view_id = self.env.ref('tvet_management.view_exam_result_entry_tree').id
         return {
             'res_model': 'exam.result',
             'type': 'ir.actions.act_window',
             'view_mode': 'form',
-            'view_id': self.env.ref('bosaso_university.view_exam_result_entry_form').id,
+            'view_id': self.env.ref('tvet_management.view_exam_result_entry_form').id,
             'context': {'department_id' : self.department_id.id,
                         'exam_type_id' : self.exam_type_id.id,
                         'class_id': self.class_room_id.id,
@@ -180,7 +180,7 @@ class ExamResult(models.Model):
         }
 
     def search(self, args, **kwargs):
-        if self.env.user.has_group('bosaso_university.lecturer_access') and not self.env.user.has_group('base.group_system'):
+        if self.env.user.has_group('tvet_management.lecturer_access') and not self.env.user.has_group('base.group_system'):
             lecturer_id = self.env['create.lecturer'].search([('user_id', '=', self.env.user.id)])
             approve_lecturer_id = self.env['approve.lecturer'].search([('lecturer_name_id', '=', lecturer_id.id)])
             course_ids = approve_lecturer_id.approve_lecturer_line_ids.mapped('course_id')

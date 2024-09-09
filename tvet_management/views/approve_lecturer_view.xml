@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_approve_lectuere_tree" model="ir.ui.view">
+            <field name="name">approve.lecturer.tree</field>
+            <field name="model">approve.lecturer</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Approve Lecturer" create="0">
+                <field name="lecturer_name_id"/>
+                <field name="class_id"/>
+                <field name="semester_id"/>
+            </tree>
+            </field>
+        </record>
+        
+        <record id="view_approve_lectuere_form" model="ir.ui.view">
+            <field name="name">approve.lecturer.form</field>
+            <field name="model">approve.lecturer</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Approve Lecturer" create="0">
+                <header>
+                    <button class="oe_highlight" type="object" name="action_approve" string="Approve" attrs="{'invisible':[('status', '!=', 'draft')]}">
+                    </button>
+                    <button class="oe_highlight" type="object" name="action_reject" string="Reject"  attrs="{'invisible':[('status', '!=', 'draft')]}">
+                    </button>
+                    <button class="oe_highlight" type="object" name="reset_to_draft" string="Reset to Draft"
+                            attrs="{'invisible':[('status', '!=', 'approve')]}">
+                    </button>
+                    <field name="status" widget="statusbar" statusbar_visible="draft,approve,reject" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="lecturer_name_id"  required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="class_id"  required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                        </group>
+                        <group>
+                            <field name="school_department_id" required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="semester_id"  required="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Course" name="subject">
+                            <field name="approve_lecturer_line_ids" widget="select_and_not_" >
+                                <tree editable="bottom" create="0">
+                                    <field name="lecturer_id"/>
+                                    <field name="class_id"/>
+                                    <field name="semester_name_id"/>
+                                    <field name="course_id"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group>
+                        <field name="rejection_reason" placeholder="Rejection Reason" nolabel="1"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+            </field>
+        </record>
+        
+        <record id="view_approve_lectuere_search" model="ir.ui.view">
+            <field name="name">approve.lecturer.search</field>
+            <field name="model">approve.lecturer</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Approve Lecturer">
+                <field name="lecturer_name_id"/>
+                <field name="class_id"/>
+                <field name="semester_id"/>
+            </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="act_open_approve_lectuere_view">
+            <field name="name">Approve Assigned Lecturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">approve.lecturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_approve_lectuere_search"/>
+            <field name="domain">[('status', 'in', ['draft'])]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_rejected_lecturer_view">
+            <field name="name">Rejected Assign Lecturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">approve.lecturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_approve_lectuere_search"/>
+            <field name="domain">[('status', 'in', ['reject'])]</field>
+            <field name="context">{'create':False, 'edit': False}</field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_approved_lectuere_view">
+            <field name="name">Approved Lecturer</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">approve.lecturer</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_approve_lectuere_search"/>
+            <field name="domain">[('status', '=', 'approve')]</field>
+            <field name="context">{'create':False, 'edit': False}</field>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_approve_lectuere_view_form">
+            <field name="act_window_id" ref="act_open_approve_lectuere_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_approve_lectuere_form"/>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_approve_lectuere_view_tree">
+            <field name="act_window_id" ref="act_open_approve_lectuere_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_approve_lectuere_tree"/>
+        </record>
+
+
+        <record id="approve_lecturer_action" model="ir.actions.server">
+            <field name="name">Approve Lecture</field>
+            <field name="model_id" ref="tvet_management.model_approve_lecturer"/>
+            <field name="binding_model_id" ref="tvet_management.model_approve_lecturer"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_approve()</field>
+        </record>
+        
+        <record id="reject_lecturer_action" model="ir.actions.server">
+            <field name="name">Reject Lecture</field>
+            <field name="model_id" ref="tvet_management.model_approve_lecturer"/>
+            <field name="binding_model_id" ref="tvet_management.model_approve_lecturer"/>
+            <field name="binding_view_types">list,form</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_reject()</field>
+        </record>
+
+        <menuitem id="menu_approve_lecturer"
+            parent="menu_tvet_acadamic"
+            sequence="5"
+            name="Approve Assigned Lecturer"
+            action="act_open_approve_lectuere_view"/>
+
+        <menuitem id="menu_rejected_assign_lecturer"
+            parent="menu_tvet_acadamic"
+            sequence="6"
+            name="Rejected Assign Lecturer"
+            action="act_open_rejected_lecturer_view"
+            />
+
+        <menuitem id="menu_approved_lecturer"
+            parent="menu_tvet_acadamic"
+            sequence="6"
+            name="Approved Lecturer"
+            action="act_open_approved_lectuere_view"/>
+
+    </data>
+</odoo>

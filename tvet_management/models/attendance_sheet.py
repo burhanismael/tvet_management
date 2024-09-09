@@ -92,7 +92,7 @@ class AttendanceSheet(models.Model):
 
     def unlink(self):
         for rec in self:
-            if self.env.user.has_group('bosaso_university.lecturer_access'):
+            if self.env.user.has_group('tvet_management.lecturer_access'):
                 raise ValidationError('You can not delete This record Please contect Administator .')
         return super(AttendanceSheet, self).unlink()
 

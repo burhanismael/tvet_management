@@ -63,6 +63,7 @@
 
                                     <field name="checkbox" invisible="0"/>
                                     <field name="checkbox2" invisible="0"/>
+                                    <field name="checkbox3" invisible="0"/>
 
                                     <field name="action_attandance" invisible="1"/>
                                     <field name="remarks"/>

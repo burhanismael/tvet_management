@@ -118,6 +118,7 @@ class AttendanceSheetLine(models.Model):
     signature = fields.Char('Signature', tracking=True)
     checkbox = fields.Boolean('Present', default=True, tracking=True)
     checkbox2 = fields.Boolean('Absent', tracking=True)
+    checkbox3 = fields.Boolean('Absent Excused', tracking=True)
     action_attandance = fields.Selection([('present', 'Present'), ('absent', 'Absent')], string="Attandance", tracking=True)
     remarks = fields.Char('Remarks', tracking=True)
 

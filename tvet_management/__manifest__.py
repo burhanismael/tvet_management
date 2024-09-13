@@ -11,6 +11,7 @@
     'website': '',
     'depends': ['base', 'account', 'contacts', 'hr'],
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'data/student_registration_seqence.xml',
         'views/academic_year_view.xml',

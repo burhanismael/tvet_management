@@ -22,7 +22,8 @@ class ExamResult(models.Model):
     status = fields.Selection(
         [
             ('draft', 'Draft'),
-            ('approved', 'Confirmed')
+            ('ar', 'AR APPROVAL'),
+            ('published', 'Published')
         ], default="draft", copy=False, tracking=True)
     # result_count = fields.Integer(string="Result Count", compute='_compute_result_count', tracking=True)
 
@@ -131,7 +132,10 @@ class ExamResult(models.Model):
     #     }
 
     def action_approve(self):
-        self.status = 'approved'
+        self.status = 'ar'
+
+    def action_published(self):
+        self.status = 'published'
 
     def unlink(self):
         for rec in self:
@@ -152,9 +156,9 @@ class ExamResult(models.Model):
                     for student in student_ids:
                         list_line.append((0, 0, {'student_id': student.id,
                                                  'registration_id': student.student_id,
-                                                         'status': 'present',
-                                                         'room': "",
-                                                         'note': "",
+                                                         # 'status': 'present',
+                                                         # 'room': "",
+                                                         # 'note': "",
                                                          }))
                 for line in rec.student_ids:
                     line.unlink()
@@ -235,5 +239,5 @@ class AttendanceAddSheetLine(models.Model):
                     vals['exam_entry_id'] = exam_entry_id.id
                     vals['student_id'] = registration_id.id
                     vals['registration_id'] = vals.get('registration_id')
-                    vals['status'] = 'present'
+                    # vals['status'] = 'present'
         return super(AttendanceAddSheetLine, self).create(vals_list)

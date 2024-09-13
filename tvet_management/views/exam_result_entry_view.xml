@@ -31,14 +31,18 @@
                         <button name="action_approve"
                                 attrs="{'invisible': [('status','!=','draft')]}"
                                 class="oe_highlight"
-                                string="Confirm" type="object"/>
+                                string="AR Approve" type="object"/>
+                        <button name="action_published"
+                                attrs="{'invisible': [('status','!=','ar')]}"
+                                class="oe_highlight"
+                                string="Published" type="object"/>
                         <field name="is_hide_result" invisible="1"/>
                         <button name="action_create_result"
                                 attrs="{'invisible': ['|', ('status','!=','approved'), ('is_hide_result', '!=', False)]}"
                                 class="oe_highlight"
                                 string="Create Result" type="object"/>
                         <field name="status"
-                               statusbar_visible="draft,approved"
+                               statusbar_visible="draft,ar,published"
                                widget="statusbar"/>
                     </header>
                     <sheet>

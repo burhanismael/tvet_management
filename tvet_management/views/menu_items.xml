@@ -16,8 +16,11 @@
     <menuitem id="menu_tvet_examination" parent="menu_tvet_root" name="Examinations" sequence="2"/>
     <menuitem id="menu_tvet_acadamic" parent="menu_tvet_root" name="Academic" sequence="3"/>
     <menuitem id="menu_tvet_examination_entry" parent="menu_tvet_examination" name="Exam Result Entry" action="act_exam_result_view" sequence="2"/>
+    <menuitem id="menu_tvet_grading_policy" parent="menu_tvet_examination" name="Grading Policy" action="act_health_grading_policy_view" sequence="1"/>
+    <menuitem id="menu_tvet_awading" parent="menu_tvet_examination" name="Awarding System" action="action_awarding_system" sequence="3"/>
     <menuitem id="menu_location" parent="menu_tvet_acadamic" name="Location" action="act_open_class_location_view" sequence="2"/>
     <menuitem id="menu_attendance" parent="menu_tvet_acadamic" name="Attendance Sheet" action="act_open_att_view_view" sequence="4"/>
+    <menuitem id="menu_alumni" parent="menu_tvet_acadamic" name="Alumni" action="act_open_student_alumni_view" sequence="4"/>
 
     <menuitem id="menu_tvet_configuration" parent="menu_tvet_root" name="Configuration" sequence="4"/>
 

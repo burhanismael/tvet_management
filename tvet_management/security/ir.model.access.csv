@@ -32,3 +32,7 @@ tvet_management.access_approve_course,access_approve_course,tvet_management.mode
 tvet_management.access_approve_course_line,access_approve_course_line,tvet_management.model_approve_course_line,base.group_user,1,1,1,1
 tvet_management.access_approve_lecturer,access_approve_lecturer,tvet_management.model_approve_lecturer,base.group_user,1,1,1,1
 tvet_management.access_approve_lecturer_line,access_approve_lecturer_line,tvet_management.model_approve_lecturer_line,base.group_user,1,1,1,1
+tvet_management.access_grading_policy,access_grading_policy,tvet_management.model_grading_policy,base.group_user,1,1,1,1
+tvet_management.access_health_grading_policy,access_health_grading_policy,tvet_management.model_health_grading_policy,base.group_user,1,1,1,1
+tvet_management.access_awarding_system,access_awarding_system,tvet_management.model_awarding_system,base.group_user,1,1,1,1
+

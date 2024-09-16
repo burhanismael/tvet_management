@@ -41,6 +41,8 @@
         'views/assign_course.xml',
         'views/approve_course_view.xml',
         'views/approve_lecturer_view.xml',
+        'views/grading_view.xml',
+        'views/awading_system.xml',
 
     ],
     'demo': [

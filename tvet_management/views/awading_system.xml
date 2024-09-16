@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_awarding_system_tree" model="ir.ui.view">
+        <field name="name">awarding.system</field>
+        <field name="model">awarding.system</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="award"/>
+                <field name="cgpa"/>
+                <field name="m_cgpa"/>
+                <field name="is_madical"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_awarding_system_form" model="ir.ui.view">
+        <field name="name">awarding.system.form</field>
+        <field name="model">awarding.system</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="award"/>
+                            <field name="m_cgpa"/>
+                            <field name="cgpa"/>
+                            <field name="is_madical"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id='action_awarding_system' model='ir.actions.act_window'>
+        <field name='name'>Awarding System</field>
+        <field name='res_model'>awarding.system</field>
+        <field name='type'>ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

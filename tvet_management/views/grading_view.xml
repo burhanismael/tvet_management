@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_grading_policy_tree" model="ir.ui.view">
+            <field name="name">grading.policy.tree</field>
+            <field name="model">grading.policy</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Exam Type" editable="bottom">
+                <field name="minimum"/>
+                <field name="maximum"/>
+                <field name="grade"/>
+                <field name="gpa"/>
+                <field name="decision"/>
+                <field name="is_medical"/>
+            </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_grading_policy_view">
+            <field name="name">Grading Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">grading.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="view_grading_policy_tree" model="ir.ui.view">
+            <field name="name">grading.policy.tree</field>
+            <field name="model">grading.policy</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Exam Type" editable="bottom">
+                <field name="minimum"/>
+                <field name="maximum"/>
+                <field name="grade"/>
+                <field name="gpa"/>
+                <field name="decision"/>
+                <field name="is_medical"/>
+            </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_grading_policy_view">
+            <field name="name">Grading Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">grading.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+
+<!--        HEALTH -->
+        <record id="view_health_grading_policy_tree" model="ir.ui.view">
+            <field name="name">health.grading.policy.tree</field>
+            <field name="model">health.grading.policy</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Exam Type" editable="bottom">
+                <field name="minimum"/>
+                <field name="maximum"/>
+                <field name="grade"/>
+                <field name="gpa"/>
+                <field name="decision"/>
+            </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_health_grading_policy_view">
+            <field name="name">Health Grading Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">health.grading.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record id="view_health_grading_policy_tree" model="ir.ui.view">
+            <field name="name">health.grading.policy.tree</field>
+            <field name="model">health.grading.policy</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <tree string="Exam Type" editable="bottom">
+                <field name="minimum"/>
+                <field name="maximum"/>
+                <field name="grade"/>
+                <field name="gpa"/>
+                <field name="decision"/>
+            </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_health_grading_policy_view">
+            <field name="name">Health Grading Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">health.grading.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+    </data>
+</odoo>

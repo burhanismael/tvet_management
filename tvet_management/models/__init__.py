@@ -23,3 +23,5 @@ from . import attendance_sheet
 from . import assign_course
 from . import approve_course
 from . import approve_lecturer
+from . import grading
+from . import awarding_system

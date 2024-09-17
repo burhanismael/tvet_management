@@ -37,12 +37,12 @@
         'views/assign_lecturer_view.xml',
         'views/exam_type_view.xml',
         'views/attendance_sheet_view.xml',
+        'views/grading_view.xml',
+        'views/awading_system.xml',
         'views/menu_items.xml',
         'views/assign_course.xml',
         'views/approve_course_view.xml',
         'views/approve_lecturer_view.xml',
-        'views/grading_view.xml',
-        'views/awading_system.xml',
 
     ],
     'demo': [

@@ -1,0 +1,214 @@
+<odoo>
+    <template id="portal_my_home_result" name="Exam results &amp; Bills" inherit_id="portal.portal_my_home" customize_show="True" priority="30">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Exam results</t>
+                <t t-set="url" t-value="'/my/results'"/>
+                <t t-set="placeholder_count" t-value="'result_count'"/>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Attendance</t>
+                <t t-set="url" t-value="'/my/attendance'"/>
+                <t t-set="placeholder_count" t-value="'attendance_count'"/>
+            </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Time Table</t>
+                <t t-set="url" t-value="'/my/timetable'"/>
+                <t t-set="placeholder_count" t-value="'time_table_count'"/>
+            </t>
+        </xpath>
+    </template>
+
+    <template id="portal_my_exam_result" name="Exam Results" inherit_id="portal.portal_breadcrumbs" priority="60">
+        <xpath expr="//ol[hasclass('o_portal_submenu')]" position="inside">
+            <li t-if="page_name == 'exam_result'" t-attf-class="breadcrumb-item #{'active ' if not sign_requests else ''}">
+                Exam Results
+            </li>
+            <li t-if="page_name == 'attendance'" t-attf-class="breadcrumb-item #{'active ' if not sign_requests else ''}">
+                Attendance
+            </li>
+            <li t-if="page_name == 'timetable'" t-attf-class="breadcrumb-item #{'active ' if not sign_requests else ''}">
+                Time Table
+            </li>
+        </xpath>
+    </template>
+
+    <template id="portal_my_result" name="My Exam Result">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Exam Results</t>
+            </t>
+            <t t-if="not result_ids">
+              <p>There are currently no exam result for your account.</p>
+            </t>
+            <t t-if="result_ids" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Date</th>
+                        <th>Cource</th>
+                        <th>Semester</th>
+                        <th>Class</th>
+                        <t t-foreach="type_ids" t-as="type">
+                            <th><span t-esc="type.exam_type"/></th>
+                        </t>
+                        <th>Total</th>
+                        <th>GPA</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <t t-foreach="data_ids" t-as="data">
+                    <tr>
+                        <td><span t-esc="data.get('date')"/></td>
+                        <td style="max-width: 100%;"><span t-esc="data.get('cource')"/></td>
+                        <td><span t-esc="data.get('semester')"/></td>
+                        <td><span t-esc="data.get('class')"/></td>
+                        <t t-foreach="data.get('result')" t-as="result">
+                            <td><span t-esc="result"/></td>
+                        </t>
+                        <td><span t-esc="data.get('total')"/></td>
+                        <td><span t-esc="data.get('gpa')"/></td>
+                        <td><span t-esc="data.get('grade')"/></td>
+                    </tr>
+
+                </t>
+                <tr>
+                    <td><strong>CGPA</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong><span t-esc="data.get('average_gpa')"/></strong></td>
+                </tr>
+            </t>
+        </t>
+    </template>
+
+    <template id="exam_result_details_error" name="Exam Result Details">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Exam Results</t>
+            </t>
+            <t t-if="not result_ids">
+              <h1>You can not access the exam result unless you clear you fees.</h1>
+            </t>
+        </t>
+    </template>
+
+    <template id="exam_result_details" name="My Exam Result">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Exam Results</t>
+            </t>
+            <t t-if="not result_ids">
+              <p>There are currently no exam result for your account.</p>
+            </t>
+            <t t-if="semister_ids" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Semister Details</th>
+                    </tr>
+                </thead>
+                <t t-foreach="semister_ids" t-as="semister">
+                    <tr>
+                        <td><a t-att-href="'/semester_details/%s' % (semister.id)"><span t-esc="semister.semester_name"/></a></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_attandance" name="My Exam Result">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Attendance</t>
+            </t>
+            <t t-if="not attendance_ids">
+              <p>There are currently no Attendance for your account.</p>
+            </t>
+            <t t-if="attendance_ids" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Date</th>
+                        <th>Class</th>
+                        <th>Course</th>
+                        <th>Semester</th>
+                        <th>Attendance</th>
+                        <th>ReMarks</th>
+                    </tr>
+                </thead>
+                <t t-foreach="attendance_ids" t-as="result">
+                    <tr>
+                        <td><span t-esc="result.attendance_sheet_id.date"/></td>
+                        <td><span t-esc="result.attendance_sheet_id.class_id.name"/></td>
+                        <td><span t-esc="result.attendance_sheet_id.course_name_id.course_name"/></td>
+                        <td><span t-esc="result.attendance_sheet_id.semester_id.semester_name"/></td>
+                        <td><t t-if="result.checkbox">Present</t> <t t-else="">Absent</t></td>
+                        <td><span t-esc="result.remarks"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_timetable" name="My Time Table">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Time Table</t>
+            </t>
+            <t t-if="not time_table_ids">
+              <p>There are currently no Time Table for your account.</p>
+            </t>
+            <t t-if="time_table_ids" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Department</th>
+                        <th>Class</th>
+                        <th>Semester</th>
+                        <th>Cource</th>
+                        <th>Day</th>
+                        <th>Time Start</th>
+                        <th>Time End</th>
+                        <th>Break Start</th>
+                        <th>Break End</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <t t-foreach="time_table_ids" t-as="result">
+                    <tr>
+                        <td><span t-esc="result.school_department_id.name"/></td>
+                        <td><span t-esc="result.class_id.name"/></td>
+                        <td><span t-esc="result.semester_id.semester_name"/></td>
+                        <td><span t-out="', '.join(map(lambda x: (x.course_name), result.course_id))"/></td>
+                        <td><t t-if="result.day == '0'">Monday</t>
+                            <t t-if="result.day == '1'">Tuesday</t>
+                            <t t-if="result.day == '2'">Wednesday</t>
+                            <t t-if="result.day == '3'">Thuresday</t>
+                            <t t-if="result.day == '4'">Friday</t>
+                            <t t-if="result.day == '5'">Saturday</t>
+                            <t t-if="result.day == '6'">Sunday</t>
+                        </td>
+                        <td><span t-esc="result.start_time"/></td>
+                        <td><span t-esc="result.end_time"/></td>
+                        <td><span t-esc="result.break_start_time"/></td>
+                        <td><span t-esc="result.break_end_time"/></td>
+                        <td><span t-esc="result.location.location"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

@@ -32,7 +32,7 @@ class CreateLecturer(models.Model):
     employee_type = fields.Selection([('normal_emp', 'Normal Employee'), ('lecturer', 'Lecturer')], string="Employee type", tracking=True)
     qualification_ids=fields.One2many('create.lecturer.qualification','qualification_id', tracking=True)
     is_assign_lecturer = fields.Boolean(default=False, tracking=True)
-    # faculty_id = fields.Many2one('school.faculty', tracking=True)
+    faculty_id = fields.Many2one('school.faculty', tracking=True)
 
     def action_create_user(self):
         vals = {
@@ -42,6 +42,8 @@ class CreateLecturer(models.Model):
             }
         user_id = self.env['res.users'].create(vals)
         self.user_id = user_id.id
+        check_seq = self.env['hr.employee'].search([('sequence_no','=', self.sequence_no)], limit=1)
+        check_seq.user_id = user_id.id
 
     @api.onchange('state_id')
     def _onchange_state(self):
@@ -51,7 +53,7 @@ class CreateLecturer(models.Model):
     def name_get(self):
         result = []
         for rec in self:
-            name = str(rec.name)
+            name = str(rec.faculty_id.faculty_code)+str(rec.sequence_no) + '-' + str(rec.name)
             result.append((rec.id,name))
         return result
         

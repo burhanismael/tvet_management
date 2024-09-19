@@ -65,11 +65,30 @@
             <field name="name">Academic Year</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">academic.year</field>
+            <!-- <field name="view_type">form</field> -->
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_academic_year_view_search"/>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
-
+        
+        <record model="ir.actions.act_window.view" id="act_open_academic_year_view_view_form">
+            <field name="act_window_id" ref="act_open_academic_year_view_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_academic_year_view_form"/>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_academic_year_view_view_tree">
+            <field name="act_window_id" ref="act_open_academic_year_view_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_academic_year_view_tree"/>
+        </record>
+        
+       <!--  <menuitem id="menu_academic_year_view"
+            parent="module.xmlid"
+            sequence="20"
+            action="act_open_academic_year_view_view"/> -->
     </data>
 </odoo>

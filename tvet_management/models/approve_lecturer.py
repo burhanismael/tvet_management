@@ -13,7 +13,7 @@ class ApproveLecturer(models.Model):
     lecturer_name_id = fields.Many2one('create.lecturer', tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
     class_id = fields.Many2one('class.room', string="Class Name", domain="[('school_department_id', '=', school_department_id)]", tracking=True)
-    semester_id = fields.Many2one('school.semester', domain="[('class_id', '=', class_id)]", tracking=True)
+    semester_id = fields.Many2one('semester.semester', domain="[('class_id', '=', class_id)]", tracking=True)
     approve_lecturer_line_ids = fields.One2many('approve.lecturer.line','approve_lecturer_id', string="Course", tracking=True)
     rejection_reason = fields.Text(string="Rejection Reason", tracking=True)
 
@@ -64,6 +64,6 @@ class ApproveLecturerLine(models.Model):
 
     lecturer_id = fields.Many2one('create.lecturer', string="Lacturer Name", tracking=True)
     class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
-    semester_name_id = fields.Many2one('school.semester', domain="[('class_id', '=', class_id)]", tracking=True)
-    course_id = fields.Many2one('school.course', string="Course Name", tracking=True)
+    semester_name_id = fields.Many2one('semester.semester', domain="[('class_id', '=', class_id)]", tracking=True)
+    course_id = fields.Many2one('school.subject', string="Subject Name", tracking=True)
     approve_lecturer_id = fields.Many2one('approve.lecturer', tracking=True)

@@ -36,7 +36,6 @@
 <!--                            <field name="user_id" readonly="1" attrs="{'invisible': [('user_id','=', False)]}"/>-->
                         </group>
                         <group>
-<!--                            <field name= "faculty_id" required="1"  options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
                         </group>
                     </group>
                     <notebook>

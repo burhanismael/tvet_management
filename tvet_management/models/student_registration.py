@@ -12,7 +12,7 @@ class StudentRegistration(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     admission_id = fields.Char(string="Admission ID", default=lambda self: _('New'), tracking=True)
-    birth_place_id = fields.Many2one('school.city', string="Place of Birth", tracking=True)
+    birth_place_id = fields.Many2one('res.city', string="Place of Birth", tracking=True)
     student_contact = fields.Char(string="Student Contact", required=True, tracking=True)
     education_level = fields.Selection([('intermediate', 'Intermediate'), ('secondary', 'Secondary'),
                                         ('diploma', 'Diploma'), ('degree', 'Degree')])
@@ -20,13 +20,15 @@ class StudentRegistration(models.Model):
     parent_contact = fields.Char(string="Parent contact", tracking=True)
     intake_type = fields.Selection([('normal', 'Normal Intake'), ('recommended', 'Recommended Intake')],
                                    string="Intake Type", tracking=True)
-    status = fields.Selection([('new', 'New'), ('enrolled', 'Enrolled'), ('drop_out', 'Drop Out'), ('inactive', 'Inactive'),
-                            ('graduated', 'Graduated')], default="new", tracking=True)
+    status = fields.Selection(
+        [('new', 'New'), ('enrolled', 'Enrolled'), ('drop_out', 'Drop Out'), ('inactive', 'Inactive'),
+         ('graduated', 'Graduated')], default="new", tracking=True)
     shift_id = fields.Many2one('school.shift', string="Shift", required=True, tracking=True)
     faculty_id = fields.Many2one('school.faculty', string="Faculty", tracking=True)
     department_id = fields.Many2one('school.department', string="Department", tracking=True)
-    classroom_id = fields.Many2one('class.room', string="Course", tracking=True)
-    semester_id = fields.Many2one('school.semester', string="Semester", domain="[('class_id', '=', classroom_id)]",
+    classroom_id = fields.Many2one('class.room', string="Class", tracking=True)
+    course_id = fields.Many2one('course.subject', string="Course")
+    semester_id = fields.Many2one('semester.semester', string="Semester", domain="[('class_id', '=', classroom_id)]",
                                   tracking=True)
     dob = fields.Date(string="DOB", tracking=True)
     school_name = fields.Char(string="School Name", tracking=True)
@@ -34,10 +36,8 @@ class StudentRegistration(models.Model):
     roll_number = fields.Char(string="Roll Number", required=True, tracking=True)
     grade = fields.Char(string="Grade", tracking=True)
 
-
-
-
-    occupation = fields.Selection([('employed', 'Employed'), ('unemployed', 'Unemployed')], string="Occupation", tracking=True)
+    occupation = fields.Selection([('employed', 'Employed'), ('unemployed', 'Unemployed')], string="Occupation",
+                                  tracking=True)
     blood_group = fields.Selection(
         [('a+', 'A+'), ('a-', 'A-'), ('ab+', 'AB+'), ('ab-', 'AB-'), ('b+', 'B+'), ('b-', 'B-'), ('o+', 'O+'),
          ('o-', 'O-')], string="Blood Group", tracking=True)
@@ -50,7 +50,6 @@ class StudentRegistration(models.Model):
     student_type = fields.Selection([('new', 'New'), ('transfer', 'Transfer')], tracking=True)
     relationship_id = fields.Many2one('student.relationship', string="Relationship", tracking=True)
 
-
     stream = fields.Selection([('science', 'Science'), ('arts', 'Arts')], string="Stream", tracking=True)
     student_id = fields.Char(string="Student ID", tracking=True, copy=False)
     student_name_id = fields.Many2one('res.partner', string="Student Name", tracking=True)
@@ -59,20 +58,20 @@ class StudentRegistration(models.Model):
     nationality_id = fields.Many2one('country.nationality', string="Nationality", tracking=True)
     email = fields.Char(string="Email", tracking=True)
     address = fields.Char(string="Address", tracking=True)
-    marital_status = fields.Selection([('married', 'Married'), ('unmarried', 'Unmarried')], string="Marital Status", tracking=True)
-
+    marital_status = fields.Selection([('married', 'Married'), ('unmarried', 'Unmarried')], string="Marital Status",
+                                      tracking=True)
 
     parent_name = fields.Char(string="Parent Name", tracking=True)
     parent_street_1 = fields.Char(string="Parent Street1", tracking=True)
     parent_street_2 = fields.Char(string="Parent Street2", tracking=True)
-    parent_city = fields.Char(string="City", tracking=True)
-    state_id = fields.Many2one('res.country.state', string="State", tracking=True)
+    parent_city_id = fields.Many2one('res.city',string="City", tracking=True)
+    state_id = fields.Many2one('res.state', string="State", tracking=True)
     country_id = fields.Many2one('res.country', string="Parent Country", tracking=True)
     student_balance = fields.Integer(string="Student Balance", tracking=True)
     is_alumni = fields.Boolean(default=False, tracking=True)
     location = fields.Many2one('class.location', string="Location", tracking=True)
     is_semester_invoice = fields.Boolean(tracking=True)
-    course_subject_id = fields.Many2many('school.course', string='Subject', tracking=True)
+    course_subject_id = fields.Many2many('school.subject', string='Subject', tracking=True)
     student_id_issue_date = fields.Date('Student ID Issue Date', tracking=True)
     student_id_expired_date = fields.Date('Student ID Expired Date', tracking=True)
     is_user = fields.Boolean(string="Is User Create", tracking=True)
@@ -83,7 +82,6 @@ class StudentRegistration(models.Model):
     special_need_ids = fields.Many2many('special.need', string="Special Need")
     project_id = fields.Many2one('tvet.project', string="Project")
     idp_name_id = fields.Many2one('idp.name', string="IDP Name")
-
 
     @api.constrains('student_id')
     def check_student_id_dublicate(self):
@@ -97,11 +95,10 @@ class StudentRegistration(models.Model):
         if self.admission_id:
             registrations = self.env['student.admission'].search([('admission_id', '=', self.admission_id)])
             registrations.write({'blood_group': self.blood_group})
-    
 
     def check_secondary_certificate(self):
         if self.admission_id:
-            admission = self.env['student.admission'].search([('admission_id','=',self.admission_id)])
+            admission = self.env['student.admission'].search([('admission_id', '=', self.admission_id)])
             if admission and admission.secondary_certificate:
                 return "True"
             else:
@@ -109,7 +106,7 @@ class StudentRegistration(models.Model):
 
     def check_blood_certificate(self):
         if self.admission_id:
-            admission = self.env['student.admission'].search([('admission_id','=',self.admission_id)])
+            admission = self.env['student.admission'].search([('admission_id', '=', self.admission_id)])
             if admission and admission.blood_group_certificate:
                 return "True"
             else:
@@ -243,15 +240,17 @@ class StudentRegistration(models.Model):
         #                 })
 
     def _student_portal_cron_action(self):
-        student_ids = self.env['student.registration'].search([('is_user', '=', False), ('student_name_id', '!=', False)])
-        print("--ds-d-sdsd", student_ids)
+        student_ids = self.env['student.registration'].search(
+            [('is_user', '=', False), ('student_name_id', '!=', False)])
+        print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n--ds-d-sdsd", student_ids)
         for student_id in student_ids:
-            print("--sd", student_id)
+            print("\n\n\n\n\n\n\n\n\n\n\n\n\n--sd", student_id)
             if student_id.student_name_id and student_id.student_id:
-                print("------sdsdda", student_id.student_name_id, student_id.student_id)
+                print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n------sdsdda", student_id.student_name_id, student_id.student_id)
                 user_ids = self.env['res.users'].search([('login', '=', student_id.student_id)])
+                print("\n\n\n\n\n\n\n\n\n\n\n user idsssssss", user_ids)
                 if not user_ids:
-                    user_id= self.env['res.users'].create({
+                    user_id = self.env['res.users'].create({
                         'login': student_id.student_id,
                         'email': student_id.student_id,
                         'password': student_id.student_id,

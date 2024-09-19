@@ -1,0 +1,19 @@
+<odoo>
+	<record id="sale.portal_my_home_sale" model="ir.ui.view">
+		<field name="customize_show" eval="True"/>
+		<field name="active" eval="False"/>
+	</record>
+	<record id="purchase.portal_my_home_purchase" model="ir.ui.view">
+		<field name="customize_show" eval="True"/>
+		<field name="active" eval="False"/>
+	</record>
+	<template id="account.portal_my_home_invoice" name="Show Invoices &amp; Bills" inherit_id="portal.portal_my_home" customize_show="True" priority="30">
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Invoices</t>
+                <t t-set="url" t-value="'/my/invoices'"/>
+                <t t-set="placeholder_count" t-value="'invoice_count'"/>
+            </t>
+        </xpath>
+    </template>
+</odoo>

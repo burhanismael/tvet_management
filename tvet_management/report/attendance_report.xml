@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="attendanace_data_xlsx" model="ir.actions.report">
+            <field name="name">Excel Report</field>
+            <field name="model">attendance.report</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tvet_management.attendanace_data_xlsx</field>
+            <field name="report_file">tvet_management.attendanace_data_xlsx</field>
+            <field name="binding_model_id" ref="model_attendance_report"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="exam_report_xlsx" model="ir.actions.report">
+            <field name="name">Excel Report</field>
+            <field name="model">exam.result.report</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tvet_management.exam_report_xlsx</field>
+            <field name="report_file">tvet_management.exam_report_xlsx</field>
+            <field name="binding_model_id" ref="model_attendance_report"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="exam_summary_report_xlsx" model="ir.actions.report">
+            <field name="name">Excel Report</field>
+            <field name="model">exam.summary.report</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tvet_management.exam_result_summary</field>
+            <field name="report_file">tvet_management.exam_result_summary</field>
+            <field name="binding_model_id" ref="model_attendance_report"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="re_exam_report_xlsx" model="ir.actions.report">
+            <field name="name">Excel Report</field>
+            <field name="model">re.exam.report</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">tvet_management.re_exam</field>
+            <field name="report_file">tvet_management.re_exam</field>
+            <field name="binding_model_id" ref="model_attendance_report"/>
+            <field name="binding_type">report</field>
+        </record>
+<!--sheet.insert_image('A1', '/opt/odoo15/custom/tvet_management/data/uni_icon.jpeg')-->
+    </data>
+</odoo>

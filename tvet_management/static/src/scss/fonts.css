@@ -1,0 +1,9 @@
+@font-face {
+    font-family: 'Uni-Custom';
+    font-weight: 400;
+    src: url(/tvet_management/static/src/fonts/oldenglishtextmt.ttf) format('truetype');
+}
+
+.use-Uni-Custom {
+    font-family: 'Uni-Custom';
+}

@@ -133,24 +133,5 @@
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_approve_course_tree"/>
         </record>
-
-        <menuitem id="menu_approve_course"
-            name="Approve Assigned Course"
-            parent = "menu_tvet_acadamic"
-            sequence="2"
-            action="act_open_approve_course_view"/>
-
-        <menuitem id="menu_approve_course_approve"
-            name="Approved Course"
-            parent = "menu_tvet_acadamic"
-            sequence="2"
-            action="act_open_approve_course_approved_view"/>
-
-        <menuitem id="menu_approve_course_Reject"
-            name="Rejected Course"
-            parent = "menu_tvet_acadamic"
-            sequence="2"
-            action="act_open_approve_course_rejected_view"/>
-
     </data>
 </odoo>

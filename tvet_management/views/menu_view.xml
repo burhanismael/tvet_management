@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_tvet_management_main"
+            sequence="1"
+            name="TVET" web_icon="tvet_management,static/description/icon.png"/>
+
+        <menuitem id="menu_student_student_registration"
+            parent="menu_tvet_management_main"
+            sequence="1"
+            name="Student"/>
+
+        <menuitem id="menu_student_create"
+            parent="menu_student_student_registration"
+            sequence="1"
+            name="Student Registration"
+            action="act_open_student_registration_view"/>
+
+        <menuitem id="menu_student_drop_out"
+            parent="menu_student_student_registration"
+            sequence="2"
+            name="Drop Out Student"
+            action="act_open_student_registration_dropout"/>
+
+        <menuitem id="menu_submenu_student_admission"
+            parent="menu_student_student_registration"
+            sequence="2"
+            name="Student Admission"
+            action="act_open_student_admission_view"/>
+
+<!--        <report manu >-->
+        <menuitem id="menu_reports"
+            parent="menu_tvet_management_main"
+            sequence="14"
+            name = "Reports"/>
+
+        <menuitem id="menu_attendance_report"
+            parent = "menu_reports"
+            name = "Attendance Report"
+            sequence="4"
+            action="attendance_view_action_id"/>
+
+
+
+
+        <menuitem id="menu_student_admission"
+            parent="menu_tvet_management_main"
+            sequence="15"
+            name = "Configuration"/>
+
+<!-- ................................................................... -->
+
+        <menuitem id="menu_course_subject1"
+            parent = "menu_student_admission"
+            name = "Course"
+            sequence="1"
+            action="act_open_subject_course_view"/>
+
+        <menuitem id="menu_student_academic"
+            parent="menu_tvet_management_main"
+            sequence="2"
+            name = "Academic"/>
+
+        <menuitem id="menu_assign_course"
+            name="Assign Course"
+            parent = "menu_student_academic"
+            sequence="2"
+            action="act_open_assign_course_view"/>
+
+        <menuitem id="menu_approve_course"
+            name="Approve Assigned Course"
+            parent = "menu_student_academic"
+            sequence="2"
+            action="act_open_approve_course_view"/>
+
+        <menuitem id="menu_approve_course_approve"
+            name="Approved Course"
+            parent = "menu_student_academic"
+            sequence="2"
+            action="act_open_approve_course_approved_view"/>
+
+        <menuitem id="menu_approve_course_Reject"
+            name="Rejected Course"
+            parent = "menu_student_academic"
+            sequence="2"
+            action="act_open_approve_course_rejected_view"/>
+
+        <menuitem id="menu_create_lecturer"
+            name="Create Lecturer"
+            parent = "menu_student_academic"
+            action="open_view_lecturer_list_my"
+            sequence="3"/>
+
+        <menuitem id="menu_unassigned_lecturer"
+            name="Unassigned Lecturers"
+            parent = "menu_student_academic"
+            action="act_open_unassigned_lecturer_view"
+            sequence="3"/>
+
+        <menuitem id="menu_assing_lecturer"
+            parent="menu_student_academic"
+            sequence="4"
+            name="Assign Lecturer"
+            action="act_open_assing_lecturer_view"/>
+
+
+        <menuitem id="menu_approve_lecturer"
+            parent="menu_student_academic"
+            sequence="5"
+            name="Approve Assigned Lecturer"
+            action="act_open_approve_lectuere_view"/>
+
+        <menuitem id="menu_approved_lecturer"
+            parent="menu_student_academic"
+            sequence="6"
+            name="Approved Lecturer"
+            action="act_open_approved_lectuere_view"/>
+
+        <menuitem id="menu_rejected_assign_lecturer"
+            parent="menu_student_academic"
+            sequence="6"
+            name="Rejected Assign Lecturer"
+            action="act_open_rejected_lecturer_view"
+            />
+
+	    <menuitem id="menu_lecturer"
+            parent="menu_student_academic"
+            name="Alumni"
+            sequence="8"
+            action="act_open_student_alumni_view"/>
+
+        <menuitem id="menu_class_location"
+            parent="menu_student_academic"
+            name="Location"
+            sequence="10"
+            action="act_open_class_location_view"/>
+
+        <menuitem id="manage_timetable_menu"
+            parent="menu_student_academic"
+            name="Manage Timetables"
+            sequence="11"
+            action="act_open_manage_timetable_view"/>
+
+        <menuitem id="manage_timetable_menu_read"
+            parent="menu_student_academic"
+            name="View Timetables"
+            sequence="11"
+            action="act_open_manage_timetable_view_read"/>
+
+        <menuitem id="menu_open_att_view_view"
+            parent="menu_student_academic"
+            name="Attendance Sheet"
+            sequence="12"
+            action="act_open_att_view_view"/>
+
+        <menuitem id="menu_semester"
+            parent="menu_student_admission"
+            sequence="3"
+            action="act_open_semester_view"/>
+
+        <menuitem id="menu_exam_type"
+            parent = "menu_student_admission"
+            name = "Exam Type"
+            sequence="4"
+            action="act_open_exam_type_view"/>
+
+        <menuitem id="menu_class_subject"
+            parent = "menu_student_admission"
+            name = "Class"
+            sequence="5"
+            action="act_open_class_room_view"/>
+
+        <menuitem id="menu_academic_year"
+            parent = "menu_student_admission"
+            name = "Academic Year"
+            sequence="6"
+            action="act_open_academic_year_view_view"/>
+
+        <menuitem id="menu_school_department"
+            parent = "menu_student_admission"
+            name = "Department"
+            sequence="8"
+            action="act_open_school_department_view"/>
+
+        <menuitem id="menu_res_city"
+            parent = "menu_student_admission"
+            name = "Cities"
+            sequence="9"
+            action="act_open_res_city_view"/>
+
+        <menuitem id="menu_res_state"
+            parent = "menu_student_admission"
+            name = "State"
+            sequence="10"
+            action="act_open_res_state_view"/>
+
+        <menuitem id="menu_school_shift"
+            parent = "menu_student_admission"
+            name = "Shift"
+            sequence="10"
+            action="act_open_school_shift_view"/>
+
+        <menuitem id="menu_school_subject"
+            parent = "menu_student_admission"
+            name = "Subject"
+            sequence="14"
+            action="action_school_subject"/>
+
+        <menuitem id="menu_tvet_project"
+            parent = "menu_student_admission"
+            name = "Projects"
+            sequence="14"
+            action="action_tvet_project"/>
+
+        <menuitem id="menu_special_need_view"
+            parent = "menu_student_admission"
+            name = "Special Need"
+            sequence="14"
+            action="act_open_special_need_view"/>
+
+        <menuitem id="open_idp_name_view"
+            parent = "menu_student_admission"
+            name = "IDP Name"
+            sequence="14"
+            action="act_open_idp_name_view"/>
+
+
+        <menuitem id="menu_grading_main"
+            parent="menu_tvet_management_main"
+            sequence="1"
+            name="Examination"/>
+
+        <menuitem id="menu_grading"
+            parent = "menu_grading_main"
+            name = "Grading Policy"
+            sequence="16"
+            action="act_grading_policy_view"/>
+
+        <menuitem id="menu_exam_result"
+            parent = "menu_grading_main"
+            name = "Exam Result Entry"
+            sequence="16"
+            action="act_exam_result_view"/>
+
+        <menuitem id="menu_exam_result_entry"
+            parent = "menu_grading_main"
+            name = "Exam Result"
+            sequence="17"
+            action="act_exam_result_entry_view"/>
+
+        <menuitem id="menu_account_student"
+            parent = "account.menu_finance_receivables"
+            name="Students"
+            action="res_partner_action_student"
+            sequence="111"/>
+        <menuitem id="menu_awarding_system_student"
+            parent = "menu_grading_main"
+            name="Awarding System"
+            action="action_awarding_system"
+            sequence="17"/>
+
+    </data>
+</odoo>

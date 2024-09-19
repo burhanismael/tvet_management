@@ -2,104 +2,109 @@
 <odoo>
     <data>
 
-        <record id="view_exam_result_tree" model="ir.ui.view">
-            <field name="name">exam.result.entry.tree</field>
-            <field name="model">exam.result.entry</field>
+        <record id="view_exam_result_entry_tree" model="ir.ui.view">
+            <field name="name">exam.result.tree</field>
+            <field name="model">exam.result</field>
             <field name="type">tree</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="Exam Result Entry">
-                    <field name="exam_type_id"/>
-                    <field name="class_room_id"/>
-                    <field name="semester_id"/>
-                    <field name="course_subject_id"/>
+                    <field name="department_id"/>
+                    <field name="course_name_id"/>
+                    <field name="class_id"/>
                     <field name="academic_year_id"/>
-                    <field name="upload_file"/>
+                    <field name="exam_type_id"/>
+                    <field name="semester_id"/>
+                    <field name="type"/>
+                    <field name="status"/>
                 </tree>
             </field>
         </record>
 
 
-        <record id="view_exam_result_form" model="ir.ui.view">
-            <field name="name">exam.result.entry.form</field>
-            <field name="model">exam.result.entry</field>
+        <record id="view_exam_result_entry_form" model="ir.ui.view">
+            <field name="name">exam.result.form</field>
+            <field name="model">exam.result</field>
             <field name="type">form</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <form string="Exam Result Entry" duplicate="0">
+                <form string="Exam Result Entry" create="false">
                     <header>
-                        <button name="action_approve"
-                                attrs="{'invisible': [('status','!=','draft')]}"
+                        <button name="action_submit_for_approval"
+                                attrs="{'invisible': ['|', ('status','!=','draft'), ('type','=','management_entry')]}" class="oe_highlight"
+                                string="Submit for Approval" type="object"/>
+
+
+                        <button name="action_ar_approved"
+                                attrs="{'invisible': [('status','!=','approved')]}"
+                                class="oe_highlight" 
+                                string="AR Publish"  type="object"/>
+
+                        <button name="action_reject_approved"
+                                attrs="{'invisible': [('status','!=','approved')]}"
                                 class="oe_highlight"
-                                string="AR Approve" type="object"/>
-                        <button name="action_published"
-                                attrs="{'invisible': [('status','!=','ar')]}"
+                                string="AR Rejected" type="object"/>
+
+                        <button name="action_to_draft"
+                                attrs="{'invisible': [('status','!=','ar_approved')]}"
                                 class="oe_highlight"
-                                string="Published" type="object"/>
-                        <field name="is_hide_result" invisible="1"/>
-                        <button name="action_create_result"
-                                attrs="{'invisible': ['|', ('status','!=','approved'), ('is_hide_result', '!=', False)]}"
-                                class="oe_highlight"
-                                string="Create Result" type="object"/>
-                        <field name="status"
-                               statusbar_visible="draft,ar,published"
+                                string="Reset to Draft" type="object"/>
+
+                        <field name="status" attrs="{'invisible': [('type','=','management_entry')]}"
+                               statusbar_visible="draft,approved,ar_approved"
                                widget="statusbar"/>
                     </header>
                     <sheet>
-<!--                        <div class="oe_button_box" name="button_box">-->
-<!--                            <button name="open_exam_result" type="object" class="oe_stat_button" icon="fa-id-card" attrs="{'invisible': [('result_count', '=', 0)]}">-->
-<!--                                <field name="result_count" widget="statinfo" string="Result"/>-->
-<!--                            </button>-->
-<!--                        </div>-->
                         <div class="oe_title">
                             <h1>
-                                <field name="name" readonly="1"/>
+                                <field name="name" readonly="1" required="1"/>
                             </h1>
                         </div>
                         <group>
                             <group>
-                                <field name="date"/>
-                                <field name="class_room_id" placeholder="Class Name" required="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
-                                <field name="semester_id" placeholder="Semester" force_save="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
-<!--                                <field name="course_subject_ids" invisible="1"/>-->
-<!--                                <field name="course_subject_id" placeholder="Course Name"-->
-<!--                                       required="1" domain="[('id', 'in', course_subject_ids)]" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+                                <field name="academic_year_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"
+                                       attrs="{'readonly':[('status', '!=', 'draft')]}"
+                                       placeholder="Exam Type" required="1"/>
+                                <field name="exam_type_id" attrs="{'readonly':[('status', '!=', 'draft')]}" required="1"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <field name="department_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"
+                                       attrs="{'readonly':[('status', '!=', 'draft')]}"
+                                       placeholder="Department Name"/>
+                                <field name="class_id"
+                                       attrs="{'readonly':[('status', '!=', 'draft')]}"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"
+                                       placeholder="Course Name" required="1"/>
+                                <field name="type" invisible="1"/>
                             </group>
                             <group>
-                                <field name="department_id"/>
-                                <field name="upload_file" placeholder="Upload file" invisible="1"/>
-                                <field name="exam_type_id" placeholder="Exam Type" required="1" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
-                                <field name="academic_year_id" options="{'no_quick_create':True,'no_create_edit':True,'no_open': True,}"/>
+                                <field name="semester_id"
+                                       attrs="{'readonly':[('status', '!=', 'draft')]}"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"
+                                       placeholder="Academic Year" required="1"/>
+                                <field name="course_name_id"
+                                       attrs="{'readonly':[('status', '!=', 'draft')]}"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"
+                                       placeholder="Course Name" required="1"/>
+                                <field name="date"/>
+<!--                                <field name="create_uid"/>-->
                             </group>
                         </group>
                         <group>
-                            <field name="student_ids" attrs="{'readonly':[('status', '=', 'approved')]}" force_save="1">
+                            <field name="student_ids"
+                                   attrs="{'readonly':[('status', 'in', ['rejected','ar_approved'])]}" force_save="1">
                                 <tree editable="bottom">
                                     <field name="registration_id" invisible="1"/>
-                                    <field name="student_id" force_save="1" readonly="1"/>
-                                    <field name="prasent"/>
-                                    <field name="practical"/>
-                                    <field name="quiz"/>
-                                    <field name="sem_activity"/>
-<!--                                    <field name="status"/>-->
-<!--                                    <field name="room"/>-->
-<!--                                    <field name="note"/>-->
-
+                                    <field name="student_id" force_save="1"/>
+                                    <field name="marks"/>
+                                    <field name="remarks"/>
                                 </tree>
                                 <form>
                                     <group>
                                         <group>
-                                            <field name="registration_id" invisible="0"/>
                                             <field name="student_id" force_save="1" readonly="1"/>
-                                            <field name="prasent"/>
-                                            <field name="practical"/>
-                                            <field name="quiz"/>
-                                            <field name="sem_activity"/>
-<!--                                            <field name="status"/>-->
-<!--                                            <field name="room"/>-->
-<!--                                            <field name="note"/>-->
+                                            <field name="marks"/>
+                                            <field name="remarks"/>
                                         </group>
-                                        <group></group>
                                     </group>
                                 </form>
                             </field>
@@ -114,48 +119,63 @@
             </field>
         </record>
 
-        <record id="view_exam_result_search" model="ir.ui.view">
-            <field name="name">exam.result.entry.search</field>
-            <field name="model">exam.result.entry</field>
+        <record id="view_exam_result_entry_search" model="ir.ui.view">
+            <field name="name">exam.result.search</field>
+            <field name="model">exam.result</field>
             <field name="type">search</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <search string="Exam Result Entry">
-                    <field name="exam_type_id"/>
-                    <field name="class_room_id"/>
-                    <field name="semester_id"/>
-                    <field name="course_subject_id"/>
+                    <field name="department_id"/>
+                    <field name="course_name_id"/>
+                    <field name="class_id"/>
+
                     <field name="academic_year_id"/>
-                    <field name="upload_file"/>
+                    <field name="exam_type_id"/>
+                    <field name="semester_id"/>
+                    <field name="type"/>
+                    <group expand="0" string="Group By">
+                        <filter string="Type" name="type"
+                                context="{'group_by': 'type'}"/>
+                    </group>
                 </search>
             </field>
         </record>
 
-
-        <record id="act_exam_result_view" model="ir.actions.act_window">
-            <field name="name">Exam Result Entry</field>
+        <record id="act_exam_result_entry_view" model="ir.actions.act_window">
+            <field name="name">Exam Result</field>
             <field name="type">ir.actions.act_window</field>
-            <field name="res_model">exam.result.entry</field>
+            <field name="res_model">exam.result</field>
             <field name="view_mode">tree,form</field>
-            <field name="search_view_id" ref="view_exam_result_search"/>
-            <field name="domain">[]</field>
-            <field name="context">{}</field>
+            <field name="search_view_id" ref="view_exam_result_entry_search"/>
+            <field name="context">{'search_default_group_type': 1}</field>
         </record>
 
-
-        <record id="act_exam_result_view_form" model="ir.actions.act_window.view">
-            <field name="act_window_id" ref="act_exam_result_view"/>
+        <record id="act_exam_result_entry_view_form" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="act_exam_result_entry_view"/>
             <field name="sequence" eval="20"/>
             <field name="view_mode">form</field>
-            <field name="view_id" ref="view_exam_result_form"/>
+            <field name="view_id" ref="view_exam_result_entry_form"/>
         </record>
 
-        <record id="act_exam_result_view_tree" model="ir.actions.act_window.view">
-            <field name="act_window_id" ref="act_exam_result_view"/>
+        <record id="act_exam_result_entry_view_tree" model="ir.actions.act_window.view">
+            <field name="act_window_id" ref="act_exam_result_entry_view"/>
             <field name="sequence" eval="10"/>
             <field name="view_mode">tree</field>
-            <field name="view_id" ref="view_exam_result_tree"/>
+            <field name="view_id" ref="view_exam_result_entry_tree"/>
         </record>
+
+<record id="view_form_cust_ref_readonly" model="ir.ui.view">
+    <field name="name">exam.result.form.readonly.cust</field>
+    <field name="model">exam.result</field>
+    <field name="inherit_id" ref="tvet_management.view_exam_result_entry_form"/>
+<!--    <field name="groups_id" eval="[(6, 0, [ref('tvet_management.edit_records_exam_entry_access') ])]"/>-->
+    <field name="arch" type="xml">
+        <field name='student_ids' position="attributes">
+            <attribute name="attrs">{'readonly':[('status','not in',['approved','dean_approval','draft','rejected','ar_approved'])]}</attribute>
+        </field>
+    </field>
+</record>
 
     </data>
 </odoo>

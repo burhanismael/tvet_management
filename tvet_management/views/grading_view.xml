@@ -71,6 +71,15 @@
             </field>
         </record>
 
+        <record model="ir.actions.act_window" id="act_health_grading_policy_view">
+            <field name="name">Health Grading Policy</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">health.grading.policy</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
         <record id="view_health_grading_policy_tree" model="ir.ui.view">
             <field name="name">health.grading.policy.tree</field>
             <field name="model">health.grading.policy</field>

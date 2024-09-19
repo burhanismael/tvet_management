@@ -9,7 +9,6 @@
             <field name="arch" type="xml">
             <tree string="Department">
                 <field name="name"/>
-                <field name="department_code"/>
                 <field name="remarks"/>
             </tree>
             </field>
@@ -25,10 +24,10 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="name"/>
+                                <field name="name" select="1"/>
                             </group>
                             <group>
-                                <field name="department_code" placeholder="Department Code"/>
+                                <field name="department_code"/>
                             </group>
                         </group>
                         <group>
@@ -52,7 +51,6 @@
             <field name="arch" type="xml">
             <search string="Department Course">
                 <field name="name" select="True"/>
-                <field name="department_code" select="True"/>
             </search>
             </field>
         </record>
@@ -61,11 +59,25 @@
             <field name="name">Department</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">school.department</field>
+            <!-- <field name="view_type">form</field> -->
             <field name="view_mode">tree,form</field>
             <field name="search_view_id" ref="view_school_department_search"/>
             <field name="domain">[]</field>
             <field name="context">{}</field>
         </record>
-
+        
+        <record model="ir.actions.act_window.view" id="act_open_school_department_view_form">
+            <field name="act_window_id" ref="act_open_school_department_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_school_department_form"/>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_school_department_view_tree">
+            <field name="act_window_id" ref="act_open_school_department_view"/>
+            <field name="sequence" eval="10"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="view_school_department_tree"/>
+        </record>
     </data>
 </odoo>

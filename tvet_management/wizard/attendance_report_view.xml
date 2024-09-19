@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    <record model="ir.ui.view" id="attendance_view_wizard">
+        <field name="name">attendance.view.wizard</field>
+        <field name="model">attendance.report</field>
+        <field name="arch" type="xml">
+            <form string="Attendance Report">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="date"/>
+                            <field name="class_name"/>
+                            <field name="sem" force_save="1"/>
+                        </group>
+                        <group>
+                            <field name="date_to"/>
+                            <field name="department_name"/>
+                            <field name="cource_ids" widget="many2many_tags"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="excle_download_action" type="object" class="oe_highlight" string="Download"/>
+                    <button name="pdf_download_action" type="object" class="oe_highlight" string="Preview"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="attendance_view_action_id">
+        <field name="name">Attendance Report</field>
+        <field name="res_model">attendance.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="tvet_management.attendance_view_wizard"/>
+    </record>
+    </data>
+</odoo>

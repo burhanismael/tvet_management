@@ -4,28 +4,32 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
+
 class StudentAdmission(models.Model):
     _name = "student.admission"
     _rec_name = 'admission_id'
     _description = "Admission Information"
     _inherit = ['mail.thread', 'mail.activity.mixin']
-   
+
     admission_id = fields.Char(string="Admission ID", tracking=True)
     student_id = fields.Char(string="Student ID", tracking=True)
     student_name_id = fields.Many2one("res.partner", string="Student", tracking=True)
-    student_type = fields.Selection([('new','New'),('transfer','Transfer')], string="Student Type", tracking=True)
-    registration_type = fields.Selection([('undergraduate','Undergraduate'),('post_graduate','Post-graduate')], string="Registration Type", tracking=True)
+    student_type = fields.Selection([('new', 'New'), ('transfer', 'Transfer')], string="Student Type", tracking=True)
+    registration_type = fields.Selection([('undergraduate', 'Undergraduate'), ('post_graduate', 'Post-graduate')],
+                                         string="Registration Type", tracking=True)
     payment_status = fields.Selection(selection=[
-            ('draft', 'Draft'),
-            ('posted', 'Posted'),
-            ('cancel', 'Cancelled'),
-        ], string="Payment Status", readonly=True, default='draft', tracking=True)
+        ('draft', 'Draft'),
+        ('posted', 'Posted'),
+        ('cancel', 'Cancelled'),
+    ], string="Payment Status", readonly=True, default='draft', tracking=True)
     contact = fields.Char(string="Contact", tracking=True)
     parent_contact = fields.Char(string="Parent Contact", tracking=True)
     student_photo = fields.Binary(string="Passport Size Photo", tracking=True)
     secondary_certificate = fields.Binary(string="Secondary Certificate", tracking=True)
     # admission_fee = fields.Binary(string="Admission Fee")
-    blood_group = fields.Selection([('a+','A+'),('a-','A-'),('ab+','AB+'),('ab-','AB-'),('b+','B+'),('b-','B-'),('o+','O+'),('o-','O-')], string="Blood Group", tracking=True)
+    blood_group = fields.Selection(
+        [('a+', 'A+'), ('a-', 'A-'), ('ab+', 'AB+'), ('ab-', 'AB-'), ('b+', 'B+'), ('b-', 'B-'), ('o+', 'O+'),
+         ('o-', 'O-')], string="Blood Group", tracking=True)
     blood_group_certificate = fields.Binary(string="Blood Group Certificate", tracking=True)
     transcript = fields.Binary(string="Transcript", tracking=True)
     testimonial = fields.Binary(string="Testimonial of the Previous University attended", tracking=True)
@@ -33,8 +37,8 @@ class StudentAdmission(models.Model):
     identification_card = fields.Binary(string="Passport or Identification Card", tracking=True)
     is_free = fields.Boolean(default=False, tracking=True)
     html_free = fields.Html(compute="_compute_html_free", tracking=True)
-    status = fields.Selection([('new','New'),('req','Requirement'),('done','Done')], default='new', tracking=True)
-    invoice_count = fields.Integer( tracking=True)
+    status = fields.Selection([('new', 'New'), ('req', 'Requirement'), ('done', 'Done')], default='new', tracking=True)
+    invoice_count = fields.Integer(tracking=True)
     color = fields.Selection([('red', 'Red'), ('green', 'Green'), ('blue', 'Blue')], string='Color')
     intake_type = fields.Selection([('normal', 'Normal Intake'), ('recommended', 'Recommended Intake')],
                                    string="Intake Type", tracking=True)
@@ -43,7 +47,6 @@ class StudentAdmission(models.Model):
     passport_photo = fields.Binary(string="Passport photo")
     national_id = fields.Binary(string='National id')
     consent_letter = fields.Binary(string='consent letter')
-
 
     def start_req(self):
         self.status = "req"
@@ -55,7 +58,6 @@ class StudentAdmission(models.Model):
             for record in check_status:
                 if record.status != 'enrolled':
                     record.status = 'enrolled'
-
 
     @api.onchange('student_photo')
     def _onchange_student_photo(self):
@@ -70,7 +72,6 @@ class StudentAdmission(models.Model):
             registrations = self.env['student.registration'].search([('admission_id', '=', self.admission_id)])
             registrations.write({'blood_group': self.blood_group})
 
-    
     def _compute_html_free(self):
         for rec in self:
             if rec.is_free:

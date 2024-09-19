@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <record id="ir_cron_scheduler_invoice_action" model="ir.cron">
+       <field name="name">Recurring Invoice</field>
+       <field name="model_id" ref="model_student_registration"/>
+       <field name="state">code</field>
+       <field name="code">model._invoice_cron_action()</field>
+       <field name="user_id" ref="base.user_root"/>
+       <field name="interval_number">1</field>
+       <field name="interval_type">days</field>
+       <field name="numbercall">-1</field>
+      <field name="active" eval="False"/>
+   </record>
+   <record id="ir_cron_scheduler_create_portal_user" model="ir.cron">
+       <field name="name">Student Portal User Creation</field>
+       <field name="model_id" ref="model_student_registration"/>
+       <field name="state">code</field>
+       <field name="code">model._student_portal_cron_action()</field>
+       <field name="user_id" ref="base.user_root"/>
+       <field name="interval_number">1</field>
+       <field name="interval_type">days</field>
+       <field name="numbercall">-1</field>
+      <field name="active" eval="False"/>
+   </record>
+</odoo>

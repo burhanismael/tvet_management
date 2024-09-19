@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    <record model="ir.ui.view" id='student_state_wizard_form_view_id'>
+        <field name="name">student_state_wizard_form_view_id</field>
+        <field name="model">student.state.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Staff Form">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="status" placeholder="select"/>
+                        </group>
+                        <group>
+                            <field name="reason" attrs="{'invisible': [('status','!=','drop_out')]}"/>
+                        </group>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="update_info" type="object" class="oe_highlight" string="Update"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="student_state_wizard_action_id">
+        <field name="name">Student State</field>
+        <field name="res_model">student.state.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="tvet_management.student_state_wizard_form_view_id"/>
+    </record>
+
+</data>
+</odoo>

@@ -163,7 +163,7 @@
 <!--                            </button>-->
 <!--                        </div>-->
                         <!--                    attrs="{'required':[('registration_type', '=', 'post_graduate'),('status', '=', 'inprogress')]}"-->
-                        <field name="student_photo" widget="image" class="oe_avatar" nolabel="1"/>
+                        <field name="student_photo" widget="image" class="oe_avatar" nolabel="1" attrs="{'required': [('status', '=', 'req')]}"/>
                         <div class="oe_title">
                             <h1>
                                 <field name="admission_id" readonly="1"/>
@@ -189,15 +189,14 @@
                             </group>
                         </group>
                         <notebook>
-                            <page string="Document">
+                            <page string="Document" attrs="{'invisible': [('status','=','new')]}">
                                 <group>
                                     <group>
-                                        <field name="secondary" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
-<!--                                        <field name="passport_photo" attrs="{'required': [('intake_type', '=', 'normal')]}"/>-->
+                                        <field name="secondary" attrs="{'required': [('intake_type', '=', 'normal'),('status', '=', 'req')]}"/>
                                     </group>
                                     <group>
-                                        <field name="national_id" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
-                                        <field name="consent_letter" attrs="{'required': [('intake_type', '=', 'normal')]}"/>
+                                        <field name="national_id" attrs="{'required': [('intake_type', '=', 'normal'),('status', '=', 'req')]}"/>
+                                        <field name="consent_letter" attrs="{'required': [('intake_type', '=', 'normal'),('status', '=', 'req')]}"/>
                                     </group>
                                 </group>
                             </page>
@@ -250,13 +249,6 @@
             <field name="view_mode">tree</field>
             <field name="view_id" ref="view_student_admission_tree"/>
         </record>
-
-<!--        <record model="ir.actions.act_window.view" id="act_open_student_admission_view_kanban">-->
-<!--            <field name="act_window_id" ref="act_open_student_admission_view"/>-->
-<!--            <field name="sequence" eval="5"/>-->
-<!--            <field name="view_mode">kanban</field>-->
-<!--            <field name="view_id" ref="student_admission_kanban_view"/>-->
-<!--        </record>-->
 
 
     </data>

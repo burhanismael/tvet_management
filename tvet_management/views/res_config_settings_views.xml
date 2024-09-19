@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit.bosaso</field>
+            <field name="model">res.config.settings</field>
+            <field name="priority" eval="40"/>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('settings')]" position="inside">
+                    <div class="app_settings_block" data-string="Bosaso University" string="Bosaso University" data-key="tvet_management">
+                        <h2>Current Academic year</h2>
+                        <div class="row mt16 o_settings_container" name="default_academic_setting_container">
+                             <div class="col-12 col-lg-6 o_setting_box" id="default_academic">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Academic Year</span>
+                                    <field name="academic_year_id"  options="{'no_open': True, 'no_create': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <h2>Examination Restriction</h2>
+                        <div class="row mt16 o_settings_container" name="default_examination_setting_container">
+                             <div class="col-12 col-lg-6 o_setting_box" id="default_examination">
+                                <div class="o_setting_right_pane">
+                                    <span class="o_form_label">Student Portal Access</span>
+                                    <field name="examination_boolean"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_bosaso_config" model="ir.actions.act_window">
+            <field name="name">Settings</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.config.settings</field>
+            <field name="view_mode">form</field>
+            <field name="target">inline</field>
+            <field name="context">{'module' : 'tvet_management'}</field>
+        </record>
+
+    </data>
+</odoo>

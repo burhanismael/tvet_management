@@ -12,8 +12,8 @@ class SchoolDepartment(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     name = fields.Char(string="Department", tracking=True)
+    department_code = fields.Char('Department Code', tracking=True)
     remarks = fields.Text(string="Remarks", tracking=True)
-    department_code = fields.Char(string="Department Code")
 
     @api.constrains('name')
     def _check_duplicate(self):

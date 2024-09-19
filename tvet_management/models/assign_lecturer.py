@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import api, fields, models
+from odoo import api, fields, models,_
+from odoo.exceptions import AccessError, UserError, ValidationError
 
 class AssignLecturer(models.Model):
     _name = "assign.lecturer"
@@ -10,19 +11,21 @@ class AssignLecturer(models.Model):
 
     status = fields.Selection([('draft','Draft'),('approved','Submit For Approval')], default="draft", tracking=True)
     lecturer_name_id = fields.Many2one('create.lecturer', tracking=True)
-    school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
+    school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True, related='course_name_id.department_id')
     class_id = fields.Many2one('class.room', string="Class Name", domain="[('school_department_id', '=', school_department_id)]", tracking=True)
-    semester_id = fields.Many2one('school.semester', domain="[('class_id', '=', class_id)]", tracking=True)
+    semester_id = fields.Many2one('semester.semester', domain="[('class_id', '=', class_id)]", tracking=True)
+    course_name_id = fields.Many2one('course.subject', string="Course Name")
     # semester_id = fields.Many2one('semester.semester', tracking=True)
     assign_lecturer_line_ids = fields.One2many('assign.lecturer.line','assign_lecturer_id', string="Course", tracking=True)
     # compute = "_compute_action_course"
     course_ids = fields.Many2many('school.subject', string='Courses', tracking=True)
 
-    # @api.onchange('class_id')
-    # def onchange_class_wise_semester(self):
-    #    semister_ids = self.class_id.class_room_ids.mapped('semester_id')
-    #    domain = [('id', 'in', semister_ids.ids)]
-    #    return {'domain': {'semester_id': domain}}
+    @api.onchange('semester_id')
+    def onchange_class_wise_semester(self):
+        if self.semester_id:
+            if self.class_id.semester_id.semester_name != self.semester_id.semester_name:
+                raise ValidationError(_('This semester is not current semester!'))
+
 
 
     def _compute_action_course(self):
@@ -87,9 +90,9 @@ class AssignLecturerLine(models.Model):
     _name = "assign.lecturer.line"
     _description = "Assign Lecturer Line"
 
-    semeter_id = fields.Many2one('school.semester', related='assign_lecturer_id.semester_id')
-    course_name_id = fields.Many2one('school.subject', string="Course Name", tracking=True)
-    course_code_id = fields.Char(string="Course Code", tracking=True)
+    semeter_id = fields.Many2one('semester.semester', related='assign_lecturer_id.semester_id')
+    course_name_id = fields.Many2one('school.subject', string="Subject Name", tracking=True)
+    course_code_id = fields.Char(string="Subject Code", related="course_name_id.subject_code", tracking=True)
     assign_lecturer_id = fields.Many2one('assign.lecturer', tracking=True)
 
     @api.onchange('course_name_id')

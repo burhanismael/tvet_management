@@ -144,25 +144,5 @@
             <field name="state">code</field>
             <field name="code">action = records.action_reject()</field>
         </record>
-
-        <menuitem id="menu_approve_lecturer"
-            parent="menu_tvet_acadamic"
-            sequence="5"
-            name="Approve Assigned Lecturer"
-            action="act_open_approve_lectuere_view"/>
-
-        <menuitem id="menu_rejected_assign_lecturer"
-            parent="menu_tvet_acadamic"
-            sequence="6"
-            name="Rejected Assign Lecturer"
-            action="act_open_rejected_lecturer_view"
-            />
-
-        <menuitem id="menu_approved_lecturer"
-            parent="menu_tvet_acadamic"
-            sequence="6"
-            name="Approved Lecturer"
-            action="act_open_approved_lectuere_view"/>
-
     </data>
 </odoo>

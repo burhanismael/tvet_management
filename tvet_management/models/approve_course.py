@@ -15,7 +15,7 @@ class ApproveCourse(models.Model):
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
     class_id = fields.Many2one('class.room', string="Class Name",
                                domain="[('school_department_id', '=', school_department_id)]", tracking=True)
-    semester_name_id = fields.Many2one('school.semester', string="Semester Name",
+    semester_name_id = fields.Many2one('semester.semester', string="Semester Name",
                                        domain="[('class_id', '=', class_id)]", tracking=True)
     course_approve_line_ids = fields.One2many('approve.course.line', 'assign_course_id', string="Course", tracking=True)
     aca_id = fields.Many2one('academic.year', string="Academic Year")
@@ -74,7 +74,9 @@ class ApproveCourse(models.Model):
                 [('class_id', '=', rec.class_id.id), ('semester_name_id', '=', rec.semester_name_id.id),
                  ('state', '=', 'approved')])
             if course:
+                # rec.class_id = course.class_id.id
                 for course_id in course:
+                    # for line in course_id.course_subject_line_ids:
                     approve_course_line_id = self.env['approve.course.line'].search(
                         [('course_name_id', '=', rec.class_id.id),
                          ('semester', '=', rec.semester_name_id.id),
@@ -95,6 +97,6 @@ class ApproveCourseLine(models.Model):
 
     is_tick = fields.Boolean(' ', tracking=True)
     course_name_id = fields.Many2one('class.room', string="Class Name", tracking=True)
-    semester = fields.Many2one('school.semester', string="Semester", tracking=True)
-    course = fields.Many2many('school.course', string="Course Name", tracking=True)
+    semester = fields.Many2one('semester.semester', string="Semester", tracking=True)
+    course = fields.Many2many('course.subject', string="Subject Name", tracking=True)
     assign_course_id = fields.Many2one('approve.course', tracking=True)

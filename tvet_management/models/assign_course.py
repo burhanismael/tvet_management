@@ -15,13 +15,39 @@ class AssignCourse(models.Model):
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
     class_id = fields.Many2one('class.room', string="Class Name",
                                domain="[('school_department_id', '=', school_department_id)]", tracking=True)
+    # domain="[('shift_id.school_department_id', '=', school_department_id)]")
     school_shift_id = fields.Integer("---", tracking=True)
-    semester_name_id = fields.Many2one('school.semester', string="Semester Name",
+    semester_name_id = fields.Many2one('semester.semester', string="Semester Name",
                                        domain="[('class_id', '=', class_id)]", tracking=True)
     course_subject_line_ids = fields.One2many('assign.course.line', 'assign_course_id', string="Course", tracking=True)
-    course_subject_id = fields.Many2many('school.course', string='Course', tracking=True)
+    course_subject_id = fields.Many2many('school.subject', string='Subject', tracking=True)
     is_assign_course = fields.Boolean(default=False, tracking=True)
     aca_id = fields.Many2one('academic.year', string="Academic Year")
+
+    # is_assign_course_check = fields.Boolean(default=False, compute='_compute_assign_course')
+
+    # def _compute_assign_course(self):
+    #     for rec in self:
+    #         self_id = rec.search([('state', '=', 'approved'),('is_assign_course', '=', False)])
+    #         if self_id:
+    #             for assign_course in self_id:
+    #                 approve_course = rec.env['approve.course'].search([
+    #                                                 ('school_department_id', '=', assign_course.school_department_id.id),
+    #                                                 ('class_id', '=', assign_course.class_id.id),
+    #                                                 ('semester_name_id', '=', assign_course.semester_name_id.id),
+    #                                                 ('status', '=', 'approved')])
+    #                 if approve_course:
+    #                     for course in approve_course:
+    #                         for line in course.course_approve_line_ids:
+    #                             if assign_course.course_subject_id.id == line.course.id:
+    #                                 assign_course.is_assign_course = True
+    #                                 assign_course.is_assign_course_check = True
+    #                             else:
+    #                                 assign_course.is_assign_course_check = False
+    #                 else:
+    #                     rec.is_assign_course_check = False
+    #         else:
+    #             rec.is_assign_course_check = False
 
     @api.constrains('school_department_id', 'class_id', 'semester_name_id', 'course_subject_id')
     def _check_duplicate(self):
@@ -35,6 +61,13 @@ class AssignCourse(models.Model):
 
     def action_approve(self):
         for rec in self:
+            # course_lines = []
+            # for line in self.course_subject_line_ids:
+            #     course_lines.append((0, 0, {
+            #         "course_name_id" : rec.class_id.id,
+            #         "semester" : rec.semester_name_id.id,
+            #         "course" : line.course_name_id.id,
+            #     }))
             vals = {
                 'school_department_id': rec.school_department_id.id,
                 'class_id': rec.class_id.id,
@@ -54,7 +87,7 @@ class AssignCourse(models.Model):
         for rec in self:
             if rec.course_subject_line_ids:
                 rec.course_subject_line_ids = False
-            course = rec.env['school.course'].search([('school_department_id', '=', rec.school_department_id.id)])
+            course = rec.env['school.subject'].search([('school_department_id', '=', rec.school_department_id.id)])
             if course:
                 rec.school_department_id = course.school_department_id
             if course:
@@ -88,7 +121,7 @@ class AssignCourse(models.Model):
     _description = "Assign Course line"
 
     course_code = fields.Char(tracking=True)
-    course_name_id = fields.Many2one('school.course', string="Course Name", tracking=True)
+    course_name_id = fields.Many2one('school.subject', string="Subject Name", tracking=True)
     credit_hrs = fields.Float(string="Credit Hrs", tracking=True)
     remarks = fields.Text(string="Remarks", tracking=True)
     assign_course_id = fields.Many2one('assign.course', tracking=True)

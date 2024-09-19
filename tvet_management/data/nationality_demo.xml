@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- NATIONALITY DEMO -->
+        <record id="demo_country_nationality1" model="country.nationality">
+            <field name="name">Afghan</field>
+        </record>
+        <record id="demo_country_nationality2" model="country.nationality">
+            <field name="name">Andorran</field>
+        </record>
+        <record id="demo_country_nationality3" model="country.nationality">
+            <field name="name">Antillean</field>
+        </record>
+        <record id="demo_country_nationality4" model="country.nationality">
+            <field name="name">Argentinian</field>
+        </record>
+        <record id="demo_country_nationality5" model="country.nationality">
+            <field name="name">Australian</field>
+        </record>
+        <record id="demo_country_nationality6" model="country.nationality">
+            <field name="name">Austrian</field>
+        </record>
+        <record id="demo_country_nationality7" model="country.nationality">
+            <field name="name">Belgian</field>
+        </record>
+        <record id="demo_country_nationality8" model="country.nationality">
+            <field name="name">Bolivian</field>
+        </record>
+        <record id="demo_country_nationality9" model="country.nationality">
+            <field name="name">Brazilian</field>
+        </record>
+        <record id="demo_country_nationality10" model="country.nationality">
+            <field name="name">Bulgarian</field>
+        </record>
+        <record id="demo_country_nationality11" model="country.nationality">
+            <field name="name">Burman</field>
+        </record>
+        <record id="demo_country_nationality12" model="country.nationality">
+            <field name="name">Cambodian</field>
+        </record>
+        <record id="demo_country_nationality13" model="country.nationality">
+            <field name="name">Cameroun</field>
+        </record>
+        <record id="demo_country_nationality14" model="country.nationality">
+            <field name="name">Ceylonese</field>
+        </record>
+        <record id="demo_country_nationality15" model="country.nationality">
+            <field name="name">Chilean</field>
+        </record>
+        <record id="demo_country_nationality16" model="country.nationality">
+            <field name="name">Chinese</field>
+        </record>
+        <record id="demo_country_nationality17" model="country.nationality">
+            <field name="name">Colombian</field>
+        </record>
+        <record id="demo_country_nationality18" model="country.nationality">
+            <field name="name">Congolese</field>
+        </record>
+        <record id="demo_country_nationality19" model="country.nationality">
+            <field name="name">Costa Rican</field>
+        </record>
+        <record id="demo_country_nationality20" model="country.nationality">
+            <field name="name">Croatian</field>
+        </record>
+        <record id="demo_country_nationality21" model="country.nationality">
+            <field name="name">Cuban</field>
+        </record>
+        <record id="demo_country_nationality22" model="country.nationality">
+            <field name="name">Cypriot</field>
+        </record>
+        <record id="demo_country_nationality23" model="country.nationality">
+            <field name="name">Czech</field>
+        </record>
+        <record id="demo_country_nationality24" model="country.nationality">
+            <field name="name">Danish</field>
+        </record>
+        <record id="demo_country_nationality25" model="country.nationality">
+            <field name="name">Dominican</field>
+        </record>
+        <record id="demo_country_nationality26" model="country.nationality">
+            <field name="name">Ecuadorians</field>
+        </record>
+        <record id="demo_country_nationality27" model="country.nationality">
+            <field name="name">Egyptian</field>
+        </record>
+        <record id="demo_country_nationality28" model="country.nationality">
+            <field name="name">Salvadoran, Salvadorian</field>
+        </record>
+        <record id="demo_country_nationality29" model="country.nationality">
+            <field name="name">English</field>
+        </record>
+        <record id="demo_country_nationality30" model="country.nationality">
+            <field name="name">Ethiopian</field>
+        </record>
+        <record id="demo_country_nationality31" model="country.nationality">
+            <field name="name">Finnish</field>
+        </record>
+        <record id="demo_country_nationality32" model="country.nationality">
+            <field name="name">French</field>
+        </record>
+        <record id="demo_country_nationality33" model="country.nationality">
+            <field name="name">Gabonese</field>
+        </record>
+        <record id="demo_country_nationality34" model="country.nationality">
+            <field name="name">Gambian</field>
+        </record>
+        <record id="demo_country_nationality35" model="country.nationality">
+            <field name="name">German</field>
+        </record>
+        <record id="demo_country_nationality36" model="country.nationality">
+            <field name="name">Ghanian, Ghanaian</field>
+        </record>
+        <record id="demo_country_nationality37" model="country.nationality">
+            <field name="name">British</field>
+        </record>
+        <record id="demo_country_nationality38" model="country.nationality">
+            <field name="name">Greek</field>
+        </record>
+        <record id="demo_country_nationality39" model="country.nationality">
+            <field name="name">Guatemalan</field>
+        </record>
+        <record id="demo_country_nationality40" model="country.nationality">
+            <field name="name">Guinean</field>
+        </record>
+        <record id="demo_country_nationality41" model="country.nationality">
+            <field name="name">Haitian</field>
+        </record>
+        <record id="demo_country_nationality42" model="country.nationality">
+            <field name="name">Dutch</field>
+        </record>
+        <record id="demo_country_nationality43" model="country.nationality">
+            <field name="name">Honduran</field>
+        </record>
+        <record id="demo_country_nationality44" model="country.nationality">
+            <field name="name">Hungarian</field>
+        </record>
+        <record id="demo_country_nationality45" model="country.nationality">
+            <field name="name">Icelander</field>
+        </record>
+        <record id="demo_country_nationality46" model="country.nationality">
+            <field name="name">Indian</field>
+        </record>
+        <record id="demo_country_nationality47" model="country.nationality">
+            <field name="name">Iranian</field>
+        </record>
+        <record id="demo_country_nationality48" model="country.nationality">
+            <field name="name">Irakian, Iraki</field>
+        </record>
+        <record id="demo_country_nationality49" model="country.nationality">
+            <field name="name">Irish</field>
+        </record>
+        <record id="demo_country_nationality50" model="country.nationality">
+            <field name="name">Israeli</field>
+        </record>
+        <record id="demo_country_nationality51" model="country.nationality">
+            <field name="name">Italian</field>
+        </record>
+        <record id="demo_country_nationality52" model="country.nationality">
+            <field name="name">Jamaican</field>
+        </record>
+        <record id="demo_country_nationality53" model="country.nationality">
+            <field name="name">Japanese</field>
+        </record>
+        <record id="demo_country_nationality54" model="country.nationality">
+            <field name="name">Jordanian</field>
+        </record>
+        <record id="demo_country_nationality55" model="country.nationality">
+            <field name="name">Kenyan</field>
+        </record>
+        <record id="demo_country_nationality56" model="country.nationality">
+            <field name="name">Korean</field>
+        </record>
+        <record id="demo_country_nationality57" model="country.nationality">
+            <field name="name">Kuwaiti</field>
+        </record>
+        <record id="demo_country_nationality58" model="country.nationality">
+            <field name="name">Laotian</field>
+        </record>
+        <record id="demo_country_nationality59" model="country.nationality">
+            <field name="name">Latvian</field>
+        </record>
+        <record id="demo_country_nationality60" model="country.nationality">
+            <field name="name">Lebanese</field>
+        </record>
+        <record id="demo_country_nationality61" model="country.nationality">
+            <field name="name">Liberian</field>
+        </record>
+        <record id="demo_country_nationality62" model="country.nationality">
+            <field name="name">Lybian</field>
+        </record>
+        <record id="demo_country_nationality63" model="country.nationality">
+            <field name="name">Luxembourger</field>
+        </record>
+        <record id="demo_country_nationality64" model="country.nationality">
+            <field name="name">Malayan</field>
+        </record>
+        <record id="demo_country_nationality65" model="country.nationality">
+            <field name="name">Malian</field>
+        </record>
+        <record id="demo_country_nationality66" model="country.nationality">
+            <field name="name">Maltese</field>
+        </record>
+        <record id="demo_country_nationality67" model="country.nationality">
+            <field name="name">Mauritanian</field>
+        </record>
+        <record id="demo_country_nationality68" model="country.nationality">
+            <field name="name">Mexican</field>
+        </record>
+        <record id="demo_country_nationality69" model="country.nationality">
+            <field name="name">Monegasque</field>
+        </record>
+        <record id="demo_country_nationality70" model="country.nationality">
+            <field name="name">Moroccan</field>
+        </record>
+        <record id="demo_country_nationality71" model="country.nationality">
+            <field name="name">Nepali, Nepalese</field>
+        </record>
+        <record id="demo_country_nationality72" model="country.nationality">
+            <field name="name">New Zelander</field>
+        </record>
+        <record id="demo_country_nationality73" model="country.nationality">
+            <field name="name">Nicaraguan</field>
+        </record>
+        <record id="demo_country_nationality74" model="country.nationality">
+            <field name="name">Nigerian</field>
+        </record>
+        <record id="demo_country_nationality75" model="country.nationality">
+            <field name="name">Norwegian</field>
+        </record>
+        <record id="demo_country_nationality76" model="country.nationality">
+            <field name="name">Pakistani</field>
+        </record>
+        <record id="demo_country_nationality77" model="country.nationality">
+            <field name="name">Panamanian</field>
+        </record>
+        <record id="demo_country_nationality78" model="country.nationality">
+            <field name="name">Paraguayan</field>
+        </record>
+        <record id="demo_country_nationality79" model="country.nationality">
+            <field name="name">Peruvian</field>
+        </record>
+        <record id="demo_country_nationality80" model="country.nationality">
+            <field name="name">Filipino</field>
+        </record>
+        <record id="demo_country_nationality81" model="country.nationality">
+            <field name="name">Polish</field>
+        </record>
+        <record id="demo_country_nationality82" model="country.nationality">
+            <field name="name">Portuguese</field>
+        </record>
+        <record id="demo_country_nationality83" model="country.nationality">
+            <field name="name">Puerto Rican</field>
+        </record>
+        <record id="demo_country_nationality84" model="country.nationality">
+            <field name="name">Rhodesian</field>
+        </record>
+        <record id="demo_country_nationality85" model="country.nationality">
+            <field name="name">Romanian</field>
+        </record>
+        <record id="demo_country_nationality86" model="country.nationality">
+            <field name="name">Russian</field>
+        </record>
+        <record id="demo_country_nationality87" model="country.nationality">
+            <field name="name">Rwandese</field>
+        </record>
+        <record id="demo_country_nationality88" model="country.nationality">
+            <field name="name">San Marinese</field>
+        </record>
+        <record id="demo_country_nationality89" model="country.nationality">
+            <field name="name">Saudi Arabian</field>
+        </record>
+        <record id="demo_country_nationality90" model="country.nationality">
+            <field name="name">Scottish</field>
+        </record>
+        <record id="demo_country_nationality100" model="country.nationality">
+            <field name="name">Senegalese</field>
+        </record>
+        <record id="demo_country_nationality101" model="country.nationality">
+            <field name="name">Somali</field>
+        </record>
+        <record id="demo_country_nationality102" model="country.nationality">
+            <field name="name">South African</field>
+        </record>
+        <record id="demo_country_nationality103" model="country.nationality">
+            <field name="name">Spanish</field>
+        </record>
+        <record id="demo_country_nationality104" model="country.nationality">
+            <field name="name">Sudanese</field>
+        </record>
+        <record id="demo_country_nationality105" model="country.nationality">
+            <field name="name">Swedish</field>
+        </record>
+        <record id="demo_country_nationality106" model="country.nationality">
+            <field name="name">Swiss</field>
+        </record>
+        <record id="demo_country_nationality107" model="country.nationality">
+            <field name="name">Syrian</field>
+        </record>
+        <record id="demo_country_nationality108" model="country.nationality">
+            <field name="name">Tanzanian</field>
+        </record>
+        <record id="demo_country_nationality109" model="country.nationality">
+            <field name="name">Thai</field>
+        </record>
+        <record id="demo_country_nationality110" model="country.nationality">
+            <field name="name">Togolese</field>
+        </record>
+        <record id="demo_country_nationality111" model="country.nationality">
+            <field name="name">Tunisian</field>
+        </record>
+        <record id="demo_country_nationality112" model="country.nationality">
+            <field name="name">Turkish</field>
+        </record>
+        <record id="demo_country_nationality113" model="country.nationality">
+            <field name="name">Ugandan</field>
+        </record>
+        <record id="demo_country_nationality114" model="country.nationality">
+            <field name="name">Ukrainian</field>
+        </record>
+        <record id="demo_country_nationality115" model="country.nationality">
+            <field name="name">North American</field>
+        </record>
+        <record id="demo_country_nationality116" model="country.nationality">
+            <field name="name">Uruguayan</field>
+        </record>
+        <record id="demo_country_nationality117" model="country.nationality">
+            <field name="name">Venezuelan</field>
+        </record>
+        <record id="demo_country_nationality118" model="country.nationality">
+            <field name="name">Vietnamese</field>
+        </record>
+        <record id="demo_country_nationality119" model="country.nationality">
+            <field name="name">Welsh</field>
+        </record>
+        <record id="demo_country_nationality120" model="country.nationality">
+            <field name="name">Yemeni</field>
+        </record>
+        <record id="demo_country_nationality121" model="country.nationality">
+            <field name="name">Zairian</field>
+        </record>
+        <record id="demo_country_nationality122" model="country.nationality">
+            <field name="name">Zambian</field>
+        </record>
+
+        <record id="demo_country_nationality01" model="country.nationality">
+            <field name="name">European</field>
+        </record>
+        <record id="demo_country_nationality02" model="country.nationality">
+            <field name="name">Asian</field>
+        </record>
+        <record id="demo_country_nationality03" model="country.nationality">
+            <field name="name">African</field>
+        </record>
+        <record id="demo_country_nationality04" model="country.nationality">
+            <field name="name">American</field>
+        </record>
+        <record id="demo_country_nationality05" model="country.nationality">
+            <field name="name">Oceanian</field>
+        </record>
+    </data>
+</odoo>

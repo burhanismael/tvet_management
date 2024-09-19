@@ -110,7 +110,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <record id="view_student_registration_form" model="ir.ui.view">
             <field name="name">student.registration.form</field>
             <field name="model">student.registration</field>
@@ -171,6 +171,7 @@
 <!--                            <field name="faculty_id" invisible="1" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />-->
                             <field name="department_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
                             <field name="classroom_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="course_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             <field name="course_subject_id" widget="many2many_tags"/>
                             <field name="semester_id" placeholder="Select" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             <field name="student_type" invisible="1" select="1" placeholder="Select" />
@@ -180,7 +181,7 @@
 <!--                            <field name="location"/>-->
                             <field name="project_id"/>
                             <field name="idp_name_id"/>
-                            <field name="parent_city"/>
+                            <field name="parent_city_id"/>
                             <field name="state_id"/>
                             <field name="is_alumni" invisible="1"/>
                             <field name="is_semester_invoice" invisible="1"/>
@@ -226,7 +227,7 @@
             </form>
             </field>
         </record>
-        
+
         <record id="view_student_registration_search" model="ir.ui.view">
             <field name="name">student.registration.search</field>
             <field name="model">student.registration</field>
@@ -275,7 +276,7 @@
             </search>
             </field>
         </record>
-        
+
         <record model="ir.actions.act_window" id="act_open_student_registration_view">
             <field name="name">Student Registration</field>
             <field name="type">ir.actions.act_window</field>
@@ -296,16 +297,6 @@
             <field name="context">{'default_status': 'drop_out','create':False,'edit':True}</field>
         </record>
 
-        <record model="ir.actions.act_window" id="act_open_student_registration_edit_view">
-            <field name="name">Student Registration</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">student.registration</field>
-            <field name="view_mode">kanban,tree,form</field>
-            <field name="search_view_id" ref="view_student_registration_search"/>
-            <field name="domain">[]</field>
-            <field name="context">{'create':False, 'edit': True}</field>
-        </record>
-
         <record model="ir.actions.act_window" id="act_open_student_alumni_view">
             <field name="name">Student Registration</field>
             <field name="type">ir.actions.act_window</field>
@@ -315,7 +306,7 @@
             <field name="context">{'default_is_alumni': True, 'default_status': 'graduated','create':False,'edit':False}</field>
             <field name="domain">[('status', 'in', ['graduated'])]</field>
         </record>
-        
+
         <record model="ir.actions.act_window.view" id="act_open_student_registration_view_form">
             <field name="act_window_id" ref="act_open_student_registration_view"/>
             <field name="sequence" eval="20"/>
@@ -346,15 +337,5 @@
             <field name="domain">[('status', 'in', ['drop_out'])]</field>
             <field name="context">{'default_status': 'drop_out','create':False,'edit':True}</field>
         </record>
-
-<!--        <record id="excle_formate_action" model="ir.actions.server">-->
-<!--            <field name="name">Sale Report</field>-->
-<!--            <field name="type">ir.actions.server</field>-->
-<!--            <field name="model_id" ref="model_student_data"/>-->
-<!--            <field name="state">code</field>-->
-<!--            <field name="code">-->
-<!--                action = model.excle_download_action()-->
-<!--            </field>-->
-<!--        </record>-->
     </data>
 </odoo>

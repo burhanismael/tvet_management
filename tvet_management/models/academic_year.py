@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from datetime import datetime, date
@@ -18,7 +19,7 @@ class AcademicYear(models.Model):
     def create(self, vals):
         res = super(AcademicYear, self).create(vals)
         if res['name'] == False or len(res['name']) != 9 or res['name'][4] != '-':
-            raise ValidationError("Please enter valid academic year format")
+            raise ValidationError("Please enter valid academic year formate")
         return res
 
     @api.onchange('start_date', 'end_date')

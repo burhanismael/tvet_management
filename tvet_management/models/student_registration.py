@@ -159,10 +159,10 @@ class StudentRegistration(models.Model):
         if self.country_id and self.country_id != self.state_id.country_id:
             self.state_id = False
 
-    @api.onchange('state_id')
-    def _onchange_state(self):
-        if self.state_id.country_id:
-            self.country_id = self.state_id.country_id
+    # @api.onchange('state_id')
+    # def _onchange_state(self):
+    #     if self.state_id.country_id:
+    #         self.country_id = self.state_id.country_id
 
     @api.model
     def create(self, vals):

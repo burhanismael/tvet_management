@@ -52,7 +52,7 @@ class HrEmployee(models.Model):
                     'default_email': self.work_email,
                     'default_gender': self.gender,
                     'default_visa_details': self.visa_no,
-                    'default_faculty_id': self.faculty_id.id,
+                    # 'default_faculty_id': self.faculty_id.id,
                     # 'default_employee_type': self.type_of_employee,
                     # 'default_street_1': self.
                     # 'default_street_2': self.
@@ -69,7 +69,7 @@ class HrEmployee(models.Model):
         result = []
         for rec in self:
             if rec.is_lecturer:
-                # name = str(rec.faculty_id.faculty_code)+str(rec.sequence_no) + '-' + str(rec.name)
+                name = str(rec.name)
                 result.append((rec.id,name))
             else:
                 name = str(rec.name)

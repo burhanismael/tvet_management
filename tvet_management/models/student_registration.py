@@ -33,7 +33,9 @@ class StudentRegistration(models.Model):
     dob = fields.Date(string="DOB", tracking=True)
     school_name = fields.Char(string="School Name", tracking=True)
     graduate_year = fields.Char("Graduate Year", tracking=True)
-    roll_number = fields.Char(string="Roll Number", required=True, tracking=True)
+    roll_number = fields.Char(string="Roll Number", tracking=True)
+    place_of_graduate = fields.Char('Place of  graduation')
+    other_sift = fields.Char('Other shift work specification')
     grade = fields.Char(string="Grade", tracking=True)
 
     occupation = fields.Selection([('employed', 'Employed'), ('unemployed', 'Unemployed')], string="Occupation",

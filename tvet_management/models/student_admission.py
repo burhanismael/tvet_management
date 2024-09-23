@@ -56,6 +56,8 @@ class StudentAdmission(models.Model):
         if self.status == 'done':
             check_status = self.env['student.registration'].search([('admission_id', '=', self.admission_id)])
             for record in check_status:
+                if record.student_id == False:
+                    record.student_id = self.student_id
                 if record.status != 'enrolled':
                     record.status = 'enrolled'
 

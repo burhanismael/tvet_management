@@ -24,6 +24,7 @@ class AssignCourse(models.Model):
     is_assign_course = fields.Boolean(default=False, tracking=True)
     aca_id = fields.Many2one('academic.year', string="Academic Year")
 
+
     # is_assign_course_check = fields.Boolean(default=False, compute='_compute_assign_course')
 
     # def _compute_assign_course(self):
@@ -79,6 +80,7 @@ class AssignCourse(models.Model):
                     "course": [(6, 0, rec.course_subject_id.ids)],
                 })]
             }
+            print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv", vals)
             self.env['approve.course'].create(vals)
             rec.state = 'approved'
 

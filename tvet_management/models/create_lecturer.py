@@ -53,7 +53,7 @@ class CreateLecturer(models.Model):
     def name_get(self):
         result = []
         for rec in self:
-            name = str(rec.faculty_id.faculty_code)+str(rec.sequence_no) + '-' + str(rec.name)
+            name = str(rec.name)
             result.append((rec.id,name))
         return result
         

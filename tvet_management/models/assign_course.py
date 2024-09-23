@@ -94,7 +94,7 @@ class AssignCourse(models.Model):
                 for course_id in course:
                     rec.update({
                         'course_subject_line_ids': [(0, 0, {
-                            "course_code": course_id.course_code,
+                            "course_code": course_id.subject_code,
                             "course_name_id": course_id.id,
                             "credit_hrs": course_id.credit_hrs,
                             "remarks": course_id.remarks,

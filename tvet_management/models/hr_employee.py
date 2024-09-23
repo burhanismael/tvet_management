@@ -69,7 +69,7 @@ class HrEmployee(models.Model):
         result = []
         for rec in self:
             if rec.is_lecturer:
-                name = str(rec.faculty_id.faculty_code)+str(rec.sequence_no) + '-' + str(rec.name)
+                # name = str(rec.faculty_id.faculty_code)+str(rec.sequence_no) + '-' + str(rec.name)
                 result.append((rec.id,name))
             else:
                 name = str(rec.name)

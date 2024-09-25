@@ -29,7 +29,7 @@ class AttendanceReportPdf(models.AbstractModel):
         if data.get('semester_id'):
             sem_id = self.env['semester.semester'].browse(data.get('semester_id'))
         if data.get('cource_ids'):
-            cource_id = self.env['course.subject'].browse(data.get('cource_ids'))
+            cource_id = self.env['school.subject'].browse(data.get('cource_ids'))
 
         attendance_company = self.env.company.at_dance
         if cource_id:

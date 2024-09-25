@@ -28,6 +28,7 @@
         'views/res_partner_view.xml',
         'views/res_city_view.xml',
         'views/state_view.xml',
+        'views/res_config_settings_views.xml',
         'views/academic_year_view.xml',
         'views/school_shift_view.xml',
         'views/class_room_view.xml',

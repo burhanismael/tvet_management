@@ -31,7 +31,7 @@ class AttendanceReport(models.AbstractModel):
         if data.get('semester_id'):
             sem_id = self.env['semester.semester'].browse(data.get('semester_id'))
         if data.get('cource_ids'):
-            cource_id = self.env['course.subject'].browse(data.get('cource_ids'))
+            cource_id = self.env['school.subject'].browse(data.get('cource_ids'))
 
         # sheet.insert_image(2, 2, 'tvet_management/static/description/icon.png')
         sheet.insert_image(0, 0, '/opt/odoo15/custom/tvet_management/data/uni_icon.jpeg')
@@ -116,7 +116,7 @@ class AttendanceReport(models.AbstractModel):
                 student_ids = self.env['student.registration'].search([('classroom_id', '=', class_id.id), ('status', '=', 'enrolled')])
                 total_student = len(student_ids)
                 row_add = total_student - 1
-                sheet.merge_range(row, col_data_at, row+row_add, col_data_at, cource.course_name, format4)
+                sheet.merge_range(row, col_data_at, row+row_add, col_data_at, cource.name, format4)
                 col_data_at += 1
                 for attendance in student_ids:
                     col_data_at = 1

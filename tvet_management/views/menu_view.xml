@@ -49,6 +49,11 @@
             name = "Configuration"/>
 
 <!-- ................................................................... -->
+        <menuitem id="menu_bosaso_config"
+            name="Settings"
+            parent = "menu_student_admission"
+            sequence="0"
+            action="action_bosaso_config"/>
 
         <menuitem id="menu_course_subject1"
             parent = "menu_student_admission"

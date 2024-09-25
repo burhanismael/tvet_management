@@ -58,7 +58,7 @@
                                             <t t-set="row_add" t-value="total_student - 1"/>
                                             <tr t-foreach="student_ids" t-as="student">
                                                 <t t-set="present_level" t-value="0"/>
-                                                <th rowspan="row_add"><t t-esc="cource.course_name"/></th>
+                                                <th rowspan="row_add"><t t-esc="cource.name"/></th>
                                                 <th><t t-esc="sqcount"/></th>
                                                 <t t-set="sqcount" t-value="sqcount + 1"/>
                                                 <th><t t-esc="student.student_id"/></th>

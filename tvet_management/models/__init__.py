@@ -3,7 +3,7 @@
 
 from . import academic_month
 from . import academic_year
-from . import account_move
+# from . import account_move
 from . import approve_course
 from . import approve_lecturer
 from . import assign_course

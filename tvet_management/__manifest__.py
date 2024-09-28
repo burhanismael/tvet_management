@@ -35,7 +35,7 @@
         'views/school_department_view.xml',
         'views/academic_month_view.xml',
         'views/student_admission_view.xml',
-        'views/account_move_view.xml',
+        # 'views/account_move_view.xml',
         'views/awading_system.xml',
         'views/assign_course_view.xml',
         'views/semester_view.xml',

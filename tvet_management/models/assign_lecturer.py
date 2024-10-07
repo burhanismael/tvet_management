@@ -74,6 +74,7 @@ class AssignLecturer(models.Model):
                                                         ('school_department_id', '=', rec.school_department_id.id),
                                                         ('status', '=', 'approved')])
                 course_list = []
+
                 for course_id in course:
                     for line in course_id.course_approve_line_ids:
                         for line_course_id in line.course:
@@ -81,7 +82,7 @@ class AssignLecturer(models.Model):
                             rec.update({
                                 'assign_lecturer_line_ids': [(0, 0, {
                                             "course_name_id" : line_course_id.id,
-                                            'course_code_id' : line_course_id.course_code
+                                            'course_code_id' : line_course_id.subject_code
                                         })],
                                 })
                 rec.course_ids = [(6, 0, course_list)]

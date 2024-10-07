@@ -8,17 +8,17 @@
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
                 <tree string="Manage Timetable">
-                    <field name="school_department_id"/>
+<!--                    <field name="school_department_id"/>-->
                     <field name="semester_id"/>
                     <field name="time_table_date"/>
                     <field name="class_id"/>
                     <field name="course_id" widget="many2many_tags"/>
-                    <field name="day"/>
-                    <field name="location"/>
-                    <field name="start_time"/>
-                    <field name="end_time"/>
-                    <field name="break_start_time" readonly="1" string="Break Start Time"/>
-                    <field name="break_end_time" readonly="1" string="Break End Time"/>
+<!--                    <field name="day"/>-->
+<!--                    <field name="location"/>-->
+<!--                    <field name="start_time"/>-->
+<!--                    <field name="end_time"/>-->
+<!--                    <field name="break_start_time" readonly="1" string="Break Start Time"/>-->
+<!--                    <field name="break_end_time" readonly="1" string="Break End Time"/>-->
                 </tree>
             </field>
         </record>
@@ -33,7 +33,9 @@
                     <sheet>
                         <group>
                             <group>
-                                <field name="school_department_id"
+<!--                                <field name="school_department_id"-->
+<!--                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+                                <field name="course_id" widget="many2many_tags"
                                        options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                                 <field name="class_id"
                                        options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
@@ -42,36 +44,34 @@
                             </group>
                             <group>
                                 <field name="time_table_date"/>
-                                <field name="course_id" widget="many2many_tags"
-                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             </group>
                         </group>
                         <group>
                             <group>
-                                <field name="day"/>
+<!--                                <field name="day"/>-->
                             </group>
                             <group>
-                                <field name="location"
-                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+<!--                                <field name="location"-->
+<!--                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
                             </group>
                         </group>
                         <group>
-                            <group>
-                                <label for="start_time" string="Time" invisible="1"></label>
-                                <div class="address_format">
-                                    Time Start:
-                                    <field name="start_time" style="width: 15%" widget="float_time"/>
-                                    Time End:
-                                    <field name="end_time" style="width: 15%" widget="float_time"/>
-                                </div>
-                            </group>
-                            <label for="break_start_time" string="Break Start Time" invisible="1"></label>
-                            <div class="address_format">
-                                Break Time Start:
-                                <field name="break_start_time" style="width: 15%" widget="float_time"/>
-                                Break Time End:
-                                <field name="break_end_time" style="width: 15%" widget="float_time"/>
-                            </div>
+<!--                            <group>-->
+<!--                                <label for="start_time" string="Time" invisible="1"></label>-->
+<!--                                <div class="address_format">-->
+<!--                                    Time Start:-->
+<!--                                    <field name="start_time" style="width: 15%" widget="float_time"/>-->
+<!--                                    Time End:-->
+<!--                                    <field name="end_time" style="width: 15%" widget="float_time"/>-->
+<!--                                </div>-->
+<!--                            </group>-->
+<!--                            <label for="break_start_time" string="Break Start Time" invisible="1"></label>-->
+<!--                            <div class="address_format">-->
+<!--                                Break Time Start:-->
+<!--                                <field name="break_start_time" style="width: 15%" widget="float_time"/>-->
+<!--                                Break Time End:-->
+<!--                                <field name="break_end_time" style="width: 15%" widget="float_time"/>-->
+<!--                            </div>-->
                         </group>
                         <notebook>
                             <page string="Saturday">
@@ -79,8 +79,7 @@
                                     <tree editable="bottom">
                                         <field name="start_time" widget="float_time"/>
                                         <field name="end_time" widget="float_time"/>
-                                        <field name="break_start_time" widget="float_time"/>
-                                        <field name="break_end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
                                         <field name="subject_id"/>
                                         <field name="lecturer_id"/>
                                         <field name="location_id"/>
@@ -93,8 +92,7 @@
                                     <tree editable="bottom">
                                         <field name="start_time" widget="float_time"/>
                                         <field name="end_time" widget="float_time"/>
-                                        <field name="break_start_time" widget="float_time"/>
-                                        <field name="break_end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
                                         <field name="subject_id"/>
                                         <field name="lecturer_id"/>
                                         <field name="location_id"/>
@@ -107,8 +105,7 @@
                                     <tree editable="bottom">
                                         <field name="start_time" widget="float_time"/>
                                         <field name="end_time" widget="float_time"/>
-                                        <field name="break_start_time" widget="float_time"/>
-                                        <field name="break_end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
                                         <field name="subject_id"/>
                                         <field name="lecturer_id"/>
                                         <field name="location_id"/>
@@ -121,8 +118,7 @@
                                     <tree editable="bottom">
                                         <field name="start_time" widget="float_time"/>
                                         <field name="end_time" widget="float_time"/>
-                                        <field name="break_start_time" widget="float_time"/>
-                                        <field name="break_end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
                                         <field name="subject_id"/>
                                         <field name="lecturer_id"/>
                                         <field name="location_id"/>
@@ -135,8 +131,7 @@
                                     <tree editable="bottom">
                                         <field name="start_time" widget="float_time"/>
                                         <field name="end_time" widget="float_time"/>
-                                        <field name="break_start_time" widget="float_time"/>
-                                        <field name="break_end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
                                         <field name="subject_id"/>
                                         <field name="lecturer_id"/>
                                         <field name="location_id"/>
@@ -149,8 +144,7 @@
                                     <tree editable="bottom">
                                         <field name="start_time" widget="float_time"/>
                                         <field name="end_time" widget="float_time"/>
-                                        <field name="break_start_time" widget="float_time"/>
-                                        <field name="break_end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
                                         <field name="subject_id"/>
                                         <field name="lecturer_id"/>
                                         <field name="location_id"/>
@@ -163,8 +157,7 @@
                                     <tree editable="bottom">
                                         <field name="start_time" widget="float_time"/>
                                         <field name="end_time" widget="float_time"/>
-                                        <field name="break_start_time" widget="float_time"/>
-                                        <field name="break_end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
                                         <field name="subject_id"/>
                                         <field name="lecturer_id"/>
                                         <field name="location_id"/>
@@ -239,8 +232,6 @@
                     <field name="location" readonly="1"/>
                     <field name="start_time" readonly="1"/>
                     <field name="end_time" readonly="1"/>
-                    <field name="break_start_time" readonly="1" string="Break Start Time"/>
-                    <field name="break_end_time" readonly="1" string="Break End Time"/>
                 </tree>
             </field>
         </record>
@@ -270,30 +261,30 @@
                         </group>
                         <group>
                             <group>
-                                <field name="day" readonly="1"/>
+<!--                                <field name="day" readonly="1"/>-->
                             </group>
-                            <group>
-                                <field name="location" readonly="1"
-                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
-                            </group>
+<!--                            <group>-->
+<!--                                <field name="location" readonly="1"-->
+<!--                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+<!--                            </group>-->
                         </group>
                         <group>
-                            <group>
-                                <label for="start_time" string="Time" invisible="1"></label>
-                                <div class="address_format">
-                                    Time Start:
-                                    <field name="start_time" readonly="1" style="width: 15%" widget="float_time"/>
-                                    Time End:
-                                    <field name="end_time" readonly="1" style="width: 15%" widget="float_time"/>
-                                </div>
-                            </group>
-                            <label for="break_start_time" string="Break Start Time" invisible="1"></label>
-                            <div class="address_format">
-                                Break Time Start:
-                                <field name="break_start_time" readonly="1" style="width: 15%" widget="float_time"/>
-                                Break Time End:
-                                <field name="break_end_time" readonly="1" style="width: 15%" widget="float_time"/>
-                            </div>
+<!--                            <group>-->
+<!--                                <label for="start_time" string="Time" invisible="1"></label>-->
+<!--                                <div class="address_format">-->
+<!--                                    Time Start:-->
+<!--                                    <field name="start_time" readonly="1" style="width: 15%" widget="float_time"/>-->
+<!--                                    Time End:-->
+<!--                                    <field name="end_time" readonly="1" style="width: 15%" widget="float_time"/>-->
+<!--                                </div>-->
+<!--                            </group>-->
+<!--                            <label for="break_start_time" string="Break Start Time" invisible="1"></label>-->
+<!--                            <div class="address_format">-->
+<!--                                Break Time Start:-->
+<!--                                <field name="break_start_time" readonly="1" style="width: 15%" widget="float_time"/>-->
+<!--                                Break Time End:-->
+<!--                                <field name="break_end_time" readonly="1" style="width: 15%" widget="float_time"/>-->
+<!--                            </div>-->
                         </group>
                     </sheet>
                     <div class="oe_chatter">

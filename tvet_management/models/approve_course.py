@@ -98,5 +98,5 @@ class ApproveCourseLine(models.Model):
     is_tick = fields.Boolean(' ', tracking=True)
     course_name_id = fields.Many2one('class.room', string="Class Name", tracking=True)
     semester = fields.Many2one('semester.semester', string="Semester", tracking=True)
-    course = fields.Many2many('course.subject', string="Subject Name", tracking=True)
+    course = fields.Many2many('school.subject', string="Subject Name", tracking=True)
     assign_course_id = fields.Many2one('approve.course', tracking=True)

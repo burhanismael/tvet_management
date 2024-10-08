@@ -57,6 +57,8 @@
         'views/student_portal_view.xml',
         'report/attendance_report.xml',
         'report/attandance_report_pdf.xml',
+        'report/student_id.xml',
+        'report/admission_template.xml',
         'views/res_users_view.xml',
         'views/hide_portal.xml',
     ],

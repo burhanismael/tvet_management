@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_student_information_document">
+            <div class="page">
+                <table style="overflow:hidden;  border-collapse: collapse;" width="75%">
+                    <tr style="height: 100px; overflow:hidden;">
+                        <td width="100%">
+                            <img style="height: 150px; width:750px; overflow:hidden;align-center; margin-bottom: 15px;text-align:center;"
+                                 t-if="env.company.uni_header"
+                                 t-att-src="image_data_uri(env.company.uni_header)"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center;font-size: 18px;   font-family:'Times New Roman', serif;"><b>OFFICE OF THE ACADEMIC REGISTRAR</b></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:right;"><br/><br/>
+                            <span style="font-size: 18px;text-align: center;" width="100%">
+                                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y-%m-%d')"/>
+                            </span>
+                        </td>
+                    </tr>
+                    <table>
+                        <tr>
+                            <td style="font-family:'Times New Roman', serif; color:#6699CC;font-size: 21px;margin-left:20px"><br/><br/>
+                                <b>STUDENT'S NAME:
+                                    <span t-field="doc.student_name_id"/>
+                                </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: 'Times New Roman', serif;color:#6699CC;font-size: 21px;margin-left:20px">
+                                <b>REG. NO:
+                                    <span t-field="doc.student_id"/>
+                                </b>
+                            </td>
+                        </tr>
+<!--                        <tr>-->
+<!--                            <td style="font-family: 'Times New Roman', serif;color:#6699CC;font-size: 21px;margin-left:20px">-->
+<!--                                <b>FACULTY:-->
+<!--                                    <span t-field="doc.faculty_id"/>-->
+<!--                                </b>-->
+<!--                            </td>-->
+<!--                        </tr>-->
+                        <tr>
+                            <td style="font-family: 'Times New Roman', serif;color:#6699CC;font-size: 21px;margin-left:20px">
+                                <b>DEPARTMENT:
+                                    <span t-field="doc.department_id"/>
+                                </b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-family: 'Times New Roman', serif;color:#6699CC;font-size: 21px;margin-left:20px">
+                                <b>SHIFT:
+                                    <span t-field="doc.shift_id"/>
+                                </b>
+                            </td>
+                        </tr>
+                    </table>
+                    <tr>
+                        <td style="font-family: 'Times New Roman', serif;"><br/><br/>
+                            <t t-set="registrar" t-value="user.env['res.company'].search([('active_company', '=', 'True')], limit=1)"/>
+                            <t t-set="company_name" t-value="registrar.name"/>
+                            <b>DEAR APPLICANT</b><br/><br/>
+                            Following your application to study at the <span t-esc="company_name"/> and the subsequent Admission
+                            Committee Meeting to consider the same, I am authorised to inform you that you have been offered
+                            admission for the above Program.
+                            Please also take note of the following.<br/>
+                            <ol type="i">
+                            <li> Students are required to pay tuition fees in two instalments (Maximum)</li>
+                                <ol type="a">
+                                    <li>
+                                        After receiving the admission letter obtained a fees structure from the university and thereafter you are required to
+                                        make payments in the Bank <div style="color:#6699CC; font-size: 14px;">
+
+<!--                                        <t t-set="bank_ids" t-value="user.env['bank.detail'].search([])"/>-->
+<!--                                        (<t t-foreach="bank_ids" t-as="bank"><span t-esc="bank.name"/> - <span t-esc="bank.number"/> </t>)-->
+                                    </div> Return the
+                                        slip to the Cashier office after banking your fees.
+                                    </li>
+                                </ol>
+                            <li> You will not be issued with the fee's clearance card at the beginning of the semester but will be given clearance
+                                letter indicating your full payment and a receipt.</li>
+                            <li> Only students who have paid fees in full will be allowed to sit for end of the examinations.</li>
+                            <li> Fees paid are non-refundable and non-transferable upon withdrawal from the university programs.</li>
+                            <li> This admission is provisional subject to verification of the documents of your qualifications as presented On your
+                                application form.</li>
+                            <li> The cases of impersonation, falsification of documents or giving false/incomplete information whenever
+                                discovered, either at the time of registration or afterwards, will lead to automatic disqualification/cancellation of
+                                admission and hence leading to your dismissal from the university</li>
+                        </ol>
+                            I therefore congratulate you on this admission to <span t-esc="company_name"/> and on behalf of the university
+                            extend to you a warm welcome and wish you success in your studies at our institution.<br/><br/>
+
+                                Yours Faithfully,<br/><br/><br/><br/>
+                            <div style="color:#6699CC;">
+                            ....................................<br/>
+                                <t t-set="employee" t-value="user.employee_id"/>
+                            <t t-esc="user.name"/><br/>
+                                <t t-esc="employee.job_title"/>
+                            </div>
+
+                        </td>
+                    </tr>
+
+
+                </table>
+            </div>
+        </template>
+
+        <template id="report_student_information_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="tvet_management.report_student_information_document"/>
+                </t>
+            </t>
+        </template>
+
+
+        <record id="action_report_student_information_id" model="ir.actions.report">
+            <field name="name">Admission Letter</field>
+            <field name="model">student.registration</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.report_student_information_id</field>
+            <field name="report_file">tvet_management.report_student_information_id</field>
+            <field name="print_report_name">'Addmission - %s' % (object.student_id)</field>
+            <field name="binding_model_id" ref="model_student_registration"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="student_information_card_paperformat" model="report.paperformat">
+            <field name="name">Student Information A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">90</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6,0,[ref('tvet_management.action_report_student_information_id')])]"/>
+        </record>
+
+    </data>
+</odoo>

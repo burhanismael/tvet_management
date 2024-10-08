@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_student_id_document">
+            <div class="page" style="margin-top: -8px !important;margin-left: -8px !important; ">
+                <table style="height: 552px; width: 365px; overflow:hidden;  border-collapse: collapse;">
+                    <tr style="height: 0px; overflow:hidden;background: #0a99e2;">
+                        <t t-set="registrar" t-value="user.env['res.company'].search([('active_company', '=', 'True')], limit=1)"/>
+                        <t t-set="company_name" t-value="registrar.name"/>
+                        <th style="font-size: 20px;text-align: center; color: white;" colspan="2"><span t-esc="company_name"/></th>
+                        <th style="font-size: 20px;text-align: center;" width="25%">
+                            <img t-if="env.company.logo" t-att-src="image_data_uri(env.company.logo)" alt="Logo" style="border-radius: 40%;max-height: 50px;"/>
+                        </th>
+                    </tr>
+                    <tr style="height:0px;">
+                        <td style="text-align: center;" colspan="3">
+                            <t t-if="doc.image">
+                                <img  t-if="doc.image" t-att-src="image_data_uri(doc.image)" alt="Avatar" style="margin-top: 2px;border-radius: 100%;height: 200px;width: 200px;"/>
+                            </t>
+                        </td>
+                    </tr>
+                    <tr style="font-family: 'Myriad Pro'; overflow:hidden;">
+                        <th style="font-family: 'Myriad Pro'; font-size: 20px;text-align: center; height: 30px;" colspan="3">
+                            <div style="background: #68ccff">Student ID</div>
+                        </th>
+                    </tr>
+                    <tr style="height: 0px;">
+                        <th style="font-family: 'Myriad Pro'; font-size: 15px;text-align: center;" colspan="3">
+                            <div style=" font-family: 'Myriad Pro';font-size: 15px; text-align: center; color: blue;">Name: <span t-field="doc.student_name_id.name"/> </div>
+                        </th>
+                    </tr>
+<!--                    <tr style="height: 0px;">-->
+<!--                        <th style="font-family: 'Myriad Pro'; font-size: 15px;text-align: center;" colspan="3">-->
+<!--                            <div style="font-family: 'Myriad Pro'; font-size: 15px; text-align: center; color: blue;">Faculty: <span t-field="doc.faculty_id"/> </div>-->
+<!--                        </th>-->
+<!--                    </tr>-->
+                    <tr style="height: 0px;">
+                        <th style="font-family: 'Myriad Pro'; font-size: 15px;text-align: center;" colspan="3">
+                            <div style="font-family: 'Myriad Pro'; font-size: 15px; text-align: center; color: blue;">Department: <span t-field="doc.department_id"/> </div>
+                        </th>
+                    </tr>
+                    <tr style="height: 0px;">
+                        <th style="font-family: 'Myriad Pro'; font-size: 15px;text-align: center;" colspan="3">
+                            <div style="font-family: 'Myriad Pro'; font-size: 15px; text-align: center; color: blue;">Blood Group: <span style="color:red;" t-field="doc.blood_group"/> </div>
+                        </th>
+                    </tr>
+
+                    <tr style="height: 0px;">
+                        <th style="font-family: 'Myriad Pro'; font-size: 15px;text-align: center;" colspan="3">
+                            <div style="font-family: 'Myriad Pro'; font-size: 15px; text-align: center; color: blue;">Issued: <span t-field="doc.student_id_issue_date" t-options='{"widget": "date","format": "MMM yyyy"}'/> </div>
+                        </th>
+                    </tr>
+                    <tr style="height: 0px;">
+                        <th style="font-family: 'Myriad Pro';font-size: 15px;text-align: center;" colspan="3">
+                            <div style="font-family: 'Myriad Pro';font-size: 15px; text-align: center; color: blue;">Expired: <span t-field="doc.student_id_expired_date" t-options='{"widget": "date","format": "MMM yyyy"}'/> </div>
+                        </th>
+                    </tr>
+
+                    <tr style="height: 0px;">
+                        <th style="font-family: 'Myriad Pro';font-size: 20px;text-align: center;" colspan="3">
+                            <div style="top: 546px;
+                                        width: 100%;
+                                        position:fixed;
+                                        font-family: 'Myriad Pro';
+                                        background: #0a99e2;
+                                        margin-bottom: -10px;
+                                        border-top-left-radius:10px;
+                                        border-top-right-radius:10px;
+                                        border-top:2px solid yellow;color:white;
+                                        height:40px;">
+                                        <div class="w-100 h-100" style="margin-top:5px;text-allign:center;vertical-align: middle !important;">Reg No: <t t-esc="doc.student_id"/></div>
+                            </div>
+                        </th>
+                    </tr>
+
+                </table>
+
+            </div>
+        </template>
+
+        <template id="report_student_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="tvet_management.report_student_id_document"/>
+                </t>
+            </t>
+        </template>
+
+        <record id="action_report_student_id" model="ir.actions.report">
+            <field name="name">Student ID</field>
+            <field name="model">student.registration</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.report_student_id</field>
+            <field name="report_file">tvet_management.report_student_id</field>
+            <field name="print_report_name">'Student ID - %s' % (object.student_id)</field>
+            <field name="binding_model_id" ref="model_student_registration"/>
+            <field name="binding_type">report</field>
+        </record>
+
+         <record id="student_id_card_paperformat" model="report.paperformat">
+            <field name="name">Student Id A4</field>
+            <field name="default" eval="True" />
+            <field name="format">custom</field>
+            <field name="page_height">85</field>
+            <field name="page_width">53</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">0</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">0</field>
+            <field name="margin_right">0</field>
+            <field name="header_line" eval="False" />
+            <field name="header_spacing">0</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6,0,[ref('tvet_management.action_report_student_id')])]"/>
+        </record>
+
+    </data>
+</odoo>

@@ -12,6 +12,7 @@
                 <xpath expr="//field[@name='favicon']" position="after">
                     <field name="student_card_sign" widget="image" class="float-left oe_avatar"/>
                     <field name="uni_header" widget="image" class="float-left oe_avatar"/>
+                    <field name="active_company"/>
                 </xpath>
             </field>
         </record>

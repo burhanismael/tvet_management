@@ -20,6 +20,14 @@ class ApproveCourse(models.Model):
     course_approve_line_ids = fields.One2many('approve.course.line', 'assign_course_id', string="Course", tracking=True)
     aca_id = fields.Many2one('academic.year', string="Academic Year")
 
+    @api.model
+    def default_get(self, fields_list):
+        vals = super().default_get(fields_list)
+        aca_id = self.env['res.config.settings'].search([('academic_year_id', '!=', False)], limit=1)
+        if aca_id:
+            vals['aca_id'] = aca_id.academic_year_id.id
+        return vals
+
     def action_course_approve(self):
         course = self.env['assign.course'].search([
             ('school_department_id', '=', self.school_department_id.id),

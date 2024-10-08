@@ -104,6 +104,10 @@ class ExamResultEntry(models.Model):
             vals['entry_id'] = self.env.context.get('entry_id')
         if self.env.context.get('academic_year_id'):
             vals['academic_year_id'] = self.env.context.get('academic_year_id')
+        else:
+            aca_id = self.env['res.config.settings'].search([('academic_year_id', '!=', False)])
+            if aca_id:
+                vals['academic_year_id'] = aca_id.academic_year_id.id
         if self.env.context.get('student_ids'):
             student_data = self.env.context.get('student_ids')
             student_ids = self.env['exam.entry.line'].browse(student_data)

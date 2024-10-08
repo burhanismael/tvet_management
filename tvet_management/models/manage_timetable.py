@@ -17,7 +17,7 @@ class ManageTimetable(models.Model):
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
     class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
     semester_id = fields.Many2one('semester.semester', tracking=True)
-    course_id = fields.Many2many('course.subject', string="Course Name", tracking=True)
+    course_id = fields.Many2one('course.subject', string="Course Name", tracking=True)
     day = fields.Selection([('0', 'Monday'),
                             ('1', 'Tuesday'),
                             ('2', 'Wednesday'),
@@ -93,7 +93,7 @@ class Monday(models.Model):
     start_time = fields.Float(string="Start Time", tracking=True)
     end_time = fields.Float(string="End Time", tracking=True)
     break_time = fields.Float(string="Break Time", tracking=True)
-    subject_id = fields.Many2one('course.subject', string="Subject")
+    subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
@@ -104,7 +104,7 @@ class Tuesday(models.Model):
     start_time = fields.Float(string="Start Time", tracking=True)
     end_time = fields.Float(string="End Time", tracking=True)
     break_time = fields.Float(string="Break Time", tracking=True)
-    subject_id = fields.Many2one('course.subject', string="Subject")
+    subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
@@ -116,7 +116,7 @@ class Wednesday(models.Model):
     start_time = fields.Float(string="Start Time", tracking=True)
     end_time = fields.Float(string="End Time", tracking=True)
     break_time = fields.Float(string="Break Time", tracking=True)
-    subject_id = fields.Many2one('course.subject', string="Subject")
+    subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
@@ -127,7 +127,7 @@ class Thursday(models.Model):
     start_time = fields.Float(string="Start Time", tracking=True)
     end_time = fields.Float(string="End Time", tracking=True)
     break_time = fields.Float(string="Break Time", tracking=True)
-    subject_id = fields.Many2one('course.subject', string="Subject")
+    subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
@@ -138,7 +138,7 @@ class Friday(models.Model):
     start_time = fields.Float(string="Start Time", tracking=True)
     end_time = fields.Float(string="End Time", tracking=True)
     break_time = fields.Float(string="Break Time", tracking=True)
-    subject_id = fields.Many2one('course.subject', string="Subject")
+    subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
@@ -148,7 +148,7 @@ class Saturday(models.Model):
     start_time = fields.Float(string="Start Time", tracking=True)
     end_time = fields.Float(string="End Time", tracking=True)
     break_time = fields.Float(string="Break Time", tracking=True)
-    subject_id = fields.Many2one('course.subject', string="Subject")
+    subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
@@ -159,6 +159,6 @@ class Sundayday(models.Model):
     start_time = fields.Float(string="Start Time", tracking=True)
     end_time = fields.Float(string="End Time", tracking=True)
     break_time = fields.Float(string="Break Time", tracking=True)
-    subject_id = fields.Many2one('course.subject', string="Subject")
+    subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)

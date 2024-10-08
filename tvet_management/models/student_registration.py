@@ -85,6 +85,14 @@ class StudentRegistration(models.Model):
     project_id = fields.Many2one('tvet.project', string="Project")
     idp_name_id = fields.Many2one('idp.name', string="IDP Name")
 
+    @api.model
+    def default_get(self, fields_list):
+        vals = super().default_get(fields_list)
+        aca_id = self.env['res.config.settings'].search([('academic_year_id', '!=', False)], limit=1)
+        if aca_id:
+            vals['academic_year_id'] = aca_id.academic_year_id.id
+        return vals
+
     @api.constrains('student_id')
     def check_student_id_dublicate(self):
         if self.student_id:

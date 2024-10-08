@@ -24,6 +24,13 @@ class AssignCourse(models.Model):
     is_assign_course = fields.Boolean(default=False, tracking=True)
     aca_id = fields.Many2one('academic.year', string="Academic Year")
 
+    @api.model
+    def default_get(self, fields_list):
+        vals = super().default_get(fields_list)
+        aca_id = self.env['res.config.settings'].search([('academic_year_id', '!=', False)], limit=1)
+        if aca_id:
+            vals['aca_id'] = aca_id.academic_year_id.id
+        return vals
 
     # is_assign_course_check = fields.Boolean(default=False, compute='_compute_assign_course')
 

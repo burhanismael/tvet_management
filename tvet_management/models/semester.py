@@ -16,6 +16,15 @@ class Semester(models.Model):
     class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
     academic_year_id = fields.Many2one('academic.year', string="Academic Year", tracking=True)
 
+    @api.model
+    def default_get(self, fields_list):
+        vals = super().default_get(fields_list)
+        aca_id = self.env['res.config.settings'].search([('academic_year_id', '!=', False)], limit=1)
+        if aca_id:
+            vals['academic_year_id'] = aca_id.academic_year_id.id
+        return vals
+
+
     @api.constrains('semester_name', 'class_id', 'academic_year_id')
     def _check_duplicate(self):
         if self.semester_name and self.class_id and self.academic_year_id:

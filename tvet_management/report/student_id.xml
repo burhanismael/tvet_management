@@ -40,8 +40,14 @@
                         </th>
                     </tr>
                     <tr style="height: 0px;">
-                        <th style="font-family: 'Myriad Pro'; font-size: 15px;text-align: center;" colspan="3">
-                            <div style="font-family: 'Myriad Pro'; font-size: 15px; text-align: center; color: blue;">Blood Group: <span style="color:red;" t-field="doc.blood_group"/> </div>
+                        <th style="font-family: 'Myriad Pro'; font-size: 12px; text-align: center;" colspan="3">
+                            <div style="font-family: 'Myriad Pro'; font-size: 15px; text-align: center; color: blue;">
+                                Courses:
+                                <t t-foreach="doc.course_ids" t-as="course">
+                                    <span style="color:red;" t-field="course.course_name"/>
+                                    <br/>
+                                </t>
+                            </div>
                         </th>
                     </tr>
 

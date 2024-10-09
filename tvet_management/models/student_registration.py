@@ -24,10 +24,10 @@ class StudentRegistration(models.Model):
         [('new', 'New'), ('enrolled', 'Enrolled'), ('drop_out', 'Drop Out'), ('inactive', 'Inactive'),
          ('graduated', 'Graduated')], default="new", tracking=True)
     shift_id = fields.Many2one('school.shift', string="Shift", required=True, tracking=True)
-    faculty_id = fields.Many2one('school.faculty', string="Faculty", tracking=True)
+    faculty_id = fields.Char(string="Faculty", tracking=True)
     department_id = fields.Many2one('school.department', string="Department", tracking=True)
     classroom_id = fields.Many2one('class.room', string="Class", tracking=True)
-    course_id = fields.Many2one('course.subject', string="Course")
+    course_ids = fields.Many2many('course.subject', string="Course")
     semester_id = fields.Many2one('semester.semester', string="Semester", domain="[('class_id', '=', classroom_id)]",
                                   tracking=True)
     dob = fields.Date(string="DOB", tracking=True)

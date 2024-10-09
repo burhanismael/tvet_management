@@ -84,6 +84,12 @@
             sequence="2"
             action="act_open_approve_course_approved_view"/>
 
+        <menuitem id="menu_assign_update_semester"
+            parent="menu_student_academic"
+            name="Assign &amp; update Semester"
+            sequence="9"
+            action="act_open_assign_semester_view"/>
+
         <menuitem id="menu_approve_course_Reject"
             name="Rejected Course"
             parent = "menu_student_academic"
@@ -157,6 +163,12 @@
             name="Attendance Sheet"
             sequence="12"
             action="act_open_att_view_view"/>
+
+        <menuitem id="menu_gradution_transcript_report"
+                  parent="menu_reports"
+                  name="Gradution Transcript Report"
+                  sequence="15"
+                  action="gradution_transcript_view_action_id"/>
 
         <menuitem id="menu_semester"
             parent="menu_student_admission"

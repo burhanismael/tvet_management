@@ -18,6 +18,7 @@
         'data/invoice_cron.xml',
         'wizard/student_state_wizard.xml',
         'wizard/attendance_report_view.xml',
+        'wizard/gradution_transcript.xml',
         'views/school_subject_view.xml',
         'views/projects.xml',
         'views/special_need.xml',
@@ -51,6 +52,7 @@
         'views/manage_timetable_view.xml',
         'views/nationality_view.xml',
         'views/attendance_sheet_view.xml',
+        'views/assign_semester_view.xml',
         'views/grading_view.xml',
         'views/portal_chages.xml',
         'views/menu_view.xml',
@@ -59,6 +61,7 @@
         'report/attandance_report_pdf.xml',
         'report/student_id.xml',
         'report/admission_template.xml',
+        'report/gradution_transcript_pdf_report.xml',
         'views/res_users_view.xml',
         'views/hide_portal.xml',
     ],
@@ -66,11 +69,11 @@
     ],
     "assets": {
         'web.assets_frontend': [
-            "/bosaso_university/static/src/js/student_dashboard.js",
-            "/bosaso_university/static/src/js/user_error.js"
+            "/tvet_management/static/src/js/student_dashboard.js",
+            "/tvet_management/static/src/js/user_error.js"
         ],
         "web.report_assets_common": [
-            "/bosaso_university/static/src/scss/fonts.css",
+            "/tvet_management/static/src/scss/fonts.css",
         ],
     },
     'installable': True,

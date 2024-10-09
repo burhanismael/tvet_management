@@ -173,7 +173,7 @@
 <!--                            <field name="faculty_id" invisible="1" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />-->
                             <field name="department_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" />
                             <field name="classroom_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
-                            <field name="course_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                            <field name="course_ids" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}" widget="many2many_tags"/>
 <!--                            <field name="course_subject_id" widget="many2many_tags"/>-->
 <!--                            <field name="semester_id" placeholder="Select" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
                             <field name="student_type" invisible="1" select="1" placeholder="Select" />

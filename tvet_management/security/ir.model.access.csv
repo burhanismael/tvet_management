@@ -48,6 +48,7 @@ tvet_management.access_tvet_project,access_tvet_project,tvet_management.model_tv
 tvet_management.access_special_need,access_special_need,tvet_management.model_special_need,base.group_user,1,1,1,1
 tvet_management.access_idp_name,access_idp_name,tvet_management.model_idp_name,base.group_user,1,1,1,1
 tvet_management.access_res_state,access_res_state,tvet_management.model_res_state,base.group_user,1,1,1,1
+tvet_management.access_assign_semester,access_assign_semester,tvet_management.model_assign_semester,base.group_user,1,1,1,1
 
 
 tvet_management.access_monday,access_monday,tvet_management.model_monday,base.group_user,1,1,1,1
@@ -57,5 +58,6 @@ tvet_management.access_thursday,access_thursday,tvet_management.model_thursday,b
 tvet_management.access_friday,access_friday,tvet_management.model_friday,base.group_user,1,1,1,1
 tvet_management.access_saturday,access_saturday,tvet_management.model_saturday,base.group_user,1,1,1,1
 tvet_management.access_sunday,access_sunday,tvet_management.model_sunday,base.group_user,1,1,1,1
+tvet_management.access_gradution_transcript_report,access_gradution_transcript_report,tvet_management.model_gradution_transcript_report,base.group_user,1,1,1,1
 
 

@@ -14,9 +14,10 @@ class SchoolSubjects(models.Model):
 
     name = fields.Char(string="Subject", tracking=True)
     subject_code = fields.Char(string="Subject Code")
-    credit_hrs = fields.Char(string="Credit Hours", tracking=True)
+    credit_hrs = fields.Float(string="Credit Hours", tracking=True)
     remarks = fields.Text(string="Remarks", tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department")
+    is_medical = fields.Boolean('Is medical')
 
     @api.constrains('name')
     def _check_duplicate(self):

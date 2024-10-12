@@ -1,0 +1,134 @@
+<odoo>
+    <data>
+        <template id="exam_report_report_template">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <div class="page">
+                        <div class="oe_structure"/>
+                        <div style="text-align: center; margin-top:20px;">
+                            <h2>Examination Result Detail</h2>
+                        </div>
+                        <br/>
+                        <div class="row" style="margin-left: 10px;">
+                            <div class="col-6">
+                                <span>Student</span>
+                                <t t-if="data_all">
+                                    All
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="student_id.student_name_id.name"/>
+                                </t>
+                            </div>
+                            <div class="col-6">
+                                <span>Class Name  </span> <t t-esc="class_id"/><br/>
+                                <span>Semester </span>  <t t-esc="semester"/>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <table class="table table-sm table-bordered" style="width: 100%">
+                                <thead style="font-size:11px;">
+                                    <tr style="width: 100%">
+                                        <th style="width: 7%;"></th>
+                                        <th style="width: 13%;"></th>
+                                        <t t-foreach="course_ids" t-as="line">
+                                            <th colspan="2"><t t-esc="line.name"/></th>
+                                        </t>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                    <tr style="width: 100%">
+                                        <th style="width: 7%;">Student ID</th>
+                                        <th style="width: 13%;">Student Name</th>
+                                        <t t-foreach="course_ids" t-as="line">
+                                            <th>Total</th>
+                                            <th>Grade</th>
+                                        </t>
+                                        <th>Grade Total</th>
+                                        <th>Grade</th>
+                                        <th>GPA</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-if="data_all">
+                                        <tr t-foreach="student_ids" t-as="student" style="font-size:11px;">
+                                            <th style="width: 7%;"><t t-esc="student.student_id"/></th>
+                                            <th style="width: 13%;"><t t-esc="student.student_name_id.name"/></th>
+                                            <t t-set="grade_total" t-value="0"/>
+                                            <t t-set="total_mark_cource" t-value="0"/>
+                                            <t t-foreach="course_ids" t-as="cource">
+                                                <t t-set="courcse_wise_exam_ids" t-value="cource_exam_ids.filtered(lambda x:x.course_name_id.id == cource.id and x.semester_id.sem_number == semester_id.sem_number)"/>
+                                                <t t-set="line_ids" t-value="courcse_wise_exam_ids.mapped('student_ids').filtered(lambda x:x.student_id.id == student.id)"/>
+                                                <t t-set="total_mark" t-value="sum(line_ids.mapped('marks'))"/>
+                                                <t t-set="marks" t-value="sum(line_ids.mapped('marks'))"/>
+                                                <t t-set="total_sem_mark" t-value="round(marks, 2)"/>
+                                                <t t-set="grade_total" t-value="grade_total + total_mark"/>
+                                                <t t-set="grade_policy" t-value="docs.get_grading_policy(total_mark)"/>
+                                                <t t-set="total_mark_cource"  t-value="total_mark_cource + total_sem_mark"/>
+                                                <th><t t-esc="total_mark"/></th>
+                                                <th><t t-esc="grade_policy"/></th>
+                                            </t>
+                                            <th><t t-esc="grade_total"/></th>
+                                            <th><t t-esc="grade_total"/></th>
+                                            <th><t t-esc="grade_total"/></th>
+                                        </tr>
+                                    </t>
+                                    <t t-else="">
+                                        <tr>
+                                            <th><t t-esc="student_number_id"/></th>
+                                            <th><t t-esc="name"/></th>
+                                            <t t-set="grade_total" t-value="0"/>
+                                            <t t-set="total_mark_cource" t-value="0"/>
+                                            <t t-foreach="course_ids" t-as="cource">
+                                                <t t-set="courcse_wise_exam_ids" t-value="cource_exam_ids.filtered(lambda x:x.course_name_id.id == cource.id and x.semester_id.sem_number == semester_id.sem_number)"/>
+                                                <t t-set="line_ids" t-value="courcse_wise_exam_ids.mapped('student_ids').filtered(lambda x:x.student_id.id == student_id.id)"/>
+                                                <t t-set="total_mark" t-value="sum(line_ids.mapped('marks'))"/>
+                                                <t t-set="marks" t-value="sum(line_ids.mapped('marks'))"/>
+                                                <t t-set="total_sem_mark" t-value="round(marks, 2)"/>
+                                                <t t-set="grade_total" t-value="grade_total + total_mark"/>
+                                                <t t-set="grade_policy" t-value="docs.get_grading_policy(total_mark)"/>
+                                                <t t-set="total_mark_cource"  t-value="total_mark_cource + total_sem_mark"/>
+                                                <th><t t-esc="total_mark"/></th>
+                                                <th><t t-esc="grade_policy"/></th>
+                                            </t>
+                                            <th><t t-esc="grade_total"/></th>
+                                            <th><t t-esc="grade_total"/></th>
+                                            <th><t t-esc="grade_total"/></th>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </template>
+
+        <record id="exam_report_report" model="ir.actions.report">
+            <field name="name">Certificate Report</field>
+            <field name="model">certificate.report</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">tvet_management.exam_report_report_template</field>
+            <field name="report_file">tvet_management.exam_report_report_template</field>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="student_information_card__aa_paperformat_certificate" model="report.paperformat">
+            <field name="name">Exam Result Report A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">5</field>
+            <field name="margin_left">15</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">90</field>
+            <field name="dpi">90</field>
+            <field name="report_ids" eval="[(6,0,[ref('tvet_management.exam_report_report')])]"/>
+        </record>
+
+    </data>
+</odoo>

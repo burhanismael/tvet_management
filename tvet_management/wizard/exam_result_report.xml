@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="exam_result_report_wizard">
+            <field name="name">exam.result.report.wizard</field>
+            <field name="model">exam.result.report</field>
+            <field name="arch" type="xml">
+                <form string="Exam Result Report">
+                    <sheet>
+                        <group>
+                        <group>
+                            <field name="acadamic_year_id"/>
+                            <field name="class_id"/>
+                            <field name="semister_id"/>
+                            <field name="student_id" options="{'no_create': True}" domain="[('status','=','enrolled')]"/>
+                        </group>
+                        <group>
+                            <field name="is_privious"/>
+                            <field name="previous_class_id" attrs="{'invisible':[('is_privious','=', False)]}"/>
+                        </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="excle_download_action_exam_result" type="object" class="oe_highlight"
+                                string="Download"/>
+                        <button name="pdf_preview_report" type="object" class="oe_highlight"
+                                string="Preview"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="result_view_action_id">
+            <field name="name">Exam Result Report</field>
+            <field name="res_model">exam.result.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="tvet_management.exam_result_report_wizard"/>
+        </record>
+    </data>
+</odoo>

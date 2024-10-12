@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="result_transcript_wizard">
+            <field name="name">result_transcript.wizard</field>
+            <field name="model">result.transcript.report</field>
+            <field name="arch" type="xml">
+                <form string="Normal Transcript Report">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="class_ids"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="student_id" required="1" options="{'no_create': True}" domain="[('status','=','enrolled')]"/>
+                            <field name="semister_id" required="1"/>
+                            <field name="is_privious"/>
+                            <field name="previous_class_id" attrs="{'invisible':[('is_privious','=', False)]}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="pdf_report" type="object" class="oe_highlight"
+                                string="Download"/>
+                        <button name="pdf_preview_report" type="object" class="oe_highlight"
+                                string="Preview"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="result_transcript_view_action_id">
+            <field name="name">Partial Transcript Report</field>
+            <field name="res_model">result.transcript.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="tvet_management.result_transcript_wizard"/>
+        </record>
+    </data>
+</odoo>

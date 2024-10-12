@@ -164,6 +164,24 @@
             sequence="12"
             action="act_open_att_view_view"/>
 
+        <menuitem id="menu_result_report"
+            parent = "menu_reports"
+            name = "Exam Result Report"
+            sequence="10"
+            action="result_view_action_id"/>
+
+        <menuitem id="menu_summary_result_report"
+            parent = "menu_reports"
+            name = "Exam Result Summary Report"
+            sequence="11"
+            action="summary_report_view_action_id"/>
+
+        <menuitem id="menu_transcript_report"
+                parent = "menu_reports"
+                name = "Partial Transcript Report"
+                sequence="14"
+                action="result_transcript_view_action_id"/>
+
         <menuitem id="menu_gradution_transcript_report"
                   parent="menu_reports"
                   name="Gradution Transcript Report"

@@ -67,7 +67,7 @@ class CustomerPortal(portal.CustomerPortal):
                 for sem in semister_ids:
                     data_dict = {}
                     data_dict['date'] = data_ids[0].exam_result_entry_id.date
-                    data_dict['cource'] = cource.course_name
+                    data_dict['cource'] = cource.name
                     data_dict['semester'] = sem.semester_name
                     data_dict['class'] = data_ids[0].exam_result_entry_id.class_id.name
                     result = []
@@ -127,7 +127,7 @@ class CustomerPortal(portal.CustomerPortal):
                 for sem in semister_ids:
                     data_dict = {}
                     data_dict['date'] = data_ids[0].exam_result_entry_id.date
-                    data_dict['cource'] = cource.course_name
+                    data_dict['cource'] = cource.name
                     data_dict['semester'] = sem.semester_name
                     data_dict['class'] = data_ids[0].exam_result_entry_id.class_id.name
                     result = []

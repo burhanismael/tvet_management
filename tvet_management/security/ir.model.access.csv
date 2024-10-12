@@ -59,5 +59,9 @@ tvet_management.access_friday,access_friday,tvet_management.model_friday,base.gr
 tvet_management.access_saturday,access_saturday,tvet_management.model_saturday,base.group_user,1,1,1,1
 tvet_management.access_sunday,access_sunday,tvet_management.model_sunday,base.group_user,1,1,1,1
 tvet_management.access_gradution_transcript_report,access_gradution_transcript_report,tvet_management.model_gradution_transcript_report,base.group_user,1,1,1,1
+tvet_management.access_result_transcript_report,access_result_transcript_report,tvet_management.model_result_transcript_report,base.group_user,1,1,1,1
+tvet_management.access_exam_summary_report,access_exam_summary_report,tvet_management.model_exam_summary_report,base.group_user,1,1,1,1
+tvet_management.access_exam_result_report,access_exam_result_report,tvet_management.model_exam_result_report,base.group_user,1,1,1,1
+
 
 

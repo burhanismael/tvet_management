@@ -44,7 +44,7 @@
                             <div style="font-family: 'Myriad Pro'; font-size: 15px; text-align: center; color: blue;">
                                 Courses:
                                 <t t-foreach="doc.course_ids" t-as="course">
-                                    <span style="color:red;" t-field="course.course_name"/>
+                                    <span style="color:red;" t-field="course.name"/>
                                     <br/>
                                 </t>
                             </div>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="exam_details">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <head>
+<!--                        <meta charset="utf-8">-->
+<!--                        <meta name="viewport" content="width=device-width, initial-scale=1">-->
+                        <title></title>
+                        <style type="text/css">
+                            table {
+                            text-align: center;
+                            width: 100%;
+                            border-collapse: collapse;
+                            }
+                            table, td, th {
+                            border: 1px solid;
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <table>
+                            <tr>
+                                <td colspan="6">
+                                    <h1>Examination sheet</h1>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Date :-  <span t-field="o.date"/></td>
+                                <td>Department :- <span t-field="o.department_id.name"/></td>
+                                <td>Class :- <span t-field="o.class_room_id.name"/></td>
+                                <td>Semister :- <span t-esc="o.semester_id.semester_name"/> </td>
+                                <td>Cource :- <span t-field="o.course_subject_id"/></td>
+                                <td>Exam Type :- <span t-field="o.exam_type_id"/></td>
+                            </tr>
+                            <tr>
+                                <td>Student Id</td>
+                                <td>status</td>
+                                <td>Room</td>
+                                <td colspan="3">Note</td>
+                            </tr>
+                            <t t-foreach="o.student_ids" t-as="line">
+                                <tr>
+                                    <td>
+                                        <span t-esc="line.student_id.student_name_id.name"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.status"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="line.room"/>
+                                    </td>
+                                    <td colspan="3">
+                                        <span t-esc="line.note"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </body>
+                </t>
+            </t>
+        </template>
+
+
+
+        <record id="action_exam_id" model="ir.actions.report">
+            <field name="name">Exam report</field>
+            <field name="model">exam.result.entry</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.exam_details</field>
+            <field name="report_file">tvet_management.exam_details</field>
+            <field name="binding_model_id" ref="model_exam_result_entry"/>
+            <field name="binding_type">report</field>
+        </record>
+
+    </data>
+</odoo>

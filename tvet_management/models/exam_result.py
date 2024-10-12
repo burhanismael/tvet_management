@@ -26,6 +26,14 @@ class ExamResult(models.Model):
         ], default="draft", copy=False, tracking=True)
     result_count = fields.Integer(string="Result Count", compute='_compute_result_count', tracking=True)
 
+    @api.constrains('depreciation_move_ids')
+    def _check_depreciations(self):
+        for record in self:
+            if record.state == 'open' and record.depreciation_move_ids and not record.currency_id.is_zero(
+                    record.depreciation_move_ids.filtered(lambda x: not x.reversal_move_id).sorted(
+                            lambda x: (x.date, x.id))[-1].asset_remaining_value):
+                raise UserError(_("The remaining value on the last depreciation line must be 0"))
+
     @api.model
     def default_get(self, fields_list):
         vals = super().default_get(fields_list)

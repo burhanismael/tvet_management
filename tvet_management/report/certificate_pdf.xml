@@ -1,0 +1,173 @@
+<odoo>
+    <data>
+        <template id="external_layout_boxed_cirtificate">
+            <div t-attf-class="header o_company_#{company.id}_layout" t-att-style="report_header_style">
+            </div>
+
+            <div t-attf-class="article o_company_#{company.id}_layout {{  'o_layout_background' if company.layout_background in ['Geometric', 'Custom']  else  '' }}" t-attf-style="background-image: url({{ 'data:image/png;base64,%s' % company.layout_background_image.decode('utf-8') if company.layout_background_image and company.layout_background == 'Custom' else '/base/static/img/bg_background_template.jpg' }});" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+                <div class="pt-5">
+                    <!-- This div ensures that the address is not cropped by the header. -->
+                    <t t-call="web.address_layout"/>
+                </div>
+                <t t-out="0"/>
+            </div>
+        </template>
+        <template id="external_layout_cirtificate">
+            <t t-if="not o" t-set="o" t-value="doc"/>
+
+            <t t-if="not company">
+                <!-- Multicompany -->
+                <t t-if="company_id">
+                    <t t-set="company" t-value="company_id"/>
+                </t>
+                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                </t>
+                <t t-else="else">
+                    <t t-set="company" t-value="res_company"/>
+                </t>
+            </t>
+
+            <t t-call="tvet_management.external_layout_boxed_cirtificate"><t t-out="0"/></t>
+
+        </template>
+        <template id="certificate_template">
+            <t t-call="web.html_container">
+                <t t-call="tvet_management.external_layout_cirtificate">
+                    <div class="page" style="background-color:white !important;">
+                        <style type="text/css"> 
+                            @font-face {
+                                font-family: 'Uni-Custom-Scr';
+                                src: url(/tvet_management/static/src/fonts/ITCEDSCR.ttf) format('truetype');
+                            }
+                            @font-face {
+                                font-family: 'Uni-Custom-Scr-lucida';
+                                src: url(/tvet_management/static/src/fonts/LHANDW.ttf) format('truetype');
+                            }
+                            @font-face {
+                                font-family: 'Uni-timenewroman';
+                                src: url(/tvet_management/static/src/fonts/timesnewroman.ttf) format('truetype');
+                            }
+                            @font-face {
+                                font-family: 'Uni-cour';
+                                src: url(/tvet_management/static/src/fonts/cour.ttf) format('truetype');
+                            }
+                            .use-Uni-cour {
+                                font-family: 'Uni-cour';
+                            }
+                            .use-Uni-Custom-Scr {
+                                font-family: 'Uni-Custom-Scr';
+                            }
+                            .use-Uni-Custom-Scr-Lucida {
+                                font-family: 'Uni-Custom-Scr-lucida';
+                            }
+                            .use-Uni-timenewroman {
+                                font-family: 'Uni-timenewroman';
+                            }
+                        </style>
+                        <div class="row">
+                            <div class="col-12">
+                                <span class="use-Uni-Custom-Scr" style="text-align: center;
+                                font-size: 50px;
+                                color: #0000ff;"><center><t t-if="certificate_name"><t t-esc='certificate_name.name'/></t></center></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-9">
+                                <span style="font-size: 14px; margin-left: 30px; font-weight: 900;color: black; font-family: Calibri;">
+                                        REGISTRATION NO: <t t-esc="student_id.student_id"/>
+                                </span>
+                            </div>
+                            <div class="col-3">
+                                <span style="font-size: 14px; margin-left: 14px; font-weight: 900;color: black; font-family: Calibri;">
+                                    SERIAL NO: <t t-esc='serial_no'/>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-center">
+                                <span class="use-Uni-timenewroman" style="font-size: 23px; colour:black;">Having Satisfactorily Completed the Academic Requirements,
+                                </span>
+                                <br/>
+                                <span style="font-size: 34px;color: #A54200;font-family: Cambria;text-transform: capitalize;"><b><t t-esc="student_id.student_name_id.name.capitalize()"/></b></span>
+                                <br/>
+                                <span style="font-size: 23px; colour:black;" class="use-Uni-timenewroman">Has been awarded the Bachelor's Degree of
+                                </span>
+                                <br/>
+<!--                                <span class="use-Uni-Custom-Scr-Lucida" style="font-size: 23px; font-weight: 900; colour:black;">-->
+<!--                                    <b>-->
+<!--                                        <t t-if="student_id.department_id.department_type and student_id.department_id != 'none'">-->
+<!--                                            <t t-esc="dict(request.env['school.department']._fields['department_type'].selection).get(student_id.department_id.name)"/> -->
+<!--                                        </t>-->
+<!--                                        <t t-esc="student_id.department_id.name"/>-->
+<!--                                    </b>-->
+<!--                                </span>-->
+                                <br/>
+<!--                                <span class="use-Uni-timenewroman" style="font-size: 23px; colour:black;">Faculty of</span>-->
+<!--                                <br/>-->
+<!--                                <span  class="use-Uni-Custom-Scr-Lucida" style="font-size: 23px; font-weight: 900; colour:black;"><b><t t-esc="student_id.faculty_id.name"/></b></span>-->
+<!--                                <br/>-->
+<!--                                <span class="use-Uni-timenewroman" style="font-size: 23px; colour:black;">By the Academic Council on </span><span class="use-Uni-timenewroman" style="font-size: 23px;"><t t-if="num"></t><span><t t-esc="num"/><sup>th</sup></span> Senate Session</span><span class="use-Uni-timenewroman" style="font-size: 23px;"> dated on </span> <b><span class="use-Uni-timenewroman" style="font-size: 23px;"> <t t-esc="date1[1]"/><sup><t t-esc="date1[0]"/></sup> <t t-esc="date1[2]"/> <t t-esc="date1[3]"/></span></b>-->
+                                <br/>
+                                <span class="use-Uni-timenewroman" style="font-size: 23px; colour:black;">He/she secured </span>
+                                <span style="font-size: 28px; color: #C8650E; margin-left: 3px;" class="use-Uni-cour">
+                                    <b><sup><t t-esc="award_name"/></sup></b>
+                                </span>
+                                <br/>
+                            </div>
+                        </div><br/><br/><br/>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-5">
+                                <span class="use-Uni-timenewroman" style="font-size: 20px; colour:black; margin-left: 30px;">Registrar</span>
+                            </div>
+                            <div class="col-4">
+                                <span class="use-Uni-timenewroman" style="font-size: 20px; colour:black; margin-left: 20px;">Vice Chancellor</span>
+                            </div>
+                            <div class="col-3">
+                                <span class="use-Uni-timenewroman" style="font-size: 20px; colour:black;" >Director of the Academic Affairs</span>
+                                <br/><br/>
+                                <span style="font-size: 15px; colour:black; font-family: Calibri; font-weight: 900;">Issued on: <t t-esc="date2[1]"/><sup><t t-esc="date2[0]"/></sup> <t t-esc="date2[2]"/> <t t-esc="date2[3]"/></span>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+        <record id="certificate_paperformat_id" model="report.paperformat">
+            <field name="name">certificate Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">32</field>
+            <field name="margin_left">7</field>
+            <field name="margin_right">7</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="action_certificate_report" model="ir.actions.report">
+            <field name="name">Certificate Report</field>
+            <field name="model">certificate.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.certificate_template</field>
+            <field name="report_file">tvet_management.certificate_template</field>
+            <field name="binding_model_id" ref="tvet_management.model_result_transcript_report"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.certificate_paperformat_id"/>
+        </record>
+
+        <record id="action_certificate_preview_report" model="ir.actions.report">
+            <field name="name">Certificate Report</field>
+            <field name="model">certificate.report</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">tvet_management.certificate_template</field>
+            <field name="report_file">tvet_management.certificate_template</field>
+            <field name="binding_model_id" ref="tvet_management.model_result_transcript_report"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.certificate_paperformat_id"/>
+        </record>
+    </data>
+</odoo>

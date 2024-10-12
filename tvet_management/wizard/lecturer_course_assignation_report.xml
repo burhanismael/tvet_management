@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="lecturer_assign_report_wizard">
+            <field name="name">lecturer_assign_report.wizard</field>
+            <field name="model">lecturer.assign.report</field>
+            <field name="arch" type="xml">
+                <form string="Result Transcript Report">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="aca_id"/>
+                                <field name="dep_id"/>
+                                <field name="sem_id"/>
+                            </group>
+                            <group>
+                                <field name="lecturer_id"/>
+                                <field name="class_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="print_pdf_report" type="object" class="oe_highlight"
+                                string="Download PDF"/>
+<!--                        <button name="pdf_preview_report" type="object" class="oe_highlight"-->
+<!--                                string="Preview"/>-->
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="lecturer_assign_report_view_action_id">
+            <field name="name">Lecturer course assignation Report</field>
+            <field name="res_model">lecturer.assign.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="lecturer_assign_report_wizard"/>
+        </record>
+    </data>
+</odoo>
+
+

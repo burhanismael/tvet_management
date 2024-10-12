@@ -1,0 +1,107 @@
+<odoo>
+    <data>
+        <template id="course_assign_template">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <table style="overflow:hidden;border-collapse: collapse;" width="100%">
+                        <tr style="height: 100px; overflow:hidden;">
+                            <td width="100%">
+                                <img style="height: 150px; width:100%; overflow:hidden;align-center; margin-bottom: 15px;text-align:center;"
+                                     t-if="env.company.uni_header"
+                                     t-att-src="image_data_uri(env.company.uni_header)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">
+                                <b>Assigned Courses Report</b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Department <span t-esc="data.get('department_id')"/></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Class <span t-esc="data.get('class_id')"/></b>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <table width="100%" style="border-collapse: collapse; margin-top: 20px;">
+                                    <tr>
+
+                                        <th style="border: 1px solid black; text-align:center; padding: 2px;">Class
+                                            Name
+                                        </th>
+                                        <th style="border: 1px solid black; text-align:center; padding: 2px;">Semester
+                                            Name
+                                        </th>
+                                        <th style="border: 1px solid black; text-align:center; padding: 2px;">Assigned
+                                            Courses
+                                        </th>
+                                    </tr>
+                                    <t t-foreach="data['sorted_course_data'].items()" t-as="semester_data">
+                                        <tr><td style="border: 1px solid black; text-align:left; padding: 2px;">
+                                                <span t-esc="semester_data[1]['class']"/>
+                                            </td>
+                                            <td style="border: 1px solid black; text-align:left; padding: 2px;">
+                                                <span t-esc="semester_data[1]['name']"/>
+                                            </td>
+                                            <td style="border: 1px solid black; text-align:left; padding: 2px;">
+                                                <t t-foreach="semester_data[1]['courses']" t-as="course_name">
+                                                    <div t-esc="course_name" style="margin-bottom: 2px;"/>
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+
+
+
+
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <record id="report_course_assign_export_paperformat_id" model="report.paperformat">
+            <field name="name">course assign Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">90</field>
+            <field name="dpi">90</field>
+        </record>
+        <record id="action_course_assign_report" model="ir.actions.report">
+            <field name="name">course assign Report</field>
+            <field name="model">course.assign.export</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.course_assign_template</field>
+            <field name="report_file">tvet_management.course_assign_template</field>
+            <field name="binding_model_id" ref="tvet_management.model_course_assign_export"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.report_course_assign_export_paperformat_id"/>
+        </record>
+
+        <record id="action_course_assign_preview_report" model="ir.actions.report">
+            <field name="name">course assign Report</field>
+            <field name="model">course.assign.export</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">tvet_management.course_assign_template</field>
+            <field name="report_file">tvet_management.course_assign_template</field>
+            <field name="binding_model_id" ref="tvet_management.model_course_assign_export"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.report_course_assign_export_paperformat_id"/>
+        </record>
+    </data>
+</odoo>

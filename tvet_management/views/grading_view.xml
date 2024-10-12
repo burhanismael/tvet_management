@@ -13,7 +13,7 @@
                 <field name="grade"/>
                 <field name="gpa"/>
                 <field name="decision"/>
-                <field name="is_medical"/>
+<!--                <field name="is_medical"/>-->
             </tree>
             </field>
         </record>
@@ -39,7 +39,7 @@
                 <field name="grade"/>
                 <field name="gpa"/>
                 <field name="decision"/>
-                <field name="is_medical"/>
+<!--                <field name="is_medical"/>-->
             </tree>
             </field>
         </record>

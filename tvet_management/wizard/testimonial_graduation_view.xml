@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="testimonial_graduation_report_wizard">
+            <field name="name">testimonial.graduation.report.wizard</field>
+            <field name="model">testimonial.graduation.report</field>
+            <field name="arch" type="xml">
+                <form string="Testimonial Continues">
+                    <sheet>
+                        <group>
+                            <field name="class_id"/>
+                            <field name="student_id" required="1" options="{'no_create': True}" domain="[('status','=','enrolled')]"/>
+                            <field name="date" required="1"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="pdf_report" type="object" class="oe_highlight" string="Download"/>
+                        <button name="pdf_preview_report" type="object" class="oe_highlight" string="Preview"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="testimonial_graduation_report_action_id">
+            <field name="name">Testimonial Graduation Report</field>
+            <field name="res_model">testimonial.graduation.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="testimonial_graduation_report_wizard"/>
+        </record>
+    </data>
+</odoo>

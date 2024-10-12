@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="course_assign_wizard">
+            <field name="name">course.assign.export</field>
+            <field name="model">course.assign.export</field>
+            <field name="arch" type="xml">
+                <form string="Course Assign Report">
+                    <sheet>
+                        <group>
+                            <field name="aca_id"/>
+                            <field name="department_id" required="1"/>
+                            <field name="class_id"/>
+                            <field name="semister_id"/>
+                        </group>
+                    </sheet>
+                    <footer>
+<!--                        <button name="export_report" type="object" class="oe_highlight"-->
+<!--                                string="Print Excel"/>-->
+                        <button name="export_pdf_report" type="object" class="oe_highlight"
+                                string="Print PDF"/>
+                        <button name="export_pdf_preview_report" type="object" class="oe_highlight"
+                                string="Preview"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="student_course_assign_view_action_id">
+            <field name="name">Course Assign Report</field>
+            <field name="res_model">course.assign.export</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="course_assign_wizard"/>
+        </record>
+    </data>
+</odoo>

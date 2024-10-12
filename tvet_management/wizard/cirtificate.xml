@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="certificate_wizard">
+            <field name="name">certificate.report.wizard</field>
+            <field name="model">certificate.report</field>
+            <field name="arch" type="xml">
+                <form string="Certificate Report">
+                    <sheet>
+                        <group>
+<!--                            <field name="is_medical"/>-->
+                            <field name="date"/>
+                            <field name="class_id"/>
+<!--                            <field name="senet_mitting_id" options="{'no_create': True}"/>-->
+<!--                            <field name="semister_id"/>-->
+                            <field name="student_id" options="{'no_create': True}" domain="[('status','=','enrolled')]"/>
+                            <field name="serial_no"/>
+                            <field name="is_privious"/>
+                            <field name="previous_class_id" attrs="{'invisible':[('is_privious','=', False)]}"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="pdf_report" type="object" class="oe_highlight"
+                                string="Download"/>
+                        <button name="pdf_preview_report" type="object" class="oe_highlight"
+                                string="Preview"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="certificate_report_view_action_id">
+            <field name="name">Certificate Report</field>
+            <field name="res_model">certificate.report</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="tvet_management.certificate_wizard"/>
+        </record>
+    </data>
+</odoo>

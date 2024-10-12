@@ -176,6 +176,35 @@
             sequence="11"
             action="summary_report_view_action_id"/>
 
+        <menuitem id="menu_certificate_report"
+                  parent="menu_reports"
+                  name="Certificate Report"
+                  sequence="16"
+                  action="certificate_report_view_action_id"/>
+
+        <menuitem id="menu_testimonial_graduation_report"
+                  parent="menu_reports"
+                  name="Testimonial Graduation Report"
+                  sequence="17"
+                  action="testimonial_graduation_report_action_id"/>
+
+        <menuitem id="menu_testimonial_continues_report"
+                  parent="menu_reports"
+                  name="Testimonial Continues Report"
+                  sequence="18"
+                  action="testimonial_continues_report_action_id"/>
+
+        <menuitem id="manu_student_course_assigns_report"
+                  parent="menu_reports"
+                  name="Assigned Courses Report"
+                  action="student_course_assign_view_action_id"
+                  sequence="21"/>
+         <menuitem id="manu_lecturer_assign_report"
+                  parent="menu_reports"
+                  name="Lecturer course assignation"
+                  action="lecturer_assign_report_view_action_id"
+                  sequence="25"/>
+
         <menuitem id="menu_transcript_report"
                 parent = "menu_reports"
                 name = "Partial Transcript Report"

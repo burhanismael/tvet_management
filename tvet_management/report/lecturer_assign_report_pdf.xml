@@ -1,0 +1,93 @@
+<odoo>
+    <data>
+        <template id="lecturer_assign_report_template">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <table style="overflow:hidden;border-collapse: collapse;" width="100%">
+                        <tr style="height: 100px; overflow:hidden;">
+                            <td width="100%">
+                                <img style="height: 150px; width:100%; overflow:hidden;align-center; margin-bottom: 15px;text-align:center;"
+                                     t-if="env.company.uni_header"
+                                     t-att-src="image_data_uri(env.company.uni_header)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">
+                                <b>Lecturer Course Assignation Report</b>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Lecturer Name
+                                    <span t-esc="lecturer_id"/>
+                                </b>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </td>
+
+                        </tr>
+                    </table>
+                    <table style="border-collapse: collapse;" width="100%">
+                        <tr>
+                            <th style="border: 1px solid black;">Class name</th>
+                            <th style="border: 1px solid black;">Department name</th>
+                            <th style="border: 1px solid black;">Semester name</th>
+                            <th style="border: 1px solid black;">Course name</th>
+                        </tr>
+
+                        <t t-foreach="approve_courses" t-as="doc">
+                            <t t-foreach="doc.approve_lecturer_line_ids" t-as="course">
+                                <tr>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="course.class_id.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="doc.school_department_id.name"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="course.semester_name_id.semester_name"/>
+                                    </td>
+                                    <td style="border: 1px solid black;">
+                                        <span t-esc="course.course_id.course_name"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </table>
+                </div>
+            </t>
+        </template>
+
+        <record id="report_lecturer_assign_report_paperformat_id" model="report.paperformat">
+            <field name="name">Lecturer course assignation page</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">90</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <record id="action_lecturer_course_report" model="ir.actions.report">
+            <field name="name">Lecturer course assignation Report</field>
+            <field name="model">lecturer.assign.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.lecturer_assign_report_template</field>
+            <field name="report_file">tvet_management.lecturer_assign_report_template</field>
+            <field name="binding_model_id" ref="tvet_management.model_lecturer_assign_report"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.report_lecturer_assign_report_paperformat_id"/>
+        </record>
+    </data>
+</odoo>

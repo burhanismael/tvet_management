@@ -1,0 +1,107 @@
+<odoo>
+    <data>
+        <template id="testimonial_continues_report_template">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <div class="row col-12">
+                        <img style="height: 150px; width:100%; overflow:hidden;align-center; border: 2px solid black; margin-bottom: 15px;text-align:center;" t-if="env.company.uni_header" t-att-src="image_data_uri(env.company.uni_header)"/>
+                    </div><br/><br/>
+                    <hr style="color:black;"/>
+                    <div style="text-align: right;margin-top: 70px;">
+                        <b>
+                            <span>
+                                <t t-esc="context_timestamp(datetime.datetime.now()).strftime('%m/%d/%Y')"/>
+                            </span>
+                        </b>
+                    </div>
+                    <div style="margin-top:10px;color:blue;font-size:20px;font-weight:bold;">
+                        Name: <t t-esc="student_id.student_name_id.name"/><br/>
+                        REG. NO: <t t-esc="student_id.student_id"/>
+                    </div> 
+                    <br/><br/>
+                    <div style="text-align:center;">
+                        <b><u><span>TO WHOM IT MAY CONCERN</span></u></b>
+                    </div>
+
+                    <div class="text-align:float-left;">
+                        <span>Dear sir/madam,</span><br/><br/>
+                    </div>
+
+                    <div style="text-align:float-left;">
+                        This is to certify that above named student is one of the undergraduate students at the University of
+                        Bosaso. He/She is pursuing a <i><b><span style="color:blue;">bachelor's degree in <t t-esc="student_id.department_id.name"/> </span></b></i>, currently he/she is in <i><b><span style="color:blue;"> <t t-esc="student_id.semester_id.semester_name"/> </span></b></i>.
+                    </div><br/><br/>
+
+                    <div style="text-align:float-left;">
+                        <b><span style="color:blue;"><i><t t-esc="student_id.student_name_id.name"/></i> </span></b> has a great sense of responsibility, commitment and high level of self-discipline and has
+                    a great passion for success.
+                    </div><br/><br/>
+
+                    <div style="text-align:float-left;">
+                        He/She has the ability to complete all the assigned task alone and/or with team under minimum supervison.
+                    </div><br/><br/>
+
+                    <div style="text-align:float-left;">
+                        Any assistance rendered to him/her would be greatly appreciated.
+                    </div><br/><br/>
+
+                    <div style="text-align:float-left;">
+                        Yours faithfully,
+                    </div>
+                    <div style="text-align:float-left; margin-top:100px;">
+                        ...............................................
+                    </div>
+
+<!--                    <div style="margin-top:50px;color:blue;font-weight:bold;">-->
+<!--                        Yusuf Abdirahman Jama <br/>-->
+<!--                        Academic Registrar <br/>-->
+<!--                        Tel: +252 90 5020562 <br/>-->
+<!--                        E-Mail: Academic.registrar@uobg.edu.so-->
+<!--                    </div>-->
+<!--                    <br/><br/><br/>-->
+<!--                    <div style="text-align:center;">-->
+<!--                        www.uobg.edu.so-->
+<!--                    </div>-->
+                </div>
+            </t>
+        </template>
+
+        <record id="testimonial_continues_report_paperformat_id" model="report.paperformat">
+            <field name="name">testimonial continues Report</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">0</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">90</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="action_testimonial_continues_report" model="ir.actions.report">
+            <field name="name">Testimonial Continues Report</field>
+            <field name="model">testimonial.continues.report</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.testimonial_continues_report_template</field>
+            <field name="report_file">tvet_management.testimonial_continues_report_template</field>
+            <field name="binding_model_id" ref="tvet_management.model_testimonial_continues_report"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.testimonial_continues_report_paperformat_id"/>
+        </record>
+
+        <record id="action_testimonial_continues_preview_report" model="ir.actions.report">
+            <field name="name">Testimonial Continues Report</field>
+            <field name="model">testimonial.continues.report</field>
+            <field name="report_type">qweb-html</field>
+            <field name="report_name">tvet_management.testimonial_continues_report_template</field>
+            <field name="report_file">tvet_management.testimonial_continues_report_template</field>
+            <field name="binding_model_id" ref="tvet_management.model_testimonial_continues_report"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.testimonial_continues_report_paperformat_id"/>
+        </record>
+    </data>
+</odoo>

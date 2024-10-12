@@ -90,7 +90,7 @@ class AttendanceReport(models.AbstractModel):
         col_data += 1
         sheet.write(row, col_data, "Absent SESIONS", format1)
         col_data += 1
-        sheet.write(row, col_data, "NOT TAKEN", format1)
+        sheet.write(row, col_data, "Absent Excused", format1)
         col_data += 1
         sheet.write(row, col_data, "TOTAL SESIONS", format1)
         col_data += 1

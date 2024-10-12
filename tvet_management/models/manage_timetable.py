@@ -97,6 +97,17 @@ class Monday(models.Model):
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
+    @api.onchange('subject_id')
+    def get_approved_lecturer(self):
+        for rec in self:
+            approve_lecturer = self.env['approve.lecturer.line'].search(
+                [('class_id', '=', rec.monday_relation.class_id.id),
+                 ('semester_name_id', '=', rec.monday_relation.semester_id.id),
+                 ('course_id', '=', rec.subject_id.id)
+                 ])
+            if len(approve_lecturer) == 1:
+                rec.lecturer_id = approve_lecturer.lecturer_id.id
+
 class Tuesday(models.Model):
     _name="tuesday"
 
@@ -107,6 +118,17 @@ class Tuesday(models.Model):
     subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
+
+    @api.onchange('subject_id')
+    def get_approved_lecturer(self):
+        for rec in self:
+            approve_lecturer = self.env['approve.lecturer.line'].search(
+                [('class_id', '=', rec.tuesday_relation.class_id.id),
+                 ('semester_name_id', '=', rec.tuesday_relation.semester_id.id),
+                 ('course_id', '=', rec.subject_id.id)
+                 ])
+            if len(approve_lecturer) == 1:
+                rec.lecturer_id = approve_lecturer.lecturer_id.id
 
 
 class Wednesday(models.Model):
@@ -120,6 +142,17 @@ class Wednesday(models.Model):
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
+    @api.onchange('subject_id')
+    def get_approved_lecturer(self):
+        for rec in self:
+            approve_lecturer = self.env['approve.lecturer.line'].search(
+                [('class_id', '=', rec.wednesday_relation.class_id.id),
+                 ('semester_name_id', '=', rec.wednesday_relation.semester_id.id),
+                 ('course_id', '=', rec.subject_id.id)
+                 ])
+            if len(approve_lecturer) == 1:
+                rec.lecturer_id = approve_lecturer.lecturer_id.id
+
 class Thursday(models.Model):
     _name="thursday"
 
@@ -130,6 +163,17 @@ class Thursday(models.Model):
     subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
+
+    @api.onchange('subject_id')
+    def get_approved_lecturer(self):
+        for rec in self:
+            approve_lecturer = self.env['approve.lecturer.line'].search(
+                [('class_id', '=', rec.thursday_relation.class_id.id),
+                 ('semester_name_id', '=', rec.thursday_relation.semester_id.id),
+                 ('course_id', '=', rec.subject_id.id)
+                 ])
+            if len(approve_lecturer) == 1:
+                rec.lecturer_id = approve_lecturer.lecturer_id.id
 
 class Friday(models.Model):
     _name="friday"
@@ -142,6 +186,18 @@ class Friday(models.Model):
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
 
+    @api.onchange('subject_id')
+    def get_approved_lecturer(self):
+        for rec in self:
+            approve_lecturer = self.env['approve.lecturer.line'].search(
+                [('class_id', '=', rec.friday_relation.class_id.id),
+                 ('semester_name_id', '=', rec.friday_relation.semester_id.id),
+                 ('course_id', '=', rec.subject_id.id)
+                 ])
+            if len(approve_lecturer)== 1:
+                rec.lecturer_id = approve_lecturer.lecturer_id.id
+
+
 class Saturday(models.Model):
     _name="saturday"
     saturday_relation = fields.Many2one('manage.timetable', string="relation")
@@ -151,6 +207,18 @@ class Saturday(models.Model):
     subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
+
+    @api.onchange('subject_id')
+    def get_approved_lecturer(self):
+        for rec in self:
+            approve_lecturer = self.env['approve.lecturer.line'].search(
+                [('class_id', '=', rec.saturday_relation.class_id.id),
+                 ('semester_name_id', '=', rec.saturday_relation.semester_id.id),
+                 ('course_id', '=',rec.subject_id.id)
+                 ])
+            if len(approve_lecturer) == 1:
+                rec.lecturer_id = approve_lecturer.lecturer_id.id
+
 
 class Sundayday(models.Model):
     _name="sunday"
@@ -162,3 +230,14 @@ class Sundayday(models.Model):
     subject_id = fields.Many2one('school.subject', string="Subject")
     lecturer_id = fields.Many2one('approve.lecturer', string="Lecturer")
     location_id = fields.Many2one('class.location', string="Location", tracking=True)
+
+    @api.onchange('subject_id')
+    def get_approved_lecturer(self):
+        for rec in self:
+            approve_lecturer = self.env['approve.lecturer.line'].search(
+                [('class_id', '=', rec.sunday_relation.class_id.id),
+                 ('semester_name_id', '=', rec.sunday_relation.semester_id.id),
+                 ('course_id', '=', rec.subject_id.id)
+                 ])
+            if len(approve_lecturer) == 1:
+                rec.lecturer_id = approve_lecturer.lecturer_id.id

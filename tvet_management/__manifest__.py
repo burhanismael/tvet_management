@@ -78,6 +78,7 @@
         'report/testimonial_graduation_report.xml',
         'report/gradution_transcript_pdf_report.xml',
         'report/lecturer_assign_report_pdf.xml',
+        'report/student_registration_report.xml',
         'report/course_assing_pdf_report.xml',
         'views/res_users_view.xml',
         'views/hide_portal.xml',

@@ -12,8 +12,8 @@ class ResultCourseAssignTemplate(models.AbstractModel):
     def _get_report_values(self, docids, data=None):
         course_data = {}
         domain = []
-        if data.get('aca_id'):
-            domain.append(('aca_id', '=', data.get('aca_id')))
+        # if data.get('aca_id'):
+        #     domain.append(('aca_id', '=', data.get('aca_id')))
         if data.get('lecturer_id'):
             domain.append(('lecturer_name_id.name', '=', data.get('lecturer_id')))
         if data.get('dep_id'):
@@ -21,15 +21,14 @@ class ResultCourseAssignTemplate(models.AbstractModel):
         if data.get('class_id'):
             domain.append(('class_id.name', '=', data.get('class_id')))
         if data.get('sem_id'):
-            domain.append(('semester_id.semester_name', '=', data.get('sem_id')))
+            domain.append(('semester_id.id', 'in', data.get('sem_id')))
 
         approve_courses = self.env['approve.lecturer'].search(domain)
-        print("sssssssssssssssssssssssssssssssssssssssssssssss", approve_courses)
         lst = []
         for lec in approve_courses:
             print("lecccccccccccccccccccccc", lec.class_id.name)
             for course in  lec.approve_lecturer_line_ids:
-                lst.append(course.course_id.course_name)
+                lst.append(course.course_id.name)
         print("lst", lst)
 
         data = {

@@ -11,7 +11,7 @@
                             <group>
                                 <field name="aca_id"/>
                                 <field name="dep_id"/>
-                                <field name="sem_id"/>
+                                <field name="sem_id" widget="many2many_tags"/>
                             </group>
                             <group>
                                 <field name="lecturer_id"/>

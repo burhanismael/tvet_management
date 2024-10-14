@@ -81,7 +81,6 @@ class ExamResult(models.Model):
                          ('course_subject_id', '=', vals.get('course_subject_id')),
                          ('semester_id', '=', vals.get('semester_id')),
                          ('department_id', '=', vals.get('department_id')),
-                         ('date', '=', vals.get('date')),
                          ('exam_type_id', '=', vals.get('exam_type_id')),
                          ('academic_year_id', '=', vals.get('academic_year_id'))
                          ])

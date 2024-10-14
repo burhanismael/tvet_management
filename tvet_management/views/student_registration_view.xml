@@ -119,6 +119,7 @@
             <field name="arch" type="xml">
             <form string="Student Registration">
                 <header>
+                    <button name="%(tvet_management.student_state_wizard_action_id)d" string="Student State" type="action" class="oe_highlight" attrs="{'invisible':[('status', '=', 'new')]}"/>
                     <button name="student_admission_start" string="Admission Start" type="object" class="oe_highlight" attrs="{'invisible': [('is_admitission_button_show','=', True)]}"/>
                     <field name="status" widget="statusbar" statusbar_visible="new,enrolled,drop_out,inactive,graduated" />
                 </header>

@@ -52,7 +52,7 @@
                                         <span t-esc="course.semester_name_id.semester_name"/>
                                     </td>
                                     <td style="border: 1px solid black;">
-                                        <span t-esc="course.course_id.course_name"/>
+                                        <span t-esc="course.course_id.name"/>
                                     </td>
                                 </tr>
                             </t>

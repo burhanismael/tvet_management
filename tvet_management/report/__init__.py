@@ -10,3 +10,4 @@ from . import certificate_pdf
 from . import testimonial_continues_report
 from . import testimonial_graduation_report
 from . import course_assign_pdf_report
+from . import lecturer_assign_report_pdf

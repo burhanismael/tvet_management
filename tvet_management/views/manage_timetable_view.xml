@@ -222,16 +222,18 @@
             <field name="type">tree</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <tree string="Manage Timetable" create="0" edit="0" delete="0">
-                    <field name="school_department_id" readonly="1"/>
-                    <field name="semester_id" readonly="1"/>
-                    <field name="time_table_date" readonly="1"/>
-                    <field name="class_id" readonly="1"/>
-                    <field name="course_id" readonly="1" widget="many2many_tags"/>
-                    <field name="day" readonly="1"/>
-                    <field name="location" readonly="1"/>
-                    <field name="start_time" readonly="1"/>
-                    <field name="end_time" readonly="1"/>
+                <tree string="Manage Timetable">
+<!--                    <field name="school_department_id"/>-->
+                    <field name="semester_id"/>
+                    <field name="time_table_date"/>
+                    <field name="class_id"/>
+                    <field name="course_id"/>
+<!--                    <field name="day"/>-->
+<!--                    <field name="location"/>-->
+<!--                    <field name="start_time"/>-->
+<!--                    <field name="end_time"/>-->
+<!--                    <field name="break_start_time" readonly="1" string="Break Start Time"/>-->
+<!--                    <field name="break_end_time" readonly="1" string="Break End Time"/>-->
                 </tree>
             </field>
         </record>
@@ -242,50 +244,142 @@
             <field name="type">form</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <form string="Manage Timetable" create="0" edit="0" delete="0">
+                <form string="Manage Timetable">
                     <sheet>
                         <group>
                             <group>
-                                <field name="school_department_id" readonly="1"
+<!--                                <field name="school_department_id"-->
+<!--                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
+                                <field name="course_id"
                                        options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
-                                <field name="semester_id" readonly="1"
+                                <field name="class_id"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <field name="semester_id"
                                        options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             </group>
                             <group>
-                                <field name="time_table_date" readonly="1"/>
-                                <field name="class_id" readonly="1"
-                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
-                                <field name="course_id"  readonly="1" widget="many2many_tags"
-                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <field name="time_table_date"/>
                             </group>
                         </group>
                         <group>
                             <group>
-<!--                                <field name="day" readonly="1"/>-->
+<!--                                <field name="day"/>-->
                             </group>
-<!--                            <group>-->
-<!--                                <field name="location" readonly="1"-->
+                            <group>
+<!--                                <field name="location"-->
 <!--                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
-<!--                            </group>-->
+                            </group>
                         </group>
                         <group>
 <!--                            <group>-->
 <!--                                <label for="start_time" string="Time" invisible="1"></label>-->
 <!--                                <div class="address_format">-->
 <!--                                    Time Start:-->
-<!--                                    <field name="start_time" readonly="1" style="width: 15%" widget="float_time"/>-->
+<!--                                    <field name="start_time" style="width: 15%" widget="float_time"/>-->
 <!--                                    Time End:-->
-<!--                                    <field name="end_time" readonly="1" style="width: 15%" widget="float_time"/>-->
+<!--                                    <field name="end_time" style="width: 15%" widget="float_time"/>-->
 <!--                                </div>-->
 <!--                            </group>-->
 <!--                            <label for="break_start_time" string="Break Start Time" invisible="1"></label>-->
 <!--                            <div class="address_format">-->
 <!--                                Break Time Start:-->
-<!--                                <field name="break_start_time" readonly="1" style="width: 15%" widget="float_time"/>-->
+<!--                                <field name="break_start_time" style="width: 15%" widget="float_time"/>-->
 <!--                                Break Time End:-->
-<!--                                <field name="break_end_time" readonly="1" style="width: 15%" widget="float_time"/>-->
+<!--                                <field name="break_end_time" style="width: 15%" widget="float_time"/>-->
 <!--                            </div>-->
                         </group>
+                        <notebook>
+                            <page string="Saturday">
+                                <field name="satday_ids">
+                                    <tree editable="bottom">
+                                        <field name="start_time" widget="float_time"/>
+                                        <field name="end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
+                                        <field name="subject_id"/>
+                                        <field name="lecturer_id"/>
+                                        <field name="location_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Sunday">
+                                <field name="sunday_ids">
+                                    <tree editable="bottom">
+                                        <field name="start_time" widget="float_time"/>
+                                        <field name="end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
+                                        <field name="subject_id"/>
+                                        <field name="lecturer_id"/>
+                                        <field name="location_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Monday" name="subject">
+                                <field name="monday_ids">
+                                    <tree editable="bottom">
+                                        <field name="start_time" widget="float_time"/>
+                                        <field name="end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
+                                        <field name="subject_id"/>
+                                        <field name="lecturer_id"/>
+                                        <field name="location_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Tuesday" name="subject">
+                                <field name="tuesday_ids">
+                                    <tree editable="bottom">
+                                        <field name="start_time" widget="float_time"/>
+                                        <field name="end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
+                                        <field name="subject_id"/>
+                                        <field name="lecturer_id"/>
+                                        <field name="location_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Wednesday" name="subject">
+                                <field name="wednesday_ids">
+                                    <tree editable="bottom">
+                                        <field name="start_time" widget="float_time"/>
+                                        <field name="end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
+                                        <field name="subject_id"/>
+                                        <field name="lecturer_id"/>
+                                        <field name="location_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Thursday" name="subject">
+                                <field name="thursday_ids">
+                                    <tree editable="bottom">
+                                        <field name="start_time" widget="float_time"/>
+                                        <field name="end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
+                                        <field name="subject_id"/>
+                                        <field name="lecturer_id"/>
+                                        <field name="location_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+
+                            <page string="Friday" name="subject">
+                                <field name="firday_ids">
+                                    <tree editable="bottom">
+                                        <field name="start_time" widget="float_time"/>
+                                        <field name="end_time" widget="float_time"/>
+                                        <field name="break_time" widget="float_time"/>
+                                        <field name="subject_id"/>
+                                        <field name="lecturer_id"/>
+                                        <field name="location_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
                     </sheet>
                     <div class="oe_chatter">
                         <field name="message_follower_ids" widget="mail_followers"/>

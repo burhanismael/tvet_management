@@ -129,13 +129,17 @@ class AttendanceReport(models.AbstractModel):
                     col_data_at += 1
                     student_data = cource_session_ids.mapped('student_ids').filtered(lambda x:x.student_id.id == attendance.id)
                     present_data = len(student_data.filtered(lambda x:x.checkbox))
-                    sheet.write(row, col_data_at, present_data, format2)
+                    present_calculate  = 0.5 * present_data
+                    sheet.write(row, col_data_at, present_calculate, format2)
                     col_data_at += 1
                     abesent_data = len(student_data.filtered(lambda x:x.checkbox2))
-                    sheet.write(row, col_data_at, abesent_data, format2)
+                    absent_calculate = 0.5 * abesent_data
+                    sheet.write(row, col_data_at, absent_calculate, format2)
                     col_data_at += 1
                     abesent_data_not_select = total_session - (present_data + abesent_data)
-                    sheet.write(row, col_data_at, abesent_data_not_select, format2)
+                    absent_not_select_calculate = 0.5 * abesent_data_not_select
+
+                    sheet.write(row, col_data_at, absent_not_select_calculate, format2)
                     col_data_at += 1
                     sheet.write(row, col_data_at, total_session, format2)
                     col_data_at += 1

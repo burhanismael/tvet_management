@@ -9,7 +9,7 @@ class LecturerCourseAssign(models.TransientModel):
     lecturer_id = fields.Many2one('create.lecturer', "Lecturer name", required=True)
     dep_id = fields.Many2one('school.department', string="Department")
     class_id = fields.Many2one('class.room', string="Class name")
-    sem_id = fields.Many2one('semester.semester', string="Semester")
+    sem_id = fields.Many2many('semester.semester', string="Semester")
 
     @api.onchange('dep_id')
     def department_based_domain(self):
@@ -32,7 +32,7 @@ class LecturerCourseAssign(models.TransientModel):
             'lecturer_id': self.lecturer_id.name,
             'dep_id': self.dep_id.name,
             'class_id': self.class_id.name,
-            'sem_id': self.sem_id.semester_name,
+            'sem_id': self.sem_id.ids,
 
         }
         return self.env.ref('tvet_management.action_lecturer_course_report').report_action(self, data=data)

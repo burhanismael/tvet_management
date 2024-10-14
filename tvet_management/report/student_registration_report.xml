@@ -1,0 +1,246 @@
+<odoo>
+    <data>
+        <template id="student_registration_report_template">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <table style="overflow:hidden;border-collapse: collapse;" width="100%">
+                        <tr style="height: 100px; overflow:hidden;">
+                            <td width="100%">
+                                <img style="height: 150px; width:100%; overflow:hidden;align-center; margin-bottom: 15px;text-align:center;"
+                                     t-if="env.company.uni_header"
+                                     t-att-src="image_data_uri(env.company.uni_header)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">
+                                <b>Student Registration Report</b>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </td>
+                        </tr>
+                        <table width="100%">
+                            <tr>
+                                <td width="90%">
+                                    <h3 style="text-align:left;">
+                                        <span t-esc="doc.admission_id"/>
+                                    </h3>
+                                </td>
+                                <td width="10%">
+                                    <img style="height: 100px; width: 100px; overflow: hidden; margin-bottom: 15px; text-align: right; border: 1px solid black;"
+                                         t-if="doc.image"
+                                         t-att-src="image_data_uri(doc.image)"/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+
+                                </td>
+                            </tr>
+                        </table>
+                    </table>
+                    <table style="border-collapse: collapse;width: 100%;" class="table table-condensed">
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>Intake Type</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.intake_type"/>
+                            </td>
+                            <td>
+                                <strong>Education Level</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.education_level"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 8px;text-align: left;border-top: 1px solid #ddd;height:50%;">
+                            <td>
+                                <strong>Student Name</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.student_name_id.name"/>
+                            </td>
+                            <td>
+                                <strong>Academic Year</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.academic_year_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>Student ID</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.student_id"/>
+                            </td>
+                            <td>
+                                <strong>Intake</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.academic_month"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>Place of Birth</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.birth_place_id.name"/>
+                            </td>
+                            <td>
+                                <strong>Shift</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.shift_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>Gender</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.gender"/>
+                            </td>
+                            <td>
+                                <strong>Department</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.department_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>Address</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.address"/>
+                            </td>
+                            <td>
+                                <strong>Class</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.classroom_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>School Name</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.school_name"/>
+                            </td>
+                            <td>
+                                <strong>Course</strong>
+                            </td>
+                            <td>
+                                <span t-esc="' , '.join(course.course_name for course in doc.course_ids)"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>Grade</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.grade"/>
+                            </td>
+                            <td>
+                                <strong>DOB</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.dob"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>Student Contact</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.student_contact"/>
+                            </td>
+                            <td>
+                                <strong>Project</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.project_id.project_name"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>City</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.parent_city_id.name"/>
+                            </td>
+                            <td>
+                                <strong>IDP Name</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.idp_name_id.name"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>State</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.state_id.name"/>
+                            </td>
+                            <td>
+                                <strong>Place of graduation</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.place_of_graduate"/>
+                            </td>
+                        </tr>
+                        <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                            <td>
+                                <strong>Other shift work specification</strong>
+                            </td>
+                            <td>
+                                <span t-field="doc.other_sift"/>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </t>
+        </template>
+        <template id="report_student_registration_id">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="tvet_management.student_registration_report_template"/>
+                </t>
+            </t>
+        </template>
+
+        <record id="report_student_registration_report_paperformat_id" model="report.paperformat">
+            <field name="name">Student Registration Report page</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">90</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <record id="action_student_registration_report_template" model="ir.actions.report">
+            <field name="name">Student Registration Report</field>
+            <field name="model">student.registration</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.report_student_registration_id</field>
+            <field name="report_file">tvet_management.report_student_registration_id</field>
+            <field name="binding_model_id" ref="tvet_management.model_student_registration"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.report_student_registration_report_paperformat_id"/>
+        </record>
+    </data>
+</odoo>

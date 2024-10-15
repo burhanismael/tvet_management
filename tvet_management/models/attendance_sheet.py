@@ -135,6 +135,13 @@ class AttendanceSheetLine(models.Model):
     date = fields.Date('Date', tracking=True)
     checkbox3 = fields.Boolean('Absent Excused', tracking=True)
 
+    @api.constrains('checkbox', 'checkbox2', 'checkbox3')
+    def blank_validation(self):
+        for rec in self:
+            if rec.checkbox == False and rec.checkbox2 == False and rec.checkbox3 == False:
+                raise ValidationError(_("Please select a present or absent or Absent Excused"))
+
+
     @api.onchange('checkbox')
     def onchange_checkbox(self):
 

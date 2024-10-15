@@ -210,7 +210,7 @@ class ResultTranscriprtTemplate(models.AbstractModel):
             fifth_total_sem += 1
             data = {
                 'code': cource.subject_code,
-                'course_title': cource.course_name,
+                'course_title': cource.name,
                 'marks': total_mark,
                 'grads': grade,
                 'gpa': gpa,
@@ -256,7 +256,7 @@ class ResultTranscriprtTemplate(models.AbstractModel):
             four_total_sem += 1
             data = {
                 'code': cource.subject_code,
-                'course_title': cource.course_name,
+                'course_title': cource.name,
                 'marks': total_mark,
                 'grads': grade,
                 'gpa': gpa,
@@ -302,7 +302,7 @@ class ResultTranscriprtTemplate(models.AbstractModel):
             three_total_sem += 1
             data = {
                 'code': cource.subject_code,
-                'course_title': cource.course_name,
+                'course_title': cource.name,
                 'marks': total_mark,
                 'grads': grade,
                 'gpa': gpa,
@@ -348,7 +348,7 @@ class ResultTranscriprtTemplate(models.AbstractModel):
             two_total_sem += 1
             data = {
                 'code': cource.subject_code,
-                'course_title': cource.course_name,
+                'course_title': cource.name,
                 'marks': total_mark,
                 'grads': grade,
                 'gpa': gpa,

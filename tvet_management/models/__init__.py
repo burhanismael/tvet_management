@@ -38,3 +38,4 @@ from . import special_needs
 from . import idp_name
 from . import state
 from . import assign_semester
+from . import transcript_details

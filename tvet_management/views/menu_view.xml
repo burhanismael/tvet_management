@@ -55,6 +55,12 @@
             sequence="0"
             action="action_bosaso_config"/>
 
+        <menuitem id="menu_transcript_config"
+            name="Transcript Details"
+            parent = "menu_student_admission"
+            sequence="0"
+            action="act_open_transcript_view"/>
+
         <menuitem id="menu_course_subject1"
             parent = "menu_student_admission"
             name = "Course"

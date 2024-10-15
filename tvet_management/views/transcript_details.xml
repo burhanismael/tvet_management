@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_transcript_tree" model="ir.ui.view">
+            <field name="name">transcript.details.tree</field>
+            <field name="model">transcript.details</field>
+            <field name="type">tree</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <tree string="Transcript">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_transcript_form" model="ir.ui.view">
+            <field name="name">transcript.details.form</field>
+            <field name="model">transcript.details</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <form string="City">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Award Classification" name="subject">
+                                <field name="award_class_ids">
+                                    <tree editable="bottom">
+                                        <field name="from_a"/>
+                                        <field name="from_t"/>
+                                        <field name="achivment"/>
+                                        <field name="class_name"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Grade Equivalence" name="subject">
+                                <field name="mark_class_ids">
+                                    <tree editable="bottom">
+                                        <field name="marks"/>
+                                        <field name="grade"/>
+                                        <field name="point"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_transcript_search" model="ir.ui.view">
+            <field name="name">transcript.details.search</field>
+            <field name="model">transcript.details</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+                <search string="City">
+                    <field name="name" select="True"/>
+                </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_transcript_view">
+            <field name="name">Transcript Details</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">transcript.details</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_transcript_search"/>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+    </data>
+</odoo>

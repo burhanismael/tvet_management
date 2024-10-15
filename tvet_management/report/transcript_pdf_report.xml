@@ -444,11 +444,10 @@
 <!--                            <span style="color: black; font-size: 16px;" class="float-left d-flex"><b>Director of Academic Affairs</b></span>-->
                         </div>
                     </div>
+                    <t t-set="transcript" t-value="user.env['transcript.details'].search([], limit=1)"/>
                     <div class="row" style="margin-top: 20px;" >
                         <div class="col-8">
-                            <span class="use-Uni-Calibri" style="color: blue; font-size: 16px;"><b>*The transcript is invalid without the university's official stamp.</b></span><br/>
-                            <span class="use-Uni-Calibri" style="color: blue; font-size: 16px;"><b>*The transcript is issued without any alterations whatsoever.</b></span><br/>
-                            <span class="use-Uni-Calibri" style="color: blue; font-size: 16px;"><b>*The University serves the right to any correction in the transcript.</b></span><br/>
+                            <span class="use-Uni-Calibri" style="color: blue; font-size: 16px;"><b><t t-esc="transcript.name"/> </b></span><br/>
                             <div class="use-Uni-timenewroman"><span style="color: #C8650E; font-size: 16px; margin-left: 100px;"><b>Awards Classification</b></span></div>
                             <table class="use-Uni-Calibri table table-sm" style="font-size:8pt;table-layout:auto; border: none!important;">
                                 <thead style="border: none!important;">
@@ -459,26 +458,14 @@
                                     </tr>
                                 </thead>
                                 <tbody style="border: none!important;">
+                                    <t t-foreach="transcript.award_class_ids" t-as="award_class">
                                     <tr style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>4.50 – 5.00</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>Excellent Performance</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>First Class</b></td>
+
+                                        <td style="font-size:12px;color:black; border: none!important;"><b><t t-esc="award_class.from_a"/>- <t t-esc="award_class.from_t"/></b></td>
+                                        <td style="font-size:12px;color:black; border: none!important;"><b><t t-esc="award_class.achivment"/> </b></td>
+                                        <td style="font-size:12px;color:black; border: none!important;"><b><t t-esc="award_class.class_name"/></b></td>
                                     </tr>
-                                    <tr style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>3.60 – 4.49</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>Very Good Performance</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>Second Class Upper Division</b></td>
-                                    </tr>
-                                    <tr style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>2.80 – 3.59</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>Good Performance</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>Second Class Lower Division</b></td>
-                                    </tr>
-                                    <tr style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>2.00 – 2.79</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>Satisfactory Performance</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>Pass</b></td>
-                                    </tr>
+                                    </t>
                                 </tbody>
                             </table>
                         </div>
@@ -493,45 +480,13 @@
                                     </tr>
                                 </thead>
                                 <tbody class="use-Uni-Calibri" style="border: none!important;font-size:8pt;">
-                                    <tr style="border: none!important;">
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>80-100</b></td>
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>A</b></td>
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>5.0</b></td>
-                                    </tr>
-                                    <tr style="border: none!important;">
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>75-79</b></td>
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>B+</b></td>
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>4.5</b></td>
-                                    </tr>
-                                    <tr style="border: none!important;">
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>70-74</b></td>
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>B</b></td>
-                                        <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b>4.0</b></td>
-                                    </tr>
-                                    <tr class="use-Uni-timenewroman" style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>65-69</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>C+</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>3.5</b></td>
-                                    </tr>
-                                    <tr class="use-Uni-timenewroman" style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>60-64</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>C</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>3.0</b></td>
-                                    </tr>
-                                    <tr class="use-Uni-timenewroman" style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>55-59</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>D+</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>2.5</b></td>
-                                    </tr>
-                                    <tr class="use-Uni-timenewroman" style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>50-54</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>D</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>2.0</b></td>
-                                    </tr>
-                                    <tr class="use-Uni-timenewroman" style="border: none!important;">
-                                        <td style="font-size:12px;color:black; border: none!important;" colspan="2"><b>Below 50%</b></td>
-                                        <td style="font-size:12px;color:black; border: none!important;"><b>Fail</b></td>
-                                    </tr>
+                                    <t t-foreach="transcript.mark_class_ids" t-as="mark_class">
+                                        <tr style="border: none!important;">
+                                            <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b><t t-esc="mark_class.marks"/></b></td>
+                                            <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b><t t-esc="mark_class.grade"/></b></td>
+                                            <td class="use-Uni-timenewroman" style="font-size:12px;color:black; border: none!important;"><b><t t-esc="mark_class.point"/></b></td>
+                                        </tr>
+                                    </t>
                                 </tbody>
                             </table>
                         </div>

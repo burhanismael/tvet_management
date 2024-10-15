@@ -46,6 +46,7 @@
         'views/student_admission_view.xml',
         # 'views/account_move_view.xml',
         'views/awading_system.xml',
+        'views/transcript_details.xml',
         'views/assign_course_view.xml',
         'views/semester_view.xml',
         'views/exam_type_view.xml',

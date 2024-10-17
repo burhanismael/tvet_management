@@ -222,7 +222,7 @@
             <field name="type">tree</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <tree string="Manage Timetable">
+                <tree string="Manage Timetable" create="0">
 <!--                    <field name="school_department_id"/>-->
                     <field name="semester_id"/>
                     <field name="time_table_date"/>
@@ -244,7 +244,7 @@
             <field name="type">form</field>
             <field name="priority" eval="8"/>
             <field name="arch" type="xml">
-                <form string="Manage Timetable">
+                <form string="Manage Timetable" create="0" edit="0">
                     <sheet>
                         <group>
                             <group>

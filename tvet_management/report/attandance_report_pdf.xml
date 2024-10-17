@@ -64,11 +64,11 @@
                                                 <th><t t-esc="student.student_id"/></th>
                                                 <th><t t-esc="student.student_name_id.name"/></th>
                                                 <t t-set="student_data" t-value="cource_session_ids.mapped('student_ids').filtered(lambda x:x.student_id.id == student.id)"/>
-                                                <t t-set="present_data" t-value="len(student_data.filtered(lambda x:x.checkbox)) * 0.5"/>
+                                                <t t-set="present_data" t-value="len(student_data.filtered(lambda x:x.checkbox == True)) * 0.5"/>
                                                 <th><t t-esc="present_data"/></th>
-                                                <t t-set="abesent_data" t-value="len(student_data.filtered(lambda x:x.checkbox2)) * 0.5"/>
+                                                <t t-set="abesent_data" t-value="len(student_data.filtered(lambda x:x.checkbox2 == True)) * 0.5"/>
                                                 <th><t t-esc="abesent_data"/></th>
-                                                <t t-set="abesent_data_not_select" t-value="total_session - (present_data + abesent_data) * 0.5"/>
+                                                <t t-set="abesent_data_not_select" t-value="len(student_data.filtered(lambda x:x.checkbox3 == True)) * 0.5"/>
                                                 <th><t t-esc="abesent_data_not_select"/></th>
                                                 <th><t t-esc="total_session"/></th>
                                                 <t t-if="present_data > 0">

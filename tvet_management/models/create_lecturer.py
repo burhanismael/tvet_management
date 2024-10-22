@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models
 
@@ -31,6 +30,8 @@ class CreateLecturer(models.Model):
     qualification = fields.Selection([('undergraduate','Undergraduate'),('post_graduate','Post-graduate')], string="Qualification", tracking=True)
     employee_type = fields.Selection([('normal_emp', 'Normal Employee'), ('lecturer', 'Lecturer')], string="Employee type", tracking=True)
     qualification_ids=fields.One2many('create.lecturer.qualification','qualification_id', tracking=True)
+    experience_ids = fields.One2many('create.lecturer.experience', 'experience_id', tracking=True)
+    document_ids=fields.One2many('create.lecturer.document','document_id', tracking=True)
     is_assign_lecturer = fields.Boolean(default=False, tracking=True)
     faculty_id = fields.Many2one('school.faculty', tracking=True)
 
@@ -66,3 +67,37 @@ class CreateLecturerQualification(models.Model):
     year = fields.Char(string="Year", tracking=True)
     institute = fields.Char(string="Institute", tracking=True)
     qualification_id = fields.Many2one('create.lecturer',string="Qualification Id", tracking=True)
+
+
+class CreateDocumentIds(models.Model):
+    _name = "create.lecturer.document"
+    _description = "Document Information"
+
+    document_id = fields.Many2one('create.lecturer',string="Document Id", tracking=True)
+    name = fields.Char(string="Name of the document")
+    document_type_id = fields.Many2one('document.type', string="Type")
+    attachment = fields.Binary(string='Attachment')
+
+
+class CreateDocumentIds(models.Model):
+    _name = "create.lecturer.experience"
+    _description = "Document Information"
+
+    experience_id = fields.Many2one('create.lecturer',string="Document Id", tracking=True)
+    name = fields.Char(string="Experience")
+    year = fields.Char(string="Year")
+    experience_type_id = fields.Many2one('experience.type', string="Type")
+
+
+class CreateDocumentType(models.Model):
+    _name = "document.type"
+    _description = "Document Type"
+
+    name = fields.Char(string="Name")
+
+class CreateExperienceType(models.Model):
+    _name = "experience.type"
+    _description = "experience Type"
+
+    name = fields.Char(string="Name")
+

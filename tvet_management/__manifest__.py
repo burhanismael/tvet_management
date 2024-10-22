@@ -31,6 +31,7 @@
         'views/projects.xml',
         'views/special_need.xml',
         'views/idp_name_view.xml',
+        'views/lerning_material.xml',
         'views/res_company_view.xml',
         'views/student_registration_view.xml',
         'views/course_subject_view.xml',

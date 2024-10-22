@@ -70,6 +70,13 @@ tvet_management.access_lecturer_assign_report,access_lecturer_assign_report,tvet
 tvet_management.access_transcript_details,access_transcript_details,tvet_management.model_transcript_details,base.group_user,1,1,1,1
 tvet_management.access_cgpa_transcript,access_cgpa_transcript,tvet_management.model_cgpa_transcript,base.group_user,1,1,1,1
 tvet_management.access_mark_transcript,access_mark_transcript,tvet_management.model_mark_transcript,base.group_user,1,1,1,1
+tvet_management.access_learning_material,access_learning_material,tvet_management.model_learning_material,base.group_user,1,1,1,1
+tvet_management.access_type_material,access_type_material,tvet_management.model_type_material,base.group_user,1,1,1,1
+tvet_management.access_create_lecturer_document,access_create_lecturer_document,tvet_management.model_create_lecturer_document,base.group_user,1,1,1,1
+tvet_management.access_document_type,access_document_type,tvet_management.model_document_type,base.group_user,1,1,1,1
+tvet_management.access_create_lecturer_experience,access_create_lecturer_experience,tvet_management.model_create_lecturer_experience,base.group_user,1,1,1,1
+tvet_management.access_experience_type,access_experience_type,tvet_management.model_experience_type,base.group_user,1,1,1,1
+
 
 
 

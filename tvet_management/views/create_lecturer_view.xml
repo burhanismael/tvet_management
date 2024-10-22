@@ -86,6 +86,26 @@
                                     </tree>
                                 </field>
                             </group>
+                            <group>
+                                <field name="experience_ids" nolabel='1'>
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="year"/>
+                                        <field name="experience_type_id"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Documents">
+                            <group>
+                                <field name="document_ids" nolabel='1'>
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="document_type_id"/>
+                                        <field name="attachment"/>
+                                    </tree>
+                                </field>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>

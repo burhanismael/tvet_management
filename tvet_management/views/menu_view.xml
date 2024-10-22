@@ -170,6 +170,12 @@
             sequence="12"
             action="act_open_att_view_view"/>
 
+        <menuitem id="menu_open_learning_material_view_view"
+            parent="menu_student_academic"
+            name="Learning Material"
+            sequence="12"
+            action="act_open_learning_material_view"/>
+
         <menuitem id="menu_result_report"
             parent = "menu_reports"
             name = "Exam Result Report"

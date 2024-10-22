@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_learning_material_tree" model="ir.ui.view">
+            <field name="name">learning.material.tree</field>
+            <field name="model">learning.material</field>
+            <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+        </record>
+
+        <record id="view_learning_material_form" model="ir.ui.view">
+            <field name="name">learning.material.form</field>
+            <field name="model">learning.material</field>
+            <field name="arch" type="xml">
+                <form string="Learning Material">
+                    <sheet>
+                        <div class="oe_title">
+                        <h1>
+                            <div class="o_row">
+                                <field name="name" nolabel="1" readonly="1"/>
+                            </div>
+                        </h1>
+                    </div>
+                        <group>
+                            <group>
+                                <field name="lerning_name"/>
+                                <field name="department_id"/>
+                            </group>
+                            <group>
+                                <field name="type_of_material_id"/>
+                                <field name="attechment"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_learning_material_search" model="ir.ui.view">
+            <field name="name">learning.material.search</field>
+            <field name="model">learning.material</field>
+            <field name="type">search</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <search string="Learning Material">
+                <field name="name" select="True"/>
+            </search>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="act_open_learning_material_view">
+            <field name="name">Learning Material</field>
+            <field name="res_model">learning.material</field>
+            <field name="view_mode">tree,form</field>
+            <field name="search_view_id" ref="view_learning_material_search"/>
+        </record>
+
+
+    </data>
+</odoo>

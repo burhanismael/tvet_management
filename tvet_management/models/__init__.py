@@ -39,3 +39,4 @@ from . import idp_name
 from . import state
 from . import assign_semester
 from . import transcript_details
+from . import lerning_material

@@ -40,6 +40,12 @@
             sequence="4"
             action="attendance_view_action_id"/>
 
+        <menuitem id="menu_time_table_report"
+            parent = "menu_reports"
+            name = "Time Table Report"
+            sequence="4"
+            action="time_table_wizard_view_action_id"/>
+
 
 
 

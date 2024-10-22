@@ -30,7 +30,7 @@ class ManageTimetable(models.Model):
     start_time = fields.Float(string="Start Time", tracking=True)
     end_time = fields.Float(string="End Time", tracking=True)
     break_time = fields.Float(string="Break Time", tracking=True)
-    time_table_date = fields.Datetime(string="Time Table Date", default=lambda self: fields.Datetime.now(), tracking=True)
+    time_table_date = fields.Date(string="Time Table Date", default=lambda self: fields.Datetime.now(), tracking=True)
 
     monday_ids = fields.One2many('monday', 'monday_relation', string="monday")
     tuesday_ids = fields.One2many('tuesday', 'tuesday_relation', string="Tuesday")

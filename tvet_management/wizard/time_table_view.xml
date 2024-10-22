@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="time_table_wizard">
+            <field name="name">time.table.wizard</field>
+            <field name="model">time.table.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Time Table Report">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_from"/>
+                            </group>
+                            <group>
+                                <field name="date_to"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="class_id"/>
+                            </group>
+                            <group>
+                                <field name="semester_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="pdf_report" type="object" class="oe_highlight"
+                                string="Download"/>
+<!--                        <button name="pdf_preview_report" type="object" class="oe_highlight"-->
+<!--                                string="Preview"/>-->
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+        <record model="ir.actions.act_window" id="time_table_wizard_view_action_id">
+            <field name="name">Time Table Report</field>
+            <field name="res_model">time.table.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="view_id" ref="tvet_management.time_table_wizard"/>
+        </record>
+    </data>
+</odoo>

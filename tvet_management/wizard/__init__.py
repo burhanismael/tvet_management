@@ -9,4 +9,5 @@ from . import testimonial_continues
 from . import testimonial_graduation
 from . import course_assign
 from . import lecturer_course_assignation_report
+from . import time_table_report_wizard
 

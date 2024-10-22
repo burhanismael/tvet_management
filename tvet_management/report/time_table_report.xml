@@ -1,0 +1,428 @@
+<odoo>
+    <data>
+        <template id="time_table_report_template">
+            <t t-call="web.html_container">
+                <div class="page">
+                    <table style="overflow:hidden;border-collapse: collapse;" width="100%">
+                        <tr style="height: 100px; overflow:hidden;">
+                            <td width="100%">
+                                <img style="height: 150px; width:100%; overflow:hidden;align-center; margin-bottom: 15px;text-align:center;"
+                                     t-if="env.company.uni_header"
+                                     t-att-src="image_data_uri(env.company.uni_header)"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center;">
+                                <b>Time Table Report</b>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="100%">
+                        <tr>
+                            <td>
+                                <h5>Date From:</h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    <span t-esc="date_from"/>
+                                </h5>
+                            </td>
+                            <td>
+                                <h5>Date To:</h5>
+                            </td>
+                            <td>
+                                <h5>
+                                    <span t-esc="date_to"/>
+                                </h5>
+                            </td>
+                        </tr>
+                    </table>
+
+                    <t t-if="course_ids">
+                        <t t-foreach="course_ids" t-as="course">
+                            <table width="100%">
+                                <tr>
+                                    <td>
+                                        <h5>Course Name:</h5>
+                                    </td>
+                                    <td>
+                                        <t t-esc="course.course_id.course_name"/>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <h5>Class Name:</h5>
+                                    </td>
+                                    <td>
+                                        <h5>
+                                            <t t-esc="course.class_id.name"/>
+                                        </h5>
+                                    </td>
+                                </tr>
+                                <t t-if="course.satday_ids">
+                                    <t t-foreach="course.satday_ids" t-as="sat">
+                                        <table width="100%">
+                                            <thead>
+                                                <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                                                    <th style="text-align: left;">Saturday Start Time</th>
+                                                    <th style="text-align: left;">Saturday End Time</th>
+                                                    <th style="text-align: left;">Saturday Break Time</th>
+                                                    <th style="text-align: left;">Saturday Subject</th>
+                                                    <th style="text-align: left;">Saturday Lecturer</th>
+                                                    <th style="text-align: left;">Saturday Location</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr style="padding: 10px;text-align: left;border-top: 1px solid #ddd;">
+                                                    <td>
+                                                        <t t-esc="sat.start_time"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="sat.end_time"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="sat.break_time"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="sat.subject_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="sat.lecturer_id.lecturer_name_id.name"/>
+                                                    </td>
+                                                    <td>
+                                                        <t t-esc="sat.location_id.location"/>
+                                                    </td>
+                                                    <br/><br/>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </t>
+                                </t>
+
+                                <t t-if="course.sunday_ids">
+                                    <t t-foreach="course.sunday_ids" t-as="sun">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>
+                                                    Sunday Start Time
+                                                </td>
+                                                <td>
+                                                    Sunday End Time
+                                                </td>
+                                                <td>
+                                                    Sunday Break Time
+                                                </td>
+                                                <td>
+                                                    Sunday Subject
+                                                </td>
+                                                <td>
+                                                    Sunday Lecturer
+                                                </td>
+                                                <td>
+                                                    Sunday Location
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="sun.start_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="sun.end_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="sun.break_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="sun.subject_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="sun.lecturer_id.lecturer_name_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="sun.location_id.location"/>
+                                                </td>
+                                                <br/><br/>
+                                            </tr>
+                                        </table>
+                                    </t>
+                                </t>
+                                <t t-if="course.monday_ids">
+                                    <t t-foreach="course.monday_ids" t-as="mon">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>
+                                                    Monday Start Time
+                                                </td>
+                                                <td>
+                                                    Monday End Time
+                                                </td>
+                                                <td>
+                                                    Monday Break Time
+                                                </td>
+                                                <td>
+                                                    Monday Subject
+                                                </td>
+                                                <td>
+                                                    Monday Lecturer
+                                                </td>
+                                                <td>
+                                                    Monday Location
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="mon.start_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="mon.end_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="mon.break_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="mon.subject_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="mon.lecturer_id.lecturer_name_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="mon.location_id.location"/>
+                                                </td>
+                                                <br/><br/>
+                                            </tr>
+                                        </table>
+                                    </t>
+                                </t>
+                                <t t-if="course.tuesday_ids">
+                                    <t t-foreach="course.tuesday_ids" t-as="tue">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>
+                                                    Tuesday Start Time
+                                                </td>
+                                                <td>
+                                                    Tuesday End Time
+                                                </td>
+                                                <td>
+                                                    Tuesday Break Time
+                                                </td>
+                                                <td>
+                                                    Tuesday Subject
+                                                </td>
+                                                <td>
+                                                    Tuesday Lecturer
+                                                </td>
+                                                <td>
+                                                    Tuesday Location
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="tue.start_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="tue.end_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="tue.break_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="tue.subject_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="tue.lecturer_id.lecturer_name_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="tue.location_id.location"/>
+                                                </td>
+                                                <br/><br/>
+                                            </tr>
+                                        </table>
+                                    </t>
+                                </t>
+                                <t t-if="course.wednesday_ids">
+                                    <t t-foreach="course.wednesday_ids" t-as="wed">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>
+                                                    Wednesday Start Time
+                                                </td>
+                                                <td>
+                                                    Wednesday End Time
+                                                </td>
+                                                <td>
+                                                    Wednesday Break Time
+                                                </td>
+                                                <td>
+                                                    Wednesday Subject
+                                                </td>
+                                                <td>
+                                                    Wednesday Lecturer
+                                                </td>
+                                                <td>
+                                                    Wednesday Location
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="wed.start_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="wed.end_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="wed.break_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="wed.subject_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="wed.lecturer_id.lecturer_name_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="wed.location_id.location"/>
+                                                </td>
+                                            </tr>
+                                            <br/><br/>
+                                        </table>
+                                    </t>
+                                </t>
+                                <t t-if="course.thursday_ids">
+                                    <t t-foreach="course.thursday_ids" t-as="thu">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>
+                                                    Thursday Start Time
+                                                </td>
+                                                <td>
+                                                    Thursday End Time
+                                                </td>
+                                                <td>
+                                                    Thursday Break Time
+                                                </td>
+                                                <td>
+                                                    Thursday Subject
+                                                </td>
+                                                <td>
+                                                    Thursday Lecturer
+                                                </td>
+                                                <td>
+                                                   Thursday Location
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="thu.start_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="thu.end_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="thu.break_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="thu.subject_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="thu.lecturer_id.lecturer_name_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="thu.location_id.location"/>
+                                                </td>
+                                            </tr>
+                                            <br/>
+                                            <br/>
+                                        </table>
+                                    </t>
+                                </t>
+                                <t t-if="course.firday_ids">
+                                    <t t-foreach="course.firday_ids" t-as="fri">
+                                        <table width="100%">
+                                            <tr>
+                                                <td>
+                                                    Friday Start Time
+                                                </td>
+                                                <td>
+                                                    Friday End Time
+                                                </td>
+                                                <td>
+                                                    Friday Break Time
+                                                </td>
+                                                <td>
+                                                    Friday Subject
+                                                </td>
+                                                <td>
+                                                    Friday Lecturer
+                                                </td>
+                                                <td>
+                                                    Friday Location
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <t t-esc="fri.start_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="fri.end_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="fri.break_time"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="fri.subject_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="fri.lecturer_id.lecturer_name_id.name"/>
+                                                </td>
+                                                <td>
+                                                    <t t-esc="fri.location_id.location"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </t>
+                                </t>
+                            </table>
+                        </t>
+                    </t>
+                </div>
+            </t>
+        </template>
+
+        <template id="report_time_table_report_id">
+            <t t-call="web.html_container">
+                <t t-call="tvet_management.time_table_report_template"/>
+            </t>
+        </template>
+
+        <record id="report_time_table_report_paperformat_id" model="report.paperformat">
+            <field name="name">Time Table Report page</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">15</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">90</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <record id="action_time_table_report_template" model="ir.actions.report">
+            <field name="name">Time Table Report</field>
+            <field name="model">time.table.wizard</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">tvet_management.report_time_table_report_id</field>
+            <field name="report_file">tvet_management.report_time_table_report_id</field>
+            <field name="binding_model_id" ref="tvet_management.model_time_table_wizard"/>
+            <field name="binding_type">report</field>
+            <field name="paperformat_id" ref="tvet_management.report_time_table_report_paperformat_id"/>
+        </record>
+    </data>
+</odoo>

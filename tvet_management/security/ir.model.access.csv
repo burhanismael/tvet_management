@@ -76,6 +76,7 @@ tvet_management.access_create_lecturer_document,access_create_lecturer_document,
 tvet_management.access_document_type,access_document_type,tvet_management.model_document_type,base.group_user,1,1,1,1
 tvet_management.access_create_lecturer_experience,access_create_lecturer_experience,tvet_management.model_create_lecturer_experience,base.group_user,1,1,1,1
 tvet_management.access_experience_type,access_experience_type,tvet_management.model_experience_type,base.group_user,1,1,1,1
+tvet_management.access_time_table_wizard,access_time_table_wizard,tvet_management.model_time_table_wizard,base.group_user,1,1,1,1
 
 
 

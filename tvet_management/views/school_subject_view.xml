@@ -26,6 +26,7 @@
                             <field name="credit_hrs"/>
                         </group>
                         <group>
+                            <field name="course_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             <field name="subject_code"/>
                         </group>
                     </group>

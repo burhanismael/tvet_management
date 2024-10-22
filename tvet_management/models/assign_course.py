@@ -17,6 +17,7 @@ class AssignCourse(models.Model):
                                domain="[('school_department_id', '=', school_department_id)]", tracking=True)
     # domain="[('shift_id.school_department_id', '=', school_department_id)]")
     school_shift_id = fields.Integer("---", tracking=True)
+    course_id = fields.Many2one('course.subject', string="Course")
     semester_name_id = fields.Many2one('semester.semester', string="Tier",
                                        domain="[('class_id', '=', class_id)]", tracking=True)
     course_subject_line_ids = fields.One2many('assign.course.line', 'assign_course_id', string="Course", tracking=True)
@@ -31,6 +32,14 @@ class AssignCourse(models.Model):
         if aca_id:
             vals['aca_id'] = aca_id.academic_year_id.id
         return vals
+
+    @api.onchange('course_id')
+    def domain_course_ids_data(self):
+        if self.course_id:
+            sunject_ids = self.env['school.subject'].search(
+                [('course_id', '=', self.course_id.id)])
+            domain = [('id', 'in', sunject_ids.ids)]
+            return {'domain': {'course_subject_id': domain}}
 
     # is_assign_course_check = fields.Boolean(default=False, compute='_compute_assign_course')
 

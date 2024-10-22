@@ -35,12 +35,12 @@ class CustomerPortal(portal.CustomerPortal):
         values = self._prepare_portal_layout_values()
         result_id = request.env['exam.result.entry.line']
         partner_id = request.env.user.partner_id
-        settings_record = request.env['res.config.settings'].sudo().search([], order="id desc", limit=1)
-        examination_boolean_value = settings_record.examination_boolean
-        if examination_boolean_value == True:
-            if partner_id.credit > 0:
-                values['credit_error'] = True  # Set the flag for the popup
-                return request.render("tvet_management.exam_result_details_error", values)
+        # settings_record = request.env['res.config.settings'].sudo().search([], order="id desc", limit=1)
+        # examination_boolean_value = settings_record.examination_boolean
+        # if examination_boolean_value == True:
+        if partner_id.credit > 0:
+            values['credit_error'] = True  # Set the flag for the popup
+            return request.render("tvet_management.exam_result_details_error", values)
 
         student_id = request.env['student.registration'].sudo().search([('student_id', '=', partner_id.email)], limit=1)
         type_data_ids = request.env['exam.type'].sudo().search([('is_portal', '=', True)])

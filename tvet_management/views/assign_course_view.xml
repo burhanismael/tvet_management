@@ -47,6 +47,8 @@
                                 <field name="aca_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             </group>
                             <group>
+                                <field name="course_id"
+                                       options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                                 <field name="course_subject_id" required="1" widget="many2many_tags"
                                        options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                                 <field name="is_assign_course" invisible="1"/>

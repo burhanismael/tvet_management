@@ -14,6 +14,7 @@ class SchoolSubjects(models.Model):
 
     name = fields.Char(string="Subject", tracking=True)
     subject_code = fields.Char(string="Subject Code")
+    course_id = fields.Many2one('course.subject', string="Course")
     credit_hrs = fields.Float(string="Credit Hours", tracking=True)
     remarks = fields.Text(string="Remarks", tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department")

@@ -21,7 +21,7 @@ class AttendanceSheet(models.Model):
 
     name = fields.Char('Name', copy=False, default='New', tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
-    class_id = fields.Many2one('class.room', string="Class Name",domain=_domain_class, tracking=True)
+    class_id = fields.Many2one('class.room', string="Batch Name",domain=_domain_class, tracking=True)
     student_ids = fields.One2many('attendance.sheet.line','attendance_sheet_id', string="Student", tracking=True)
     date = fields.Date(required=True, default=lambda self: fields.Date.context_today(self), tracking=True)
     status = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirmed')], default="draft", tracking=True)
@@ -128,7 +128,7 @@ class AttendanceSheetLine(models.Model):
     remarks = fields.Char('Remarks', tracking=True)
 
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
-    class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
+    class_id = fields.Many2one('class.room', string="Tier Name", tracking=True)
     semester_id = fields.Many2one('semester.semester', string="Semester Name",
                                   domain="[('class_id', '=', class_id)]", tracking=True)
     course_name_id = fields.Many2one('school.subject', string="Subject Name", tracking=True)

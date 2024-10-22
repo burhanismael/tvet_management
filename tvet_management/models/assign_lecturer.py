@@ -10,10 +10,10 @@ class AssignLecturer(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     status = fields.Selection([('draft','Draft'),('approved','Submit For Approval')], default="draft", tracking=True)
-    lecturer_name_id = fields.Many2one('create.lecturer', tracking=True)
+    lecturer_name_id = fields.Many2one('create.lecturer', string="Instructor Name" , tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True, related='course_name_id.department_id')
-    class_id = fields.Many2one('class.room', string="Class Name", domain="[('school_department_id', '=', school_department_id)]", tracking=True)
-    semester_id = fields.Many2one('semester.semester', domain="[('class_id', '=', class_id)]", tracking=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", domain="[('school_department_id', '=', school_department_id)]", tracking=True)
+    semester_id = fields.Many2one('semester.semester', string="Tier Name", domain="[('class_id', '=', class_id)]", tracking=True)
     course_name_id = fields.Many2one('course.subject', string="Course Name")
     # semester_id = fields.Many2one('semester.semester', tracking=True)
     assign_lecturer_line_ids = fields.One2many('assign.lecturer.line','assign_lecturer_id', string="Course", tracking=True)

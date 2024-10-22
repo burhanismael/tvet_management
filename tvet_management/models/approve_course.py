@@ -13,9 +13,9 @@ class ApproveCourse(models.Model):
     status = fields.Selection([('draft', 'To Be Approved'), ('approved', 'Approved'), ('reject', 'Reject')],
                               default='draft', tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
-    class_id = fields.Many2one('class.room', string="Class Name",
+    class_id = fields.Many2one('class.room', string="Batch Name",
                                domain="[('school_department_id', '=', school_department_id)]", tracking=True)
-    semester_name_id = fields.Many2one('semester.semester', string="Semester Name",
+    semester_name_id = fields.Many2one('semester.semester', string="Tier Name",
                                        domain="[('class_id', '=', class_id)]", tracking=True)
     course_approve_line_ids = fields.One2many('approve.course.line', 'assign_course_id', string="Course", tracking=True)
     aca_id = fields.Many2one('academic.year', string="Academic Year")
@@ -132,7 +132,7 @@ class ApproveCourseLine(models.Model):
     _description = "Assign Course line"
 
     is_tick = fields.Boolean(' ', tracking=True)
-    course_name_id = fields.Many2one('class.room', string="Class Name", tracking=True)
+    course_name_id = fields.Many2one('class.room', string="Batch Name", tracking=True)
     semester = fields.Many2one('semester.semester', string="Semester", tracking=True)
     course = fields.Many2many('school.subject', string="Subject Name", tracking=True)
     assign_course_id = fields.Many2one('approve.course', tracking=True)

@@ -15,8 +15,8 @@ class ManageTimetable(models.Model):
 
    
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
-    class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
-    semester_id = fields.Many2one('semester.semester', tracking=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", tracking=True)
+    semester_id = fields.Many2one('semester.semester', string="Tier Name", tracking=True)
     course_id = fields.Many2one('course.subject', string="Course Name", tracking=True)
     day = fields.Selection([('0', 'Monday'),
                             ('1', 'Tuesday'),

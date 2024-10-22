@@ -10,9 +10,9 @@ class AssignSemester(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     # school_department_id = fields.Many2one('school.department', string="Department Name")
-    class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", tracking=True)
     academic_year_id = fields.Many2one('academic.year',string="Academic Year", tracking=True)
-    semester_id = fields.Many2one('semester.semester', domain="[('class_id', '=', class_id)]", string="Semester", tracking=True)
+    semester_id = fields.Many2one('semester.semester', string="Tier Name", domain="[('class_id', '=', class_id)]", tracking=True)
     remarks = fields.Text(string="Remarks", tracking=True)
     status = fields.Selection([('draft','Draft'),('approved','Semester Assign'),('invoice','Invoice Created')], default="draft", copy=False, tracking=True)
     date_invoice = fields.Date(string=" Invoice Date", required=True)

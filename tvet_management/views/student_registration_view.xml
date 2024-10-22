@@ -149,6 +149,7 @@
                             <field name="admission_id_id" invisible="1"/>
                             <field name="student_name_id"/>
                             <field name="student_id" attrs="{'invisible':[('status', '!=', 'enrolled')], 'required':[('status', '=', 'enrolled')]}"/>
+                            <field name="dob" placeholder="Select Date"/>
                             <field name="birth_place_id" select="1" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             <field name="gender"  widget="radio" options="{'horizontal':True}"/>
 <!--                            <field name="nationality_id"/>-->
@@ -157,6 +158,7 @@
 <!--                            <field name="marital_status" select="1" placeholder="Select"/>-->
                             <field name="school_name" />
 <!--                            <field name="roll_number"/>-->
+                            <field name="place_of_graduate"/>
                             <field name="grade"/>
                             <field name="student_contact" />
 <!--                            <field name="student_id_issue_date"/>-->
@@ -179,14 +181,14 @@
 <!--                            <field name="semester_id" placeholder="Select" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>-->
                             <field name="student_type" invisible="1" select="1" placeholder="Select" />
                             <field name="is_admitission_button_show" invisible="1"/>
-                            <field name="dob" placeholder="Select Date"/>
+
 <!--                            <field name="student_balance"/>-->
 <!--                            <field name="location"/>-->
                             <field name="project_id"/>
                             <field name="idp_name_id"/>
                             <field name="is_alumni" invisible="1"/>
                             <field name="is_semester_invoice" invisible="1"/>
-                            <field name="place_of_graduate"/>
+
                             <field name="other_sift"/>
                         </group>
                     </group>

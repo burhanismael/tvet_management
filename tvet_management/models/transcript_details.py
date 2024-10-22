@@ -18,7 +18,7 @@ class Cgps(models.Model):
     from_a = fields.Char('Cgpa From')
     from_t = fields.Char('Cgpa To')
     achivment = fields.Char('Achievement')
-    class_name = fields.Char('Class')
+    class_name = fields.Char('Batch')
 
 class MarkGreadPay(models.Model):
     _name = "mark.transcript"

@@ -16,13 +16,13 @@ class ExamResultEntry(models.Model):
 
     name = fields.Char('Name', copy=False, default='New', tracking=True)
     department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
-    class_id = fields.Many2one('class.room', string="Class Name",
+    class_id = fields.Many2one('class.room', string="Batch Name",
                                domain="[('school_department_id', '=', department_id)]", tracking=True)
     academic_year_id = fields.Many2one('academic.year', string="Academic Year", tracking=True)
     exam_type_id = fields.Many2one('exam.type', string="Exam Type", tracking=True)
     student_ids = fields.One2many('exam.result.entry.line', 'exam_result_entry_id',
                                   string="Student", tracking=True)
-    semester_id = fields.Many2one('semester.semester', string="Semester Name",
+    semester_id = fields.Many2one('semester.semester', string="Tier",
                                   domain="[('class_id', '=', class_id)]", tracking=True)
     course_name_id = fields.Many2one('school.subject', string="Subject Name",
                                      domain="[('school_department_id', '=', department_id)]", tracking=True)

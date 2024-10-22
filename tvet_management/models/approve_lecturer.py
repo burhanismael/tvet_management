@@ -10,9 +10,9 @@ class ApproveLecturer(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     status = fields.Selection([('draft','Draft'),('approve','Approved'),('reject','Reject')], default='draft', tracking=True)
-    lecturer_name_id = fields.Many2one('create.lecturer', tracking=True)
+    lecturer_name_id = fields.Many2one('create.lecturer', string="Instructor Name", tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
-    class_id = fields.Many2one('class.room', string="Class Name", domain="[('school_department_id', '=', school_department_id)]", tracking=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", domain="[('school_department_id', '=', school_department_id)]", tracking=True)
     semester_id = fields.Many2one('semester.semester', domain="[('class_id', '=', class_id)]", tracking=True)
     approve_lecturer_line_ids = fields.One2many('approve.lecturer.line','approve_lecturer_id', string="Course", tracking=True)
     rejection_reason = fields.Text(string="Rejection Reason", tracking=True)
@@ -62,8 +62,8 @@ class ApproveLecturerLine(models.Model):
     _name = "approve.lecturer.line"
     _description = "Assign Lecturer Line"
 
-    lecturer_id = fields.Many2one('create.lecturer', string="Lacturer Name", tracking=True)
-    class_id = fields.Many2one('class.room', string="Class Name", tracking=True)
-    semester_name_id = fields.Many2one('semester.semester', domain="[('class_id', '=', class_id)]", tracking=True)
+    lecturer_id = fields.Many2one('create.lecturer', tracking=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", tracking=True)
+    semester_name_id = fields.Many2one('semester.semester', string="Tier Name",  domain="[('class_id', '=', class_id)]", tracking=True)
     course_id = fields.Many2one('school.subject', string="Subject Name", tracking=True)
     approve_lecturer_id = fields.Many2one('approve.lecturer', tracking=True)

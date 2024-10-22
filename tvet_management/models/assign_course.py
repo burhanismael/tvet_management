@@ -13,11 +13,11 @@ class AssignCourse(models.Model):
     state = fields.Selection([('draft', 'Draft'), ('approved', 'Submitted for Approval')], string="State",
                              default='draft', tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
-    class_id = fields.Many2one('class.room', string="Class Name",
+    class_id = fields.Many2one('class.room', string="Batch Name",
                                domain="[('school_department_id', '=', school_department_id)]", tracking=True)
     # domain="[('shift_id.school_department_id', '=', school_department_id)]")
     school_shift_id = fields.Integer("---", tracking=True)
-    semester_name_id = fields.Many2one('semester.semester', string="Semester Name",
+    semester_name_id = fields.Many2one('semester.semester', string="Tier",
                                        domain="[('class_id', '=', class_id)]", tracking=True)
     course_subject_line_ids = fields.One2many('assign.course.line', 'assign_course_id', string="Course", tracking=True)
     course_subject_id = fields.Many2many('school.subject', string='Subject', tracking=True)

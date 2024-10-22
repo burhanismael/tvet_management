@@ -11,7 +11,7 @@ class ClassRoom(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
 
-    name = fields.Char(string="Class Name", store=True, tracking=True)
+    name = fields.Char(string="Batch Name", store=True, tracking=True)
     course_id = fields.Many2one('course.subject', string="Course Name", tracking=True)
     cource_ids = fields.Many2many('course.subject', string="Course", tracking=True)
     class_year = fields.Char(string="Class Year", tracking=True)
@@ -19,7 +19,7 @@ class ClassRoom(models.Model):
     shift_id = fields.Many2one('school.shift', string="Shift", tracking=True)
     school_department_id = fields.Many2one('school.department', string="Department Name", tracking=True)
     semester_id = fields.Many2one('semester.semester', string="Current Semester")
-    class_room_ids = fields.One2many('class.class', 'relation_id', string="class name")
+    class_room_ids = fields.One2many('class.class', 'relation_id', string="Tier Name")
 
 
     @api.constrains('name', 'school_department_id')

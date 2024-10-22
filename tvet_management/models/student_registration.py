@@ -18,7 +18,7 @@ class StudentRegistration(models.Model):
                                         ('diploma', 'Diploma'), ('degree', 'Degree')])
     gender = fields.Selection([('male', 'Male'), ('female', 'Female')], string="Gender", tracking=True)
     parent_contact = fields.Char(string="Parent contact", tracking=True)
-    intake_type = fields.Selection([('normal', 'Normal Intake'), ('recommended', 'Recommended Intake')],
+    intake_type = fields.Selection([('normal', 'NTI Intake'), ('recommended', 'Other Intake')],
                                    string="Intake Type", tracking=True)
     status = fields.Selection(
         [('new', 'New'), ('enrolled', 'Enrolled'), ('drop_out', 'Drop Out'), ('inactive', 'Inactive'),
@@ -26,16 +26,16 @@ class StudentRegistration(models.Model):
     shift_id = fields.Many2one('school.shift', string="Shift", required=True, tracking=True)
     faculty_id = fields.Char(string="Faculty", tracking=True)
     department_id = fields.Many2one('school.department', string="Department", tracking=True)
-    classroom_id = fields.Many2one('class.room', string="Class", tracking=True)
-    course_ids = fields.Many2many('course.subject', string="Course")
-    semester_id = fields.Many2one('semester.semester', string="Semester", domain="[('class_id', '=', classroom_id)]",
+    classroom_id = fields.Many2one('class.room', string="Batch", tracking=True)
+    course_ids = fields.Many2many('course.subject', string="Subject")
+    semester_id = fields.Many2one('semester.semester', string="Tier", domain="[('class_id', '=', classroom_id)]",
                                   tracking=True)
-    dob = fields.Date(string="DOB", tracking=True)
+    dob = fields.Date(string="Date of Birth", tracking=True)
     school_name = fields.Char(string="School Name", tracking=True)
     graduate_year = fields.Char("Graduate Year", tracking=True)
     roll_number = fields.Char(string="Roll Number", tracking=True)
-    place_of_graduate = fields.Char('Place of  graduation')
-    other_sift = fields.Char('Other shift work specification')
+    place_of_graduate = fields.Char('School Location')
+    other_sift = fields.Char('Other')
     grade = fields.Char(string="Grade", tracking=True)
 
     occupation = fields.Selection([('employed', 'Employed'), ('unemployed', 'Unemployed')], string="Occupation",

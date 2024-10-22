@@ -10,7 +10,6 @@
                 <field name="award"/>
                 <field name="cgpa"/>
                 <field name="m_cgpa"/>
-                <field name="is_madical"/>
             </tree>
         </field>
     </record>
@@ -27,7 +26,7 @@
                             <field name="award"/>
                             <field name="m_cgpa"/>
                             <field name="cgpa"/>
-                            <field name="is_madical"/>
+                            <field name="is_madical" invisible="1"/>
                         </group>
                     </group>
                 </sheet>

@@ -18,7 +18,7 @@ class AssignLecturer(models.Model):
     # semester_id = fields.Many2one('semester.semester', tracking=True)
     assign_lecturer_line_ids = fields.One2many('assign.lecturer.line','assign_lecturer_id', string="Course", tracking=True)
     # compute = "_compute_action_course"
-    course_ids = fields.Many2many('school.subject', string='Courses', tracking=True)
+    course_ids = fields.Many2many('school.subject', string='Subjects', tracking=True)
 
     @api.onchange('semester_id')
     def onchange_class_wise_semester(self):

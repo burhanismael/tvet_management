@@ -88,6 +88,7 @@ class AssignCourse(models.Model):
             vals = {
                 'school_department_id': rec.school_department_id.id,
                 'class_id': rec.class_id.id,
+                'course_id':rec.course_id.id,
                 'semester_name_id': rec.semester_name_id.id,
                 'aca_id': rec.aca_id.id,
                 'course_approve_line_ids': [(0, 0, {
@@ -96,7 +97,6 @@ class AssignCourse(models.Model):
                     "course": [(6, 0, rec.course_subject_id.ids)],
                 })]
             }
-            print("vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv", vals)
             self.env['approve.course'].create(vals)
             rec.state = 'approved'
 

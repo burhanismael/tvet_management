@@ -16,6 +16,10 @@
                 <t t-set="url" t-value="'/my/timetable'"/>
                 <t t-set="placeholder_count" t-value="'time_table_count'"/>
             </t>
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Learning Material</t>
+                <t t-set="url" t-value="'/my/material'"/>
+            </t>
         </xpath>
     </template>
 
@@ -29,6 +33,9 @@
             </li>
             <li t-if="page_name == 'timetable'" t-attf-class="breadcrumb-item #{'active ' if not sign_requests else ''}">
                 Time Table
+            </li>
+            <li t-if="page_name == 'learningmaterial'" t-attf-class="breadcrumb-item #{'active ' if not sign_requests else ''}">
+                Learning Materials
             </li>
         </xpath>
     </template>
@@ -205,6 +212,42 @@
                         <td><span t-esc="result.break_start_time"/></td>
                         <td><span t-esc="result.break_end_time"/></td>
                         <td><span t-esc="result.location.location"/></td>
+                    </tr>
+                </t>
+            </t>
+        </t>
+    </template>
+    <template id="portal_my_timetable" name="My Time Table">
+        <t t-call="portal.portal_layout">
+            <t t-set="breadcrumbs_searchbar" t-value="True"/>
+
+            <t t-call="portal.portal_searchbar">
+                <t t-set="title">Time Table</t>
+            </t>
+            <t t-if="not learning_material_ids">
+              <p>There are currently no Time Table for your account.</p>
+            </t>
+            <t t-if="learning_material_ids" t-call="portal.portal_table">
+                <thead>
+                    <tr class="active">
+                        <th>Name</th>
+                        <th>Type of the materials</th>
+                        <th>Department</th>
+                        <th>Attechment</th>
+                    </tr>
+                </thead>
+                <t t-foreach="learning_material_ids" t-as="result">
+                    <tr>
+                        <td><span t-esc="result.lerning_name"/></td>
+                        <td><span t-esc="result.type_of_material_id.name"/></td>
+                        <td><span t-esc="result.department_id.name"/></td>
+<!--                        <td>-->
+<!--                            <a t-if="result.attechment"-->
+<!--                               t-att-href="'/web/content/%d?download=true' % result.attechment.id"-->
+<!--                               download="result.attechment.name">-->
+<!--                                Download Attachment-->
+<!--                            </a>-->
+<!--                        </td>-->
                     </tr>
                 </t>
             </t>

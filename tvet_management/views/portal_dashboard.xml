@@ -9,6 +9,12 @@
 <!--                <t t-set="placeholder_count" t-value="'timetable_count'"/>-->
             </t>
         </xpath>
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="title">Learning Materials</t>
+                <t t-set="url" t-value="'/my/material'"/>
+            </t>
+        </xpath>
     </template>
 
     <template id="portal_my_timetable" name="My Timetable">
@@ -41,6 +47,31 @@
                         <td class="text-center"><span t-field="i.break_start_time"/>/<span t-field="i.break_end_time"/></td>
                     </tr>
                 </t>
+            </t>
+        </t>
+    </template>
+
+    <template id="portal_my_learning_material" name="Learning Materials">
+        <t t-call="website.layout">
+            <thead>
+                <tr class="active">
+                    <th class="text-center">Sequence</th>
+                    <th class="text-center">Name</th>
+                    <th class="text-center">Department</th>
+                    <th class="text-center">Type of the materials</th>
+                    <th class="text-center">Course Name</th>
+<!--                    <th class="text-center">Attechment</th>-->
+                </tr>
+            </thead>
+            <t t-foreach="my_details" t-as="i">
+                <tr>
+                    <td class="text-center"><span t-field="i.school_department_id.name"/></td>
+                    <td class="text-center"><span t-field="i.semester_id.semester_name"/></td>
+                    <td class="text-center"><span t-field="i.time_table_date"/></td>
+                    <td class="text-center"><span t-field="i.class_id.name"/></td>
+                    <td class="text-center"><span t-esc="i.get_course_name()"/></td>
+                    <td class="text-center"><span t-field="i.day"/></td>
+                </tr>
             </t>
         </t>
     </template>

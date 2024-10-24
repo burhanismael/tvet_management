@@ -4,6 +4,7 @@ from odoo.addons.portal.controllers import portal
 from odoo import http
 from odoo.http import content_disposition, request
 from werkzeug.exceptions import BadRequest
+import base64
 import ast
 
 class CustomerPortal(portal.CustomerPortal):
@@ -194,6 +195,34 @@ class CustomerPortal(portal.CustomerPortal):
         values.update({
             'page_name': 'timetable',
             'time_table_ids': time_table_ids
+        })
+        return request.render("tvet_management.portal_my_timetable", values)
+
+    @http.route(['/my/material', '/my/material/page/<int:page>'], type='http', auth="user", website=True)
+    def portal_my_learning_materials(self, page=1, date_begin=None, date_end=None, sortby=None, **kw):
+        values = self._prepare_portal_layout_values()
+        timetable_id = request.env['learning.material']
+        partner_id = request.env.user.partner_id
+        student_id = request.env['student.registration'].sudo().search([('student_id', '=', partner_id.email)], limit=1)
+        learning_material_ids = timetable_id.sudo().search(
+            [('department_id', '=', student_id.department_id.id)])
+        print("sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", learning_material_ids)
+        # for result in learning_material_ids:
+        #     if isinstance(result.attechment, bytes):
+        #         attachment = request.env['ir.attachment'].sudo().create({
+        #             'name': 'filename.pdf',  # Set an appropriate file name
+        #             'type': 'binary',
+        #             'datas': base64.b64encode(result.attechment),  # Encoding the binary data
+        #             'res_model': 'learning.material',
+        #             'res_id': result.id,
+        #         })
+        #         result.sudo().attechment = attachment.id  # Set the Many2one field
+        #     else:
+        #         raise TypeError("The attachment data is not in binary format.")
+
+        values.update({
+            'page_name': 'learningmaterial',
+            'learning_material_ids': learning_material_ids
         })
         return request.render("tvet_management.portal_my_timetable", values)
 

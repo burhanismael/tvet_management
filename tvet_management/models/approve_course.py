@@ -19,6 +19,7 @@ class ApproveCourse(models.Model):
                                        domain="[('class_id', '=', class_id)]", tracking=True)
     course_approve_line_ids = fields.One2many('approve.course.line', 'assign_course_id', string="Course", tracking=True)
     aca_id = fields.Many2one('academic.year', string="Academic Year")
+    course_id = fields.Many2one('course.subject', string="Course")
 
     @api.model
     def default_get(self, fields_list):
@@ -54,30 +55,33 @@ class ApproveCourse(models.Model):
                     'cource_ids': [(6, 0, record.course_approve_line_ids.course.ids)],
                     'relation_id': record.class_id.id,
                 })
+            record.class_id.write({
+                'cource_ids': [(4, course_id.id) for course_id in record.course_id]
+            })
 
         self.status = 'approved'
 
     def action_course_reject(self):
-        course = self.env['assign.course'].search([
-            ('school_department_id', '=', self.school_department_id.id),
-            ('is_assign_course', '=', False),
-            ('class_id', '=', self.class_id.id),
-            ('semester_name_id', '=', self.semester_name_id.id),
-            ('state', '=', 'approved')], limit=1)
-
-        course.is_assign_course = True
-
-        for record in self:
-            existing_record = record.class_id.class_room_ids.filtered(
-                lambda r: r.semester_id.id == record.semester_name_id.id)
-
-            if existing_record:
-                if existing_record:
-                    existing_record.write(
-                        {'cource_ids': [(3, course_id) for course_id in record.course_approve_line_ids.course.ids]})
-                else:
-                    existing_record.write(
-                        {'cource_ids': [(4, course_id) for course_id in record.course_approve_line_ids.course.ids]})
+        # course = self.env['assign.course'].search([
+        #     ('school_department_id', '=', self.school_department_id.id),
+        #     ('is_assign_course', '=', False),
+        #     ('class_id', '=', self.class_id.id),
+        #     ('semester_name_id', '=', self.semester_name_id.id),
+        #     ('state', '=', 'approved')], limit=1)
+        #
+        # course.is_assign_course = True
+        #
+        # for record in self:
+        #     existing_record = record.class_id.class_room_ids.filtered(
+        #         lambda r: r.semester_id.id == record.semester_name_id.id)
+        #
+        #     if existing_record:
+        #         if existing_record:
+        #             existing_record.write(
+        #                 {'cource_ids': [(3, course_id) for course_id in record.course_approve_line_ids.course.ids]})
+        #         else:
+        #             existing_record.write(
+        #                 {'cource_ids': [(4, course_id) for course_id in record.course_approve_line_ids.course.ids]})
             # else:
             #     if record.state != 'rejected':
             #         self.env['class.class'].create({
@@ -89,8 +93,27 @@ class ApproveCourse(models.Model):
         self.status = 'reject'
 
     def reset_to_draft(self):
-        for rec in self:
-            rec.status = 'draft'
+            course = self.env['assign.course'].search([
+                ('school_department_id', '=', self.school_department_id.id),
+                ('is_assign_course', '=', False),
+                ('class_id', '=', self.class_id.id),
+                ('semester_name_id', '=', self.semester_name_id.id),
+                ('state', '=', 'approved')], limit=1)
+
+            course.is_assign_course = True
+
+            for record in self:
+                existing_record = record.class_id.class_room_ids.filtered(
+                    lambda r: r.semester_id.id == record.semester_name_id.id)
+
+                if existing_record:
+                    if existing_record:
+                        existing_record.write(
+                            {'cource_ids': [(3, course_id) for course_id in record.course_approve_line_ids.course.ids]})
+                    else:
+                        existing_record.write(
+                            {'cource_ids': [(4, course_id) for course_id in record.course_approve_line_ids.course.ids]})
+            self.status = 'draft'
 
     @api.onchange('school_department_id')
     def onchange_department(self):

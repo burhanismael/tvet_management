@@ -50,6 +50,7 @@
                                        context="{'default_school_department_id': school_department_id}"
                                        options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                                 <field name="aca_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
+                                <field name="course_id" options="{'no_create': True, 'no_create_edit':True,'no_open':True}"/>
                             </group>
                         </group>
                         <notebook>

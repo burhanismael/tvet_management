@@ -5,11 +5,11 @@ class ReExamView(models.TransientModel):
     _name = "certificate.report"
     _description = 'certificate.report'
 
-    class_id = fields.Many2one('class.room', string="Class Name", required=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", required=True)
     date = fields.Date(string="Date")
     # senet_mitting_id = fields.Many2one("senate.mitting",string="Senate Meeting")
     is_medical = fields.Boolean('Medicine')
-    # semister_id = fields.Many2one('semester.semester', string="Semester Name", required=True)
+    # semister_id = fields.Many2one('semester.semester', string="Tier Name", required=True)
     student_id = fields.Many2one('student.registration', string="Student Name")
     serial_no = fields.Char(string="Serial Number", required=True)
     is_privious = fields.Boolean(string="Is Previous")

@@ -8,8 +8,8 @@ class TestimonialGraduationWizard(models.TransientModel):
 
     date_from = fields.Date('Date From')
     date_to = fields.Date('Date To')
-    class_id = fields.Many2one('class.room', string="Class")
-    semester_id = fields.Many2one('semester.semester', string="Semester")
+    class_id = fields.Many2one('class.room', string="Batch")
+    semester_id = fields.Many2one('semester.semester', string="Tier")
 
     def pdf_report(self):
         record_data = {

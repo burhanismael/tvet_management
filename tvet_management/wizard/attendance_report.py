@@ -19,8 +19,8 @@ class AttendanceReportView(models.TransientModel):
     name = fields.Char(string="name")
     date_to = fields.Date('Date To', required="1")
     department_name = fields.Many2one('school.department', string='Department Name')
-    class_name = fields.Many2one('class.room', string="Class Name", required="1")
-    sem = fields.Many2one('semester.semester', domain="[('class_id', '=', class_name)]", string="Semester", required="1")
+    class_name = fields.Many2one('class.room', string="Batch Name", required="1")
+    sem = fields.Many2one('semester.semester', domain="[('class_id', '=', class_name)]", string="Tier", required="1")
     cource_ids = fields.Many2many('course.subject', string="Subject")
 
     @api.onchange('class_name', 'department_name')

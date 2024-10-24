@@ -7,8 +7,8 @@ class TestimonialContinuesWizard(models.TransientModel):
     _name = "testimonial.continues.report"
     _description = 'Testimonial Continues Wizard'
 
-    class_id = fields.Many2one('class.room', string="Class Name", required=True)
-    # semister_id = fields.Many2one('semester.semester', string="Semester Name", required=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", required=True)
+    # semister_id = fields.Many2one('semester.semester', string="Tier Name", required=True)
     student_id = fields.Many2one('student.registration', string="Student Name")
     # date = fields.Date(string='Certificate Issuance Date')
 

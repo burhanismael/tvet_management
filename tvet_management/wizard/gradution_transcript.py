@@ -5,8 +5,8 @@ class GradutionView(models.TransientModel):
     _name = "gradution.transcript.report"
     _description = 'gradution.slip.report'
 
-    class_id = fields.Many2one('class.room', string="Class Name", required=True)
-    semister_id = fields.Selection([('six', '6 Semester'), ('eight', '8 Semester')], string="Semester Type")
+    class_id = fields.Many2one('class.room', string="Batch Name", required=True)
+    semister_id = fields.Selection([('six', '6 Semester'), ('eight', '8 Semester')], string="Tier Type")
     student_id = fields.Many2one('student.registration', string="Student Name")
     date = fields.Date(string='Date')
     is_privious = fields.Boolean(string="Is Previous")

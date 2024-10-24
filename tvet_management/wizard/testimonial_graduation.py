@@ -7,7 +7,7 @@ class TestimonialGraduationWizard(models.TransientModel):
     _description = 'Testimonial Graduation Wizard'
 
     student_id = fields.Many2one('student.registration', string="Student Name", required=True)
-    class_id = fields.Many2one('class.room', string="Class Name", required=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", required=True)
     date = fields.Date(string='Certificate Issuance Date')
 
     def pdf_report(self):

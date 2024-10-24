@@ -8,8 +8,8 @@ class LecturerCourseAssign(models.TransientModel):
     aca_id = fields.Many2one('academic.year', string="Academic Year")
     lecturer_id = fields.Many2one('create.lecturer', "Lecturer name", required=True)
     dep_id = fields.Many2one('school.department', string="Department")
-    class_id = fields.Many2one('class.room', string="Class name")
-    sem_id = fields.Many2many('semester.semester', string="Semester")
+    class_id = fields.Many2one('class.room', string="Batch Name")
+    sem_id = fields.Many2many('semester.semester', string="Tier")
 
     @api.onchange('dep_id')
     def department_based_domain(self):

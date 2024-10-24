@@ -4,9 +4,9 @@ from odoo import api, fields, models, _
 class AttendanceView(models.TransientModel):
     _name = "exam.summary.report"
 
-    class_id = fields.Many2one('class.room', string="Class Name", required=True)
+    class_id = fields.Many2one('class.room', string="Batch Name", required=True)
     acadamic_year_id = fields.Many2one('academic.year', string="Academic Year", required=True)
-    semister_id = fields.Many2one('semester.semester', string="Semester Name", required=True, domain="[('class_id', '=', class_id)]")
+    semister_id = fields.Many2one('semester.semester', string="Tier Name", required=True, domain="[('class_id', '=', class_id)]")
     student_id = fields.Many2one('student.registration', string="Student Name")
     is_privious = fields.Boolean(string="Is Previous")
     previous_class_id = fields.Many2one('class.room', string="Previous Class")

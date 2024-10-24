@@ -6,8 +6,8 @@ class ReexamUpdates(models.TransientModel):
     _description = 'course.assign.export'
 
     department_id = fields.Many2one('school.department', string="Department", required=True)
-    class_id = fields.Many2one('class.room', string="Class Name")
-    semister_id = fields.Many2one('semester.semester', string="Semester Name", domain="[('class_id', '=', class_id)]")
+    class_id = fields.Many2one('class.room', string="Batch Name")
+    semister_id = fields.Many2one('semester.semester', string="Tier Name", domain="[('class_id', '=', class_id)]")
     aca_id = fields.Many2one('academic.year', string="Academic Year")
 
     @api.onchange('department_id')
